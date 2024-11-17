@@ -15,5 +15,14 @@ class CategoryModel{
         return $categories;
     }
 
+    public function insertCategory($name, $description){
+        global $conn;
+        $sql = "INSERT INTO categories (name, description) VALUES (?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ss", $name, $description);
+        $stmt->execute();
+        $stmt->close();
+    }
+
 }
 ?>

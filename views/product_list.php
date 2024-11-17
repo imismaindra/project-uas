@@ -42,70 +42,47 @@
                                 Category
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Description
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Qty
+                                Stock
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Price
                             </th>
-                            <th scope="col" class="px-6 py-3">
-                                Stock
-                            </th>
+                            
                             <th scope="col" class="px-6 py-3">
                                 <span class="sr-only">Edit</span>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($Products as $product): ?>
+                    <?php foreach ($products as $product): ?>
                         <tr class="bg-white border-b hover:bg-gray-50">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                <?php echo $role['id']; ?>
+                                <?php echo $product['id']; ?>
                             </th>
                             <td class="px-6 py-4">
-                                <?php echo $role['name']; ?>
+                                <?php echo $product['name']; ?>
                             </td>
                             <td class="px-6 py-4">
-                                <?php echo $role['id_categories']; ?>
+                                <?php echo $product['category_name']; ?>
+                            </td>
+                           
+                            <td class="px-6 py-4">
+                                <?php echo $product['stock']; ?>
                             </td>
                             <td class="px-6 py-4">
-                                <?php echo $role['description']; ?>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="<?php echo  $role['is_aktif'] == 1 ? 'bg-green-400' : 'bg-red-400'; ?> text-gray-50 rounded-md px-2">
-                                    <?php echo htmlspecialchars( $role['is_aktif'] == 1 ? "Aktif" : "Non-Aktif") ?>
-                                </span>
+                                <?php echo $product['price']; ?>
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <a href="../index.php?modul=role&fitur=edit&id=<?php echo htmlspecialchars($role['id']); ?>" class="text-gray-400 hover:text-gray-100 mx-2">
+                                <a href="../index.php?modul=prodcut$product&fitur=edit&id=<?php echo htmlspecialchars($product['id']); ?>" class="text-gray-400 hover:text-gray-100 mx-2">
                                     <i class="material-icons-outlined text-blue-600">edit</i>
                                 </a>
                                 
-                                <a href="../index.php?modul=role&fitur=delete&rid=<?php echo htmlspecialchars($role['id']); ?>" class="text-gray-400 hover:text-gray-100 ml-2">
+                                <a href="../index.php?modul=prodcut$product&fitur=delete&rid=<?php echo htmlspecialchars($role['id']); ?>" class="text-gray-400 hover:text-gray-100 ml-2">
                                     <i class="material-icons-round text-red-600">delete_outline</i>
                                 </a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
-                        <!-- <tr class="bg-white border-b  hover:bg-gray-50">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                Microsoft Surface Pro
-                            </th>
-                            <td class="px-6 py-4">
-                                White
-                            </td>
-                            <td class="px-6 py-4">
-                                Laptop PC
-                            </td>
-                            <td class="px-6 py-4">
-                                $1999
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            </td>
-                        </tr> -->
                     </tbody>
                 </table>
             </div>
