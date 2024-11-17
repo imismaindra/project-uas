@@ -14,6 +14,19 @@ switch ($modul) {
                 break;
         }
         break;
+    case 'user':
+        break;
+    case 'categories':
+        $fitur = isset($_GET['fitur']) ? $_GET['fitur'] : 'list';
+        require_once 'models/category_model.php';
+        switch ($fitur) {
+            case 'list':
+                $categoryModel = new CategoryModel();
+                $categories = $categoryModel->getCategories();
+                include 'views/category_list.php';
+                break;
+        }
+        break;
     case 'login-admmin':
         include 'login-admin.php';
         break;
