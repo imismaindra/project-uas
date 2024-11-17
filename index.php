@@ -16,7 +16,7 @@ switch ($modul) {
         break;
     case 'user':
         break;
-    case 'categories':
+    case 'category':
         $fitur = isset($_GET['fitur']) ? $_GET['fitur'] : 'list';
         require_once 'models/category_model.php';
         switch ($fitur) {
