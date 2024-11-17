@@ -25,6 +25,14 @@ switch ($modul) {
                 $categories = $categoryModel->getCategories();
                 include 'views/category_list.php';
                 break;
+            case 'insert':
+                include 'views/category_insert.php';
+                break;
+            case 'add':
+                $categoryModel = new CategoryModel();
+                $categoryModel->insertCategory($_POST['name'], $_POST['description']);
+                header('Location: index.php?modul=category&fitur=list');
+                break;
         }
         break;
 
