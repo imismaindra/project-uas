@@ -4,7 +4,15 @@ $modul = isset($_GET['modul']) ? $_GET['modul'] : 'store';
 
 switch ($modul) {
     case 'role': 
-        include 'views/roles.php';
+        $fitur = isset($_GET['fitur']) ? $_GET['fitur'] : 'dashboard';
+        require_once 'models/role_model.php';
+        switch ($fitur) {
+            case'list':
+                $roleModel = new RoleModel();
+                $roles = $roleModel->getRoles();
+                include 'views/role_list.php';
+                break;
+        }
         break;
     case 'login-admmin':
         include 'login-admin.php';
