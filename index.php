@@ -27,8 +27,9 @@ switch ($modul) {
                 break;
         }
         break;
+
     case 'product':
-        $fitur = isset($_GET['fitur']) ? $_GET['fitur'] :
+        $fitur = isset($_GET['fitur']) ? $_GET['fitur'] : 'list';
         require_once 'models/product_model.php';
         switch ($fitur) {
             case 'list':
