@@ -4,6 +4,7 @@ $modul = isset($_GET['modul']) ? $_GET['modul'] : 'store';
 
 switch ($modul) {
     case 'role': 
+        include 'views/roles.php';
         break;
     case 'login-admmin':
         include 'login-admin.php';

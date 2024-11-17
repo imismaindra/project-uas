@@ -6,7 +6,9 @@
         </li>
         <li class="flex items-center pl-6 py-2 hover:rounded-lg hover:bg-[#EFDFF5] hover:text-[#1D1242]">
             <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M5 8a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V8Zm4 2a1 1 0 0 0-1 1v4a1 1 0 1 0 2 0v-4a1 1 0 0 0-1-1Zm4 0a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2h-2Zm0 3a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2h-2Z"/></svg>
-            <span> <a href="myprofile.php"> Profile Saya</a></span>
+            <span> 
+                <a href="myprofile.php">Roles</a>
+            </span>
         </li>
         <li class="flex items-center pl-6 py-2 text-gray-300 hover:rounded-lg hover:bg-[#EFDFF5] hover:text-[#1D1242]">
             <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a8 8 0 0 1 8 8v1.742c.714.385 1.28 1.02 1.644 1.807A4 4 0 0 1 18 20h-4a3 3 0 0 1-3-3v-1a1 1 0 0 0-2 0v1a3 3 0 0 1-3 3H4a4 4 0 0 1-3.644-6.451c.365-.787.93-1.422 1.644-1.807V10a8 8 0 0 1 8-8ZM7 11a5 5 0 0 0 10 0V9a5 5 0 0 0-10 0v2Z"/></svg>
