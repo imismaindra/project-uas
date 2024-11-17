@@ -27,6 +27,17 @@ switch ($modul) {
                 break;
         }
         break;
+    case 'product':
+        $fitur = isset($_GET['fitur']) ? $_GET['fitur'] :
+        require_once 'models/product_model.php';
+        switch ($fitur) {
+            case 'list':
+                $productModel = new ProductModel();
+                $products = $productModel->getProducts();
+                include 'views/product_list.php';
+                break;
+        }
+        break;
     case 'login-admmin':
         include 'login-admin.php';
         break;
