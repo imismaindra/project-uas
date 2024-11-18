@@ -15,13 +15,25 @@ class CategoryModel{
         return $categories;
     }
 
-    public function insertCategory($name, $description, $slug){
+    public function insertCategory($name, $description, $slug,$image){
         global $conn;
-        $sql = "INSERT INTO categories (name, description, slug) VALUES (?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss", $name, $description, $slug);
-        $stmt->execute();
-        $stmt->close();
+       // Path untuk menyimpan file
+        $uploadDir = 'assets/';
+        $fileName = basename($image['name']);
+        $targetFile = $uploadDir . $fileName;
+
+        // Validasi dan pindahkan file
+        if (move_uploaded_file($image['tmp_name'], $targetFile)) {
+            // Jika berhasil diupload, simpan path ke database
+            $sql = "INSERT INTO categories (name, description, slug, image) VALUES (?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ssss", $name, $description, $slug, $targetFile);
+            $stmt->execute();
+            $stmt->close();
+        } else {
+            // Tangani error upload
+            die("Error uploading file.");
+        }
     }
 
     public function deleteCategory($id){
@@ -45,14 +57,15 @@ class CategoryModel{
         return $category;
     }
 
-    public function updateCategory($id, $name, $description, $slug){
+    public function updateCategory($id, $name, $description, $slug, $image){
         global $conn;
-        $sql = "UPDATE categories SET name = ?, description = ?, slug = ? WHERE id = ?";
+        $sql = "UPDATE categories SET name = ?, description = ?, slug = ?, image = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssi", $name, $description, $slug, $id);
+        $stmt->bind_param("ssssi", $name, $description, $slug, $image, $id);
         $stmt->execute();
         $stmt->close();
     }
+    
 }
 
 

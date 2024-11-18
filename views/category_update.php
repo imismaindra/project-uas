@@ -21,7 +21,7 @@
         <!-- Main Content -->
         <div class="flex-1 ml-72 mt-20 p-8">
             <h1 class="text-2xl font-bold mb-8">Edit Category</h1>
-            <form method="post" action="../index.php?modul=category&fitur=update" class="bg-white px-6 py-8 rounded-lg shadow-lg">
+            <form method="post" action="../index.php?modul=category&fitur=update" enctype="multipart/form-data" class="bg-white px-6 py-8 rounded-lg shadow-lg">
                 <div class="grid gap-6 mb-6">
                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($category['id']); ?>">
                     <!-- Input for Category Name -->
@@ -44,7 +44,17 @@
                             value="<?php echo $category['slug']; ?>" required 
                         />
                     </div>
-
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Current Image</label>
+                        <img src="<?php echo htmlspecialchars($category['image']); ?>" alt="Current Image" class="mb-4 w-32 h-32 object-cover">
+                    </div>
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-900" for="file_input">Upload file</label>
+                        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" aria-describedby="file_input_help" id="image" name="image" type="file">
+                        <p class="mt-1 text-sm text-gray-500" id="file_input_help">
+                            Upload a new file to replace the current image.
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Submit Button -->

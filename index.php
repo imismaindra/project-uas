@@ -38,7 +38,7 @@ switch ($modul) {
                 break;
             case 'add':
                 $categoryModel = new CategoryModel();
-                $categoryModel->insertCategory($_POST['name'], $_POST['description'], $_POST['slug']);
+                $categoryModel->insertCategory($_POST['name'], $_POST['description'], $_POST['slug'], $_FILES['image']);
                 header('Location: index.php?modul=category&fitur=list');
                 break;
             case 'edit':
@@ -48,11 +48,28 @@ switch ($modul) {
                 include 'views/category_update.php';
                 break;
             case 'update':
+                $id = $_POST['id'];
+                $name = $_POST['name'];
+                $description = $_POST['description'];
+                $slug = $_POST['slug'];
                 $categoryModel = new CategoryModel();
-                $categoryModel->updateCategory($_POST['id'], $_POST['name'], $_POST['description'], $_POST['slug']);
-                //var_dump($_POST);
+            
+                // Proses upload file gambar
+                if ($_FILES['image']['name']) {
+                    $image_name = $_FILES['image']['name'];
+                    $image_tmp = $_FILES['image']['tmp_name'];
+                    $image_path = "assets/". $image_name;
+                    move_uploaded_file($image_tmp, $image_path);
+                } else {
+                    // Jika tidak ada file diunggah, gunakan gambar lama
+                    $image_name = $categoryModel->getCategoryById($id)['image'];
+                }
+                //print_r($image_path);
+                $categoryModel->updateCategory($id, $name, $description, $slug, $image_path);
+            
                 header('Location: index.php?modul=category&fitur=list');
                 break;
+                
             case 'delete':
                 $categoryModel = new CategoryModel();
                 $categoryModel->deleteCategory($_GET['rid']);

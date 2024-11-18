@@ -15,7 +15,7 @@
     <!-- carousell -->
     <?php include './views/components/carousell.php'; ?>
     <!-- content -->
-     <section class=" text-white ml-[7.5rem] px-4 md:px-8">
+     <section class=" text-white ml-[5.5rem] px-4 md:px-8">
         <h1 class="text-3xl font-bold mb-5">Yang sedang Populer 🔥</h>
         <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <?php include './views/components/cards.php'; ?>

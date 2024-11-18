@@ -45,6 +45,9 @@
                                 Slug
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Image
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 <span class="sr-only">Edit</span>
                             </th>
                         </tr>
@@ -63,6 +66,9 @@
                             </td>
                             <td class="px-6 py-4">
                                 <?php echo $category['slug']; ?>
+                            </td>
+                            <td class="px-6 py-4">
+                                <img src="<?= $category['image'] ?>" alt="<?= $category['name'] ?>" style="max-width: 100px;">
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <a href="../index.php?modul=category&fitur=edit&id=<?php echo htmlspecialchars($category['id']); ?>" class="text-gray-400 hover:text-gray-100 mx-2">

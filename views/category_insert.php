@@ -21,7 +21,7 @@
         <!-- Main Content -->
         <div class="flex-1 ml-72 mt-20 p-8">
             <h1 class="text-2xl font-bold mb-8">Insert Category</h1>
-            <form method="post" action="../index.php?modul=category&fitur=add" class="bg-white px-6 py-8 rounded-lg shadow-lg">
+            <form method="post" action="../index.php?modul=category&fitur=add" enctype="multipart/form-data" class="bg-white px-6 py-8 rounded-lg shadow-lg">
                 <div class="grid gap-6 mb-6">
                     <!-- Input for Category Name -->
                     <div>
@@ -59,7 +59,12 @@
                         />
                     </div>
                 </div>
-
+                <!-- image upload -->
+                 <div>
+                     <label class="block mb-2 text-sm font-medium text-gray-900" for="file_input">Upload file</label>
+                     <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" aria-describedby="file_input_help" id="image" name="image" type="file">
+                     <p class="mt-1 text-sm text-gray-500" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
+                </div>
                 <!-- Submit Button -->
                 <div class="flex justify-end">
                     <button 
