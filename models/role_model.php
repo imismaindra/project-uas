@@ -15,4 +15,12 @@ class RoleModel {
         }
         return $roles;
     }
+    public function insertRole($name, $description, $is_aktif) {
+        global $conn;
+        $sql = "INSERT INTO roles (name, description, is_aktif) VALUES (?,?,?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sss", $name, $description, $is_aktif);
+        $stmt->execute();
+        $stmt->close();
+    }
 }

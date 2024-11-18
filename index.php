@@ -12,6 +12,14 @@ switch ($modul) {
                 $roles = $roleModel->getRoles();
                 include 'views/role_list.php';
                 break;
+            case 'insert':
+                include 'views/role_insert.php';
+                break;
+            case 'add':
+                $roleModel = new RoleModel();
+                $roleModel->insertRole($_POST['name'], $_POST['description'], $_POST['is_aktif']);
+                header('Location: ?modul=role&fitur=list');
+                break;
         }
         break;
     case 'user':
