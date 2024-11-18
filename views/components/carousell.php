@@ -4,18 +4,18 @@
             <div class="relative h-80 md:h-96" data-carousel-inner>
                 <!-- Item 1 -->
                 <div class="hidden  duration-700 ease-in-out" data-carousel-item>
-                    <img src="https://c4.wallpaperflare.com/wallpaper/579/1/177/mobile-legends-chou-iori-yagami-hd-wallpaper-preview.jpg"
+                    <img src="https://i.ibb.co/FWTR0zh/jujutsu-kaisen-mobile-legends-wallpaper-hd-1.jpg"
                         class="object-cover w-full h-full" alt="Slide 1">
                     <span class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xl font-semibold text-white md:text-2xl">First Slide</span>
                 </div>
                 <!-- Item 2 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="https://flowbite.com/docs/images/carousel/carousel-2.svg"
+                    <img src="https://i.ibb.co/6wGC3GV/hok-pc.jpg"
                         class="object-cover w-full h-full" alt="Slide 2">
                 </div>
                 <!-- Item 3 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="https://flowbite.com/docs/images/carousel/carousel-3.svg"
+                    <img src="https://i.ibb.co/TBmgpMG/wallpaperflare-com-wallpaper-1.jpg"
                         class="object-cover w-full h-full" alt="Slide 3">
                 </div>
             </div>

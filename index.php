@@ -30,7 +30,24 @@ switch ($modul) {
                 break;
             case 'add':
                 $categoryModel = new CategoryModel();
-                $categoryModel->insertCategory($_POST['name'], $_POST['description']);
+                $categoryModel->insertCategory($_POST['name'], $_POST['description'], $_POST['slug']);
+                header('Location: index.php?modul=category&fitur=list');
+                break;
+            case 'edit':
+                $category_id = $_GET['id'];
+                $categoryModel = new CategoryModel();
+                $category = $categoryModel->getCategoryById($category_id);
+                include 'views/category_update.php';
+                break;
+            case 'update':
+                $categoryModel = new CategoryModel();
+                $categoryModel->updateCategory($_POST['id'], $_POST['name'], $_POST['description'], $_POST['slug']);
+                //var_dump($_POST);
+                header('Location: index.php?modul=category&fitur=list');
+                break;
+            case 'delete':
+                $categoryModel = new CategoryModel();
+                $categoryModel->deleteCategory($_GET['rid']);
                 header('Location: index.php?modul=category&fitur=list');
                 break;
         }
@@ -51,7 +68,10 @@ switch ($modul) {
         include 'login-admin.php';
         break;
     default:
-        // $store = new ();
+        require_once 'models/category_model.php';
+
+        $categoryModel = new CategoryModel();
+         $categories = $categoryModel->getCategories();
         include 'views/store/store.php';
         break;
 }

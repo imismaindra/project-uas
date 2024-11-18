@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TopUp Store - Roles</title>
+    <title>TopUp Store - Categories</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,6 +42,9 @@
                                 Deskripsi
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Slug
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 <span class="sr-only">Edit</span>
                             </th>
                         </tr>
@@ -57,6 +60,9 @@
                             </td>
                             <td class="px-6 py-4">
                                 <?php echo $category['description']; ?>
+                            </td>
+                            <td class="px-6 py-4">
+                                <?php echo $category['slug']; ?>
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <a href="../index.php?modul=category&fitur=edit&id=<?php echo htmlspecialchars($category['id']); ?>" class="text-gray-400 hover:text-gray-100 mx-2">
