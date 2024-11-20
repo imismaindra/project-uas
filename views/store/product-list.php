@@ -47,7 +47,7 @@
      </div>
      <div class="container relative mt-8 grid grid-cols-2 gap-4 md:gap-8">
         <!-- Card -->
-        <div class="rounded-xl bg-white px-4 pb-4 pt-2 shadow-2xl">
+        <div class="rounded-xl text-white bg-[#53B950] px-4 mx-4 pb-4 pt-2 max-h-[12.5rem] shadow-2xl">
             <div class="prose prose-sm my-3 text-xs text-foreground prose-p:!m-0">
                 <div>
                     <p>Top up Free Fire harga paling murah. Cara topup dm FF termurah :</p>
@@ -70,7 +70,7 @@
             <section class="relative scroll-mt-20 rounded-xl bg-card/50 shadow-2xl md:scroll-mt-[5.75rem] w-[45rem]" id="1">
                 <div class="flex items-center overflow-hidden rounded-t-xl bg-[#53B950]">
                     <div class="flex h-10 w-10 items-center justify-center bg-primary font-semibold text-primary-foreground">1</div>
-                    <h2 class="px-4 py-2 text-sm/6 font-semibold text-card-foreground">Masukkan Data Akun</h2>
+                    <h2 class="px-4 py-2 text-sm/6 font-semibold text-white">Masukkan Data Akun</h2>
                 </div>
                 <div class="p-4">
                     <div class="space-y-4">
@@ -98,6 +98,107 @@
                     </div>
                 </div>
             </section>
+            <section class="relative scroll-mt-20 rounded-xl bg-card/50 shadow-2xl md:scroll-mt-[5.75rem]" id="2">
+                <div class="flex items-center overflow-hidden bg-[#53B950]  rounded-t-xl bg-card">
+                    <div class="flex h-10 w-10 items-center justify-center  font-semibold text-primary-foreground">2</div>
+                    <h2 class="px-4 py-2 text-sm/6 font-semibold text-white">Pilih Nominal</h2>
+                </div>
+                <div class="p-4">
+                    <div class="flex flex-col space-y-4">
+                        <section id="Spesial Items">
+                            <h3 class="pb-4 text-sm/6 font-semibold text-white">Spesial Items</h3>
+                            <div id="headlessui-radiogroup-:rc:" role="radiogroup" aria-labelledby="headlessui-label-:rd:">
+                            <label class="sr-only" id="headlessui-label-:rd:" role="none">Select a variant list</label>
+                            <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3" role="none">
+                                <div class="relative flex cursor-pointer rounded-xl border border-transparent bg-white p-2.5 text-background shadow-sm outline-none md:p-4 bg-order-variant-background text-order-variant-foreground" id="headlessui-radiogroup-option-:re:" role="radio" aria-checked="false" tabindex="0" data-headlessui-state="" aria-labelledby="headlessui-label-:rf:" aria-describedby="headlessui-description-:rg:">
+                                    <span class="flex flex-1">
+                                        <span class="flex flex-col justify-between">
+                                        <span class="block text-xs font-semibold " id="headlessui-label-:rf:">Weekly Diamond Pass</span>
+                                        <div>
+                                            <span class="mt-1 flex items-center text-xs font-semibold" id="headlessui-description-:rg:">Rp&nbsp; 28.164</span></div>
+                                        </span>
+                                    </span>
+                                    <div class="flex aspect-square w-8 items-center"><img alt="Mobile Legends - Weekly Diamond Pass" fetchpriority="high" width="300" height="300" decoding="async" data-nimg="1" class="object-contain object-right" sizes="80vh" 
+                                    src="/assets/include/wdp.webp" style="color: transparent;"></div>
+                                </div>
+                                <div class="relative flex cursor-pointer rounded-xl border border-transparent bg-foreground/75 p-2.5 text-background shadow-sm outline-none md:p-4 bg-order-variant-background text-order-variant-foreground" id="headlessui-radiogroup-option-:rh:" role="radio" aria-checked="false" tabindex="-1" data-headlessui-state="" aria-labelledby="headlessui-label-:ri:" aria-describedby="headlessui-description-:rj:">
+                                    <span class="flex flex-1">
+                                        <span class="flex flex-col justify-between">
+                                        <span class="block text-xs font-semibold " id="headlessui-label-:ri:">2x Weekly Diamond Pass</span>
+                                        <div><span class="mt-1 flex items-center text-xs font-semibold" id="headlessui-description-:rj:">Rp&nbsp; 56.328</span></div>
+                                        </span>
+                                    </span>
+                                    <div class="flex aspect-square w-8 items-center"><img alt="Mobile Legends - Weekly Diamond Pass" fetchpriority="high" width="300" height="300" decoding="async" data-nimg="1" class="object-contain object-right" sizes="80vh" 
+                                    src="/assets/include/wdp.webp" style="color: transparent;"></div>                                </div>
+                                <div class="relative flex cursor-pointer rounded-xl border border-transparent bg-foreground/75 p-2.5 text-background shadow-sm outline-none md:p-4 bg-order-variant-background text-order-variant-foreground" id="headlessui-radiogroup-option-:rk:" role="radio" aria-checked="false" tabindex="-1" data-headlessui-state="" aria-labelledby="headlessui-label-:rl:" aria-describedby="headlessui-description-:rm:">
+                                    <span class="flex flex-1">
+                                        <span class="flex flex-col justify-between">
+                                        <span class="block text-xs font-semibold " id="headlessui-label-:rl:">3x Weekly Diamond Pass</span>
+                                        <div><span class="mt-1 flex items-center text-xs font-semibold" id="headlessui-description-:rm:">Rp&nbsp; 84.492</span></div>
+                                        </span>
+                                    </span>
+                                    <div class="flex aspect-square w-8 items-center"><img alt="Mobile Legends - Weekly Diamond Pass" fetchpriority="high" width="300" height="300" decoding="async" data-nimg="1" class="object-contain object-right" sizes="80vh" 
+                                    src="/assets/include/wdp.webp" style="color: transparent;"></div>                                </div>
+                                <div class="relative flex cursor-pointer rounded-xl border border-transparent bg-foreground/75 p-2.5 text-background shadow-sm outline-none md:p-4 bg-order-variant-background text-order-variant-foreground" id="headlessui-radiogroup-option-:rn:" role="radio" aria-checked="false" tabindex="-1" data-headlessui-state="" aria-labelledby="headlessui-label-:ro:" aria-describedby="headlessui-description-:rp:">
+                                    <span class="flex flex-1">
+                                        <span class="flex flex-col justify-between">
+                                        <span class="block text-xs font-semibold " id="headlessui-label-:ro:">4x Weekly Diamond Pass</span>
+                                        <div><span class="mt-1 flex items-center text-xs font-semibold" id="headlessui-description-:rp:">Rp&nbsp; 112.656</span></div>
+                                        </span>
+                                    </span>
+                                    <div class="flex aspect-square w-8 items-center"><img alt="Mobile Legends - Weekly Diamond Pass" fetchpriority="high" width="300" height="300" decoding="async" data-nimg="1" class="object-contain object-right" sizes="80vh" 
+                                    src="/assets/include/wdp.webp" style="color: transparent;"></div>                                </div>
+                                <div class="relative flex cursor-pointer rounded-xl border border-transparent bg-foreground/75 p-2.5 text-background shadow-sm outline-none md:p-4 bg-order-variant-background text-order-variant-foreground" id="headlessui-radiogroup-option-:rq:" role="radio" aria-checked="false" tabindex="-1" data-headlessui-state="" aria-labelledby="headlessui-label-:rr:" aria-describedby="headlessui-description-:rs:">
+                                    <span class="flex flex-1">
+                                        <span class="flex flex-col justify-between">
+                                        <span class="block text-xs font-semibold " id="headlessui-label-:rr:">5x Weekly Diamond Pass</span>
+                                        <div><span class="mt-1 flex items-center text-xs font-semibold" id="headlessui-description-:rs:">Rp&nbsp; 140.820</span></div>
+                                        </span>
+                                    </span>
+                                    <div class="flex aspect-square w-8 items-center"><img alt="Mobile Legends - Weekly Diamond Pass" fetchpriority="high" width="300" height="300" decoding="async" data-nimg="1" class="object-contain object-right" sizes="80vh" 
+                                    src="/assets/include/wdp.webp" style="color: transparent;"></div>                                </div>
+                                <div class="relative flex cursor-pointer rounded-xl border border-transparent bg-foreground/75 p-2.5 text-background shadow-sm outline-none md:p-4 bg-order-variant-background text-order-variant-foreground" id="headlessui-radiogroup-option-:rt:" role="radio" aria-checked="false" tabindex="-1" data-headlessui-state="" aria-labelledby="headlessui-label-:ru:" aria-describedby="headlessui-description-:rv:">
+                                    <span class="flex flex-1">
+                                        <span class="flex flex-col justify-between">
+                                        <span class="block text-xs font-semibold " id="headlessui-label-:ru:">Twilight Pass</span>
+                                        <div><span class="mt-1 flex items-center text-xs font-semibold" id="headlessui-description-:rv:">Rp&nbsp; 151.686</span></div>
+                                        </span>
+                                    </span>
+                                    <div class="flex aspect-square w-8 items-center"><img alt="Mobile Legends - Weekly Diamond Pass" fetchpriority="high" width="300" height="300" decoding="async" data-nimg="1" class="object-contain object-right" sizes="80vh" 
+                                    src="/assets/include/wdp.webp" style="color: transparent;"></div>                                </div>
+                            </div>
+                            </div>
+                        </section>
+                        <section id="Top Up Instant">
+                            <h3 class="pb-4 text-sm/6 font-semibold text-white">Top Up Instant</h3>
+                            <div id="headlessui-radiogroup-:r10:" role="radiogroup" aria-labelledby="headlessui-label-:r11:">
+                            <label class="sr-only" id="headlessui-label-:r11:" role="none">Select a variant list</label>
+                            <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3" role="none">
+                                <div class="relative flex cursor-pointer rounded-xl border border-transparent bg-[#53B950] text-background shadow-sm outline-none md:p-4 bg-order-variant-background text-order-variant-foreground" id="headlessui-radiogroup-option-:r12:" role="radio" aria-checked="false" tabindex="0" data-headlessui-state="" aria-labelledby="headlessui-label-:r13:" aria-describedby="headlessui-description-:r14:">
+                                    <span class="flex flex-1">
+                                        <span class="flex flex-col justify-between">
+                                        <span class="block text-white text-xs font-semibold " id="headlessui-label-:r13:">5 (5+0) Diamonds</span>
+                                        <div><span class="mt-1 flex items-center text-xs font-semibold" id="headlessui-description-:r14:">Rp&nbsp; 1.521</span></div>
+                                        </span>
+                                    </span>
+                                    <div class="flex aspect-square w-8 items-center"><img alt="Mobile Legends - 5 (5+0) Diamonds" fetchpriority="high" width="300" height="300" decoding="async" data-nimg="1" class="object-contain object-right" sizes="80vh" 
+                                     src="/assets/include/dm.webp" style="color: transparent;"></div>
+                                </div>
+                                <div class="relative flex cursor-pointer rounded-xl border border-transparent bg-[#53B950] text-background shadow-sm outline-none md:p-4 bg-order-variant-background text-order-variant-foreground" id="headlessui-radiogroup-option-:r15:" role="radio" aria-checked="false" tabindex="-1" data-headlessui-state="" aria-labelledby="headlessui-label-:r16:" aria-describedby="headlessui-description-:r17:">
+                                    <span class="flex flex-1">
+                                        <span class="flex flex-col justify-between">
+                                        <span class="block text-xs font-semibold " id="headlessui-label-:r16:">10 (9+1) Diamonds</span>
+                                        <div><span class="mt-1 flex items-center text-xs font-semibold" id="headlessui-description-:r17:">Rp&nbsp; 3.082</span></div>
+                                        </span>
+                                    </span>
+                                    <div class="flex aspect-square w-8 items-center"><img alt="Mobile Legends - 5 (5+0) Diamonds" fetchpriority="high" width="300" height="300" decoding="async" data-nimg="1" class="object-contain object-right" sizes="80vh" 
+                                    src="/assets/include/dm.webp" style="color: transparent;"></div>                                </div>
+                            </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            <section>
         </form>
     </div>
       

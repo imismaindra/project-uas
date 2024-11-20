@@ -95,6 +95,33 @@ switch ($modul) {
                 $products = $productModel->getProducts();
                 include 'views/product_list.php';
                 break;
+            case 'insert':
+                require_once 'models/category_model.php';
+                $categoryModel = new CategoryModel();
+                $categories = $categoryModel->getCategories();
+                include 'views/product_insert.php';
+                break;
+            case 'add':
+                $productModel = new ProductModel();
+                print_r($_POST['category_id']);
+                $productModel->insertProduct($_POST['name'],  $_POST['category_id'], $_POST['stock'], $_POST['price']);
+                header('Location: index.php?modul=product&fitur=list');
+                break;
+            case 'edit':
+                $product_id = $_GET['id'];
+                $productModel = new ProductModel();
+                // $product = $productModel->getProductById($product_id);
+                include 'views/product_update.php';
+                break;
+            case 'update':
+                $id = $_POST['id'];
+                $name = $_POST['name'];
+                $description = $_POST['description'];
+                $price = $_POST['price'];
+                $category_id = $_POST['category_id'];
+                $productModel = new ProductModel();
+                // $productModel->updateProduct($id, $name, $description, $price, $category_id);
+                header('Location: index.php?modul=product&fitur=list');
         }
         break;
     case 'login-admmin':

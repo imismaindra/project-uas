@@ -23,6 +23,15 @@ class ProductModel {
         return $products;
     }
 
+    public function InsertProduct($name, $id_catagories, $stock, $price) {
+        $sql = "INSERT INTO products (name, id_catagories, stock, price) VALUES (?, ?, ?, ?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ssis", $name, $id_catagories, $stock, $price); // Bind parameter);
+        $stmt->execute();
+        $stmt->close();
+        return $this->conn->insert_id;
+    }
+
     public function getProductsByCategorySlug($slug) {
         
         $stmt = $this->conn->prepare("
