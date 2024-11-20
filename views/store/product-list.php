@@ -174,16 +174,32 @@
                             <div id="headlessui-radiogroup-:r10:" role="radiogroup" aria-labelledby="headlessui-label-:r11:">
                             <label class="sr-only" id="headlessui-label-:r11:" role="none">Select a variant list</label>
                             <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3" role="none">
+                                <?php foreach ($products as $diamond): ?>
                                 <div class="relative flex cursor-pointer rounded-xl border border-transparent bg-[#53B950] text-background shadow-sm outline-none md:p-4 bg-order-variant-background text-order-variant-foreground" id="headlessui-radiogroup-option-:r12:" role="radio" aria-checked="false" tabindex="0" data-headlessui-state="" aria-labelledby="headlessui-label-:r13:" aria-describedby="headlessui-description-:r14:">
                                     <span class="flex flex-1">
                                         <span class="flex flex-col justify-between">
-                                        <span class="block text-white text-xs font-semibold " id="headlessui-label-:r13:">5 (5+0) Diamonds</span>
-                                        <div><span class="mt-1 flex items-center text-xs font-semibold" id="headlessui-description-:r14:">Rp&nbsp; 1.521</span></div>
+                                        <span class="block text-white text-xs font-semibold " id="headlessui-label-:r13:"><?php echo $diamond['name'];?></span>
+                                        <div><span class="mt-1 flex items-center text-xs font-semibold" id="headlessui-description-:r14:">Rp&nbsp; <?php echo $diamond['price'];?></span></div>
                                         </span>
                                     </span>
-                                    <div class="flex aspect-square w-8 items-center"><img alt="Mobile Legends - 5 (5+0) Diamonds" fetchpriority="high" width="300" height="300" decoding="async" data-nimg="1" class="object-contain object-right" sizes="80vh" 
-                                     src="/assets/include/dm.webp" style="color: transparent;"></div>
+                                    <div class="flex aspect-square w-8 items-center">
+                                        <?php 
+                                        if (isset($category_images[$products[0]['category_name']])): ?>
+                                            <img 
+                                                alt="<?= $products[0]['category_name']; ?>" 
+                                                fetchpriority="high" 
+                                                width="300" 
+                                                height="300" 
+                                                decoding="async" 
+                                                data-nimg="1" 
+                                                class="object-contain object-right" 
+                                                sizes="80vh" 
+                                                src="<?= $category_images[$products[0]['category_name']]; ?>" 
+                                                style="color: transparent;">
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
+                                <?php endforeach; ?>
                                 <div class="relative flex cursor-pointer rounded-xl border border-transparent bg-[#53B950] text-background shadow-sm outline-none md:p-4 bg-order-variant-background text-order-variant-foreground" id="headlessui-radiogroup-option-:r15:" role="radio" aria-checked="false" tabindex="-1" data-headlessui-state="" aria-labelledby="headlessui-label-:r16:" aria-describedby="headlessui-description-:r17:">
                                     <span class="flex flex-1">
                                         <span class="flex flex-col justify-between">
@@ -193,7 +209,7 @@
                                     </span>
                                     <div class="flex aspect-square w-8 items-center"><img alt="Mobile Legends - 5 (5+0) Diamonds" fetchpriority="high" width="300" height="300" decoding="async" data-nimg="1" class="object-contain object-right" sizes="80vh" 
                                     src="/assets/include/dm.webp" style="color: transparent;"></div>                                </div>
-                            </div>
+                                </div>
                             </div>
                         </section>
                     </div>

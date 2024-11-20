@@ -7,6 +7,17 @@ if ($slug) {
     require_once 'models/product_model.php';
     $productModel = new ProductModel();
     $products = $productModel->getProductsByCategorySlug($slug);
+    
+    $category_images = [
+        'Mobile Legends' => '/assets/include/dm.webp',
+        'Free Fire' => '/assets/include/dm.webp',
+        'PUBG' => '/assets/include/uc.webp',
+        'Valorant' => '/assets/include/vp.webp',
+        'Genshin Impact' => '/assets/include/gc.webp',
+        'Honor of Kings' => '/assets/include/dm.webp',
+        'EA FC' => '/assets/include/dm.webp',
+    ];
+
     include 'views/store/product-list.php';
     exit; // Hentikan eksekusi agar tidak masuk ke switch $modul
 }
