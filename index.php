@@ -1,7 +1,15 @@
 <?php
 
 $modul = isset($_GET['modul']) ? $_GET['modul'] : 'store';
+$slug =  isset($_GET['slug']) ? $_GET['slug'] : null;
 
+if ($slug) {
+    require_once 'models/product_model.php';
+    $productModel = new ProductModel();
+    $products = $productModel->getProductsByCategorySlug($slug);
+    include 'views/store/product-list.php';
+    exit; // Hentikan eksekusi agar tidak masuk ke switch $modul
+}
 switch ($modul) {
     case 'role': 
         $fitur = isset($_GET['fitur']) ? $_GET['fitur'] : 'dashboard';
@@ -100,4 +108,16 @@ switch ($modul) {
         include 'views/store/store.php';
         break;
 }
+
+//route front end store
+// switch ($slug) {
+//     case 'mobile-legends':
+//         require_once 'models/product_model.php';
+
+//         $productModel = new ProductModel();
+//         $products = $productModel->getProductsByCategorySlug($slug);
+//         include 'views/store/product-list.php';
+//         // header("Location: views/store/product-list.php");
+
+// }
 ?>
