@@ -121,7 +121,8 @@ switch ($modul) {
             case 'edit':
                 $product_id = $_GET['id'];
                 $productModel = new ProductModel();
-                // $product = $productModel->getProductById($product_id);
+                $product = $productModel->getProductById($product_id);
+                // var_dump($product);
                 include 'views/product_update.php';
                 break;
             case 'update':

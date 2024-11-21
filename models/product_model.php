@@ -50,6 +50,17 @@ class ProductModel {
         }
         return $products; // Return array produk
     }
+
+    public function getProductById($id){
+        $sql = "SELECT * FROM products WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        return $row;
+        
+    }
     
 }
 ?>

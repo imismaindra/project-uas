@@ -73,11 +73,11 @@
                                 <?php echo $product['price']; ?>
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <a href="../index.php?modul=prodcut$product&fitur=edit&id=<?php echo htmlspecialchars($product['id']); ?>" class="text-gray-400 hover:text-gray-100 mx-2">
+                                <a href="../index.php?modul=product&fitur=edit&id=<?php echo htmlspecialchars($product['id']); ?>" class="text-gray-400 hover:text-gray-100 mx-2">
                                     <i class="material-icons-outlined text-blue-600">edit</i>
                                 </a>
                                 
-                                <a href="../index.php?modul=prodcut$product&fitur=delete&rid=<?php echo htmlspecialchars($role['id']); ?>" class="text-gray-400 hover:text-gray-100 ml-2">
+                                <a href="../index.php?modul=product&fitur=delete&rid=<?php echo htmlspecialchars($role['id']); ?>" class="text-gray-400 hover:text-gray-100 ml-2">
                                     <i class="material-icons-round text-red-600">delete_outline</i>
                                 </a>
                             </td>
