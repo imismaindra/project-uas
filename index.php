@@ -142,6 +142,10 @@ switch ($modul) {
                 $productModel = new ProductModel();
                 // $productModel->updateProduct($id, $name, $description, $price, $category_id);
                 header('Location: index.php?modul=product&fitur=list');
+            case 'delete':
+                $productModel = new ProductModel();
+                $productModel->deleteProductByid($_GET['id']);
+                header('Location: index.php?modul=product&fitur=list');
         }
         break;
     case 'login-admmin':

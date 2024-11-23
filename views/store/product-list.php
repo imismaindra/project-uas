@@ -45,7 +45,7 @@
         </div>
         </div>
      </div>
-     <div class="container relative mt-8 grid grid-cols-2 gap-4 md:gap-8">
+     <div class="min-h-screen flex items-center justify-center mt-10 mb-10">
         <!-- Form -->
         <form action="" class="col-auto col-start-1 flex flex-col gap-4 lg:col-auto lg:gap-8">
             <section class="relative scroll-mt-20 rounded-xl bg-card/50 shadow-2xl md:scroll-mt-[5.75rem] w-[45rem]" id="1">
@@ -87,7 +87,7 @@
                 <div class="p-4">
                     <div class="flex flex-col space-y-4">
                         <section id="Spesial Items">
-                            <h3 class="pb-4 text-sm/6 font-semibold text-white">Spesial Items</h3>
+                            <h3 class="pb-4 text-sm/6 font-semibold text-[#53B950] ">Spesial Items</h3>
                             <div id="headlessui-radiogroup-:rc:" role="radiogroup" aria-labelledby="headlessui-label-:rd:">
                             <label class="sr-only" id="headlessui-label-:rd:" role="none">Select a variant list</label>
                             <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3" role="none">
@@ -151,15 +151,15 @@
                             </div>
                         </section>
                         <section id="Top Up Instant">
-                            <h3 class="pb-4 text-sm/6 font-semibold text-white">Top Up Instant</h3>
+                            <h3 class="pb-4 text-sm/6 text-[#53B950] font-semibold ">Top Up Instant</h3>
                             <div id="headlessui-radiogroup-:r10:" role="radiogroup" aria-labelledby="headlessui-label-:r11:">
                             <label class="sr-only" id="headlessui-label-:r11:" role="none">Select a variant list</label>
                             <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3" role="none">
                                 <?php foreach ($products as $diamond): ?>
-                                <div class="relative flex cursor-pointer rounded-xl border border-transparent bg-[#53B950] text-background shadow-sm outline-none md:p-4 bg-order-variant-background text-order-variant-foreground" id="headlessui-radiogroup-option-:r12:" role="radio" aria-checked="false" tabindex="0" data-headlessui-state="" aria-labelledby="headlessui-label-:r13:" aria-describedby="headlessui-description-:r14:">
+                                <div class="relative flex cursor-pointer rounded-xl border border-transparent bg-white text-background shadow-sm outline-none md:p-4 bg-order-variant-background text-order-variant-foreground" id="headlessui-radiogroup-option-:r12:" role="radio" aria-checked="false" tabindex="0" data-headlessui-state="" aria-labelledby="headlessui-label-:r13:" aria-describedby="headlessui-description-:r14:">
                                     <span class="flex flex-1">
                                         <span class="flex flex-col justify-between">
-                                        <span class="block text-white text-xs font-semibold " id="headlessui-label-:r13:"><?php echo $diamond['name'];?></span>
+                                        <span class="block text-xs font-semibold " id="headlessui-label-:r13:"><?php echo $diamond['name'];?></span>
                                         <div><span class="mt-1 flex items-center text-xs font-semibold" id="headlessui-description-:r14:">Rp&nbsp; <?php echo $diamond['price'];?></span></div>
                                         </span>
                                     </span>
@@ -181,23 +181,13 @@
                                     </div>
                                 </div>
                                 <?php endforeach; ?>
-                                <div class="relative flex cursor-pointer rounded-xl border border-transparent bg-[#53B950] text-background shadow-sm outline-none md:p-4 bg-order-variant-background text-order-variant-foreground" id="headlessui-radiogroup-option-:r15:" role="radio" aria-checked="false" tabindex="-1" data-headlessui-state="" aria-labelledby="headlessui-label-:r16:" aria-describedby="headlessui-description-:r17:">
-                                    <span class="flex flex-1">
-                                        <span class="flex flex-col justify-between">
-                                        <span class="block text-xs font-semibold " id="headlessui-label-:r16:">10 (9+1) Diamonds</span>
-                                        <div><span class="mt-1 flex items-center text-xs font-semibold" id="headlessui-description-:r17:">Rp&nbsp; 3.082</span></div>
-                                        </span>
-                                    </span>
-                                    <div class="flex aspect-square w-8 items-center"><img alt="Mobile Legends - 5 (5+0) Diamonds" fetchpriority="high" width="300" height="300" decoding="async" data-nimg="1" class="object-contain object-right" sizes="80vh" 
-                                    src="/assets/include/dm.webp" style="color: transparent;"></div>                                </div>
-                                </div>
                             </div>
                         </section>
                     </div>
                 </div>
             <section>
         </form>
-    </div>
+     </div>
       
     
 </body>

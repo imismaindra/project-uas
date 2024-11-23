@@ -94,6 +94,15 @@ class ProductModel {
         return $row;
         
     }
+    public function deleteProductByid($id){
+        $sql = "DELETE FROM products WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $stmt->close();
+        return $this->conn->affected_rows;
+    
+    }
     
 }
 ?>
