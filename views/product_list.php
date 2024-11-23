@@ -1,3 +1,7 @@
+<?php
+    $message = isset($_SESSION['message']) ? $_SESSION['message'] : '';
+    unset($_SESSION['message']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +14,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
         rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
 </head>
 <body class="bg-[#B5C2CA] font-poppins">
     <!-- Navbar -->
@@ -20,6 +26,15 @@
         <?php include 'components/sidebar-admin.php'; ?>
         <!-- Main Content -->
         <div class="flex-1 ml-72 mt-20 p-8">
+        <?php if ($message): ?>
+            <div 
+                x-data="{ show: true }" 
+                x-show="show"
+                x-init="setTimeout(() => show = false, 3000)" 
+                class="fixed top-5 right-5 z-50 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg">
+                <?= htmlspecialchars($message); ?>
+            </div>
+        <?php endif; ?>
             <h1 class="text-3xl font-bold mb-5">Products</h1>
 
             <div class="mb-4">

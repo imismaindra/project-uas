@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 
 $modul = isset($_GET['modul']) ? $_GET['modul'] : 'store';
 $slug =  isset($_GET['slug']) ? $_GET['slug'] : null;
@@ -140,9 +142,11 @@ switch ($modul) {
                 $price = $_POST['price'];
                 $category_id = $_POST['category_id'];
                 $productModel = new ProductModel();
-                // $productModel->updateProduct($id, $name, $description, $price, $category_id);
+                //$productModel->updateProduct($id, $name, $description, $price, $category_id);
+                $message = isset($_SESSION['message']) ? $_SESSION['message'] : '';
                 header('Location: index.php?modul=product&fitur=list');
             case 'delete':
+                $_SESSION['message'] = "Data berhasil diperbarui!"; // atau "Data berhasil dihapus!"
                 $productModel = new ProductModel();
                 $productModel->deleteProductByid($_GET['id']);
                 header('Location: index.php?modul=product&fitur=list');

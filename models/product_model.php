@@ -65,6 +65,7 @@ class ProductModel {
         return $this->conn->insert_id;
     }
 
+
     public function getProductsByCategorySlug($slug) {
         
         $stmt = $this->conn->prepare("

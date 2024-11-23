@@ -6,6 +6,8 @@
     <title>Rusdi Store - TopUp paling murah se-Indonesia    </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
+
 </head>
 <body class="bg-[#1A1B41]">
      <!-- navbar -->
@@ -48,7 +50,7 @@
      <div class="min-h-screen flex items-center justify-center mt-10 mb-10">
         <!-- Form -->
         <form action="" class="col-auto col-start-1 flex flex-col gap-4 lg:col-auto lg:gap-8">
-            <section class="relative scroll-mt-20 rounded-xl bg-card/50 shadow-2xl md:scroll-mt-[5.75rem] w-[45rem]" id="1">
+            <section class="relative scroll-mt-20 rounded-xl bg-card/50 shadow-2xl shadow-[#53B950] md:scroll-mt-[5.75rem] w-[45rem]" id="1">
                 <div class="flex items-center overflow-hidden rounded-t-xl bg-[#53B950]">
                     <div class="flex h-10 w-10 items-center justify-center bg-primary font-semibold text-primary-foreground">1</div>
                     <h2 class="px-4 py-2 text-sm/6 font-semibold text-white">Masukkan Data Akun</h2>
