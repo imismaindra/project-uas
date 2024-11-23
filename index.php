@@ -103,7 +103,15 @@ switch ($modul) {
         switch ($fitur) {
             case 'list':
                 $productModel = new ProductModel();
-                $products = $productModel->getProducts();
+                $search = isset($_GET['search']) ? $_GET['search'] : '';
+                $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : null;
+            
+                $products = $productModel->GetProducts($search, $category_id);
+            
+                require_once 'models/category_model.php';
+                $categoryModel = new CategoryModel();
+                $categories = $categoryModel->getCategories();
+            
                 include 'views/product_list.php';
                 break;
             case 'insert':

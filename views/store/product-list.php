@@ -46,25 +46,6 @@
         </div>
      </div>
      <div class="container relative mt-8 grid grid-cols-2 gap-4 md:gap-8">
-        <!-- Card -->
-        <div class="rounded-xl text-white bg-[#53B950] px-4 mx-4 pb-4 pt-2 max-h-[12.5rem] shadow-2xl">
-            <div class="prose prose-sm my-3 text-xs text-foreground prose-p:!m-0">
-                <div>
-                    <p>Top up Free Fire harga paling murah. Cara topup dm FF termurah :</p>
-                    <ol>
-                        <li>Masukkan ID</li>
-                        <li>Pilih Nominal</li>
-                        <li>Masukkan jumlah</li>
-                        <li>Pilih Pembayaran</li>
-                        <li>Tulis Kode Promo (jika ada)</li>
-                        <li>Masukkan No WhatsApp</li>
-                        <li>Klik Order Now &amp; lakukan Pembayaran</li>
-                        <li>Diamond otomatis masuk ke akun game</li>
-                    </ol>
-                </div>
-            </div>
-        </div> 
-
         <!-- Form -->
         <form action="" class="col-auto col-start-1 flex flex-col gap-4 lg:col-auto lg:gap-8">
             <section class="relative scroll-mt-20 rounded-xl bg-card/50 shadow-2xl md:scroll-mt-[5.75rem] w-[45rem]" id="1">
