@@ -1,54 +1,91 @@
 <?php 
 include 'config/connection.php';
-class CategoryModel{
-    public function getCategories(){
-        global $conn;
-        $sql = "SELECT * FROM categories";
-        $result = $conn->query($sql);
 
-        $categories =[];
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                $categories[] = $row;
-            }
+class CategoryModel {
+    public $conn;
+
+    public function __construct() {
+        global $conn;
+        $this->conn = $conn;
+    }
+
+    public function getCategories($search = '', $limit = 5, $offset = 0) {
+        $sql = "SELECT * FROM categories WHERE 1=1";
+        if ($search != '') {
+            $sql .= " AND name LIKE ?";
         }
+        $sql .= " LIMIT ? OFFSET ?";
+
+        $stmt = $this->conn->prepare($sql);
+
+        if ($search != '') {
+            $searchParam = "%$search%";
+            $stmt->bind_param("sii", $searchParam, $limit, $offset);
+        } else {
+            $stmt->bind_param("ii", $limit, $offset);
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $categories = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $categories[] = $row;
+        }
+
+        $stmt->close();
         return $categories;
     }
 
-    public function insertCategory($name, $description, $slug,$image){
-        global $conn;
-       // Path untuk menyimpan file
+    public function getTotalCategories($search = '') {
+        $sql = "SELECT COUNT(*) as total FROM categories WHERE 1=1";
+        if ($search != '') {
+            $sql .= " AND name LIKE ?";
+        }
+
+        $stmt = $this->conn->prepare($sql);
+
+        if ($search != '') {
+            $searchParam = "%$search%";
+            $stmt->bind_param("s", $searchParam);
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+
+        $stmt->close();
+        return $row['total'] ?? 0;
+    }
+
+    public function insertCategory($name, $description, $slug, $image) {
         $uploadDir = 'assets/';
         $fileName = basename($image['name']);
         $targetFile = $uploadDir . $fileName;
 
         // Validasi dan pindahkan file
         if (move_uploaded_file($image['tmp_name'], $targetFile)) {
-            // Jika berhasil diupload, simpan path ke database
             $sql = "INSERT INTO categories (name, description, slug, image) VALUES (?, ?, ?, ?)";
-            $stmt = $conn->prepare($sql);
+            $stmt = $this->conn->prepare($sql);
             $stmt->bind_param("ssss", $name, $description, $slug, $targetFile);
             $stmt->execute();
             $stmt->close();
         } else {
-            // Tangani error upload
             die("Error uploading file.");
         }
     }
 
-    public function deleteCategory($id){
-        global $conn;
+    public function deleteCategory($id) {
         $sql = "DELETE FROM categories WHERE id = ?";
-        $stmt = $conn->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $stmt->close();
     }
 
-    public function getCategoryById($id){
-        global $conn;
+    public function getCategoryById($id) {
         $sql = "SELECT * FROM categories WHERE id = ?";
-        $stmt = $conn->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -57,16 +94,12 @@ class CategoryModel{
         return $category;
     }
 
-    public function updateCategory($id, $name, $description, $slug, $image){
-        global $conn;
+    public function updateCategory($id, $name, $description, $slug, $image) {
         $sql = "UPDATE categories SET name = ?, description = ?, slug = ?, image = ? WHERE id = ?";
-        $stmt = $conn->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("ssssi", $name, $description, $slug, $image, $id);
         $stmt->execute();
         $stmt->close();
     }
-    
 }
-
-
 ?>

@@ -84,6 +84,32 @@
                     </tbody>
                 </table>
             </div>
+            <div class="mt-4">
+                <nav>
+                    <ul class="inline-flex items-center">
+                        <?php if ($page > 1): ?>
+                            <li>
+                                <a href="?modul=category&fitur=list&page=<?php echo $page - 1; ?>&search=<?php echo htmlspecialchars($search ?? ''); ?>" 
+                                class="px-3 py-2 bg-gray-200 hover:bg-gray-300 rounded-l">Previous</a>
+                            </li>
+                        <?php endif; ?>
+
+                        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                            <li>
+                                <a href="?modul=category&fitur=list&page=<?php echo $i; ?>&search=<?php echo htmlspecialchars($search ?? ''); ?>" 
+                                class="px-3 py-2 <?php echo ($i == $page) ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'; ?> rounded"><?php echo $i; ?></a>
+                            </li>
+                        <?php endfor; ?>
+
+                        <?php if ($page < $totalPages): ?>
+                            <li>
+                                <a href="?modul=category&fitur=list&page=<?php echo $page + 1; ?>&search=<?php echo htmlspecialchars($search ?? ''); ?>" 
+                                class="px-3 py-2 bg-gray-200 hover:bg-gray-300 rounded-r">Next</a>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
 </body>

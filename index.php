@@ -51,7 +51,15 @@ switch ($modul) {
         switch ($fitur) {
             case 'list':
                 $categoryModel = new CategoryModel();
-                $categories = $categoryModel->getCategories();
+                $search = isset($_GET['serach']) ? $_GET['search']: '';
+                $limit = 5;
+                $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                $offset = ($page - 1) * $limit;
+                
+                $totalCategories = $categoryModel->getTotalCategories($search);
+                $totalPages = ceil($totalCategories / $limit);
+                
+                $categories = $categoryModel->getCategories($search, $limit, $offset);
                 include 'views/category_list.php';
                 break;
             case 'insert':
