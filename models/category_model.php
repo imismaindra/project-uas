@@ -60,21 +60,20 @@ class CategoryModel {
 
     public function insertCategory($name, $description, $slug, $image) {
         $uploadDir = 'assets/';
-        $fileName = basename($image['name']);
-        $targetFile = $uploadDir . $fileName;
-
-        // Validasi dan pindahkan file
-        if (move_uploaded_file($image['tmp_name'], $targetFile)) {
-            $sql = "INSERT INTO categories (name, description, slug, image) VALUES (?, ?, ?, ?)";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("ssss", $name, $description, $slug, $targetFile);
-            $stmt->execute();
-            $stmt->close();
-        } else {
-            die("Error uploading file.");
+        $fileName = isset($image['name']) ? basename($image['name']) : null;
+        $targetFile = $fileName ? $uploadDir . $fileName : null;
+        if ($fileName && move_uploaded_file($image['tmp_name'], $targetFile)) {
+        } else { 
+            $targetFile = null;
         }
+    
+        $sql = "INSERT INTO categories (name, description, slug, image) VALUES (?, ?, ?, ?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ssss", $name, $description, $slug, $targetFile);
+        $stmt->execute();
+        $stmt->close();
     }
-
+    
     public function deleteCategory($id) {
         $sql = "DELETE FROM categories WHERE id = ?";
         $stmt = $this->conn->prepare($sql);

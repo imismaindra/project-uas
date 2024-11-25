@@ -51,7 +51,7 @@ switch ($modul) {
         switch ($fitur) {
             case 'list':
                 $categoryModel = new CategoryModel();
-                $search = isset($_GET['serach']) ? $_GET['search']: '';
+                $search = isset($_GET['search']) ? $_GET['search']: '';
                 $limit = 5;
                 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
                 $offset = ($page - 1) * $limit;
@@ -67,7 +67,8 @@ switch ($modul) {
                 break;
             case 'add':
                 $categoryModel = new CategoryModel();
-                $categoryModel->insertCategory($_POST['name'], $_POST['description'], $_POST['slug'], $_FILES['image']);
+                $image = isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK ? $_FILES['image'] : null;
+                $categoryModel->insertCategory($_POST['name'], $_POST['description'], $_POST['slug'], $image);
                 header('Location: index.php?modul=category&fitur=list');
                 break;
             case 'edit':
@@ -82,19 +83,16 @@ switch ($modul) {
                 $description = $_POST['description'];
                 $slug = $_POST['slug'];
                 $categoryModel = new CategoryModel();
-            
-                // Proses upload file gambar
-                if ($_FILES['image']['name']) {
+                if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
                     $image_name = $_FILES['image']['name'];
                     $image_tmp = $_FILES['image']['tmp_name'];
-                    $image_path = "assets/". $image_name;
+                    $image_path = "assets/" . $image_name;
                     move_uploaded_file($image_tmp, $image_path);
                 } else {
-                    // Jika tidak ada file diunggah, gunakan gambar lama
-                    $image_name = $categoryModel->getCategoryById($id)['image'];
+                    $image_path = $categoryModel->getCategoryById($id)['image'];
                 }
-                //print_r($image_path);
                 $categoryModel->updateCategory($id, $name, $description, $slug, $image_path);
+
             
                 header('Location: index.php?modul=category&fitur=list');
                 break;
@@ -171,9 +169,11 @@ switch ($modul) {
         break;
     default:
         require_once 'models/category_model.php';
-
+        $limit = 6;
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($page - 1) * $limit;
         $categoryModel = new CategoryModel();
-         $categories = $categoryModel->getCategories();
+        $categories = $categoryModel->getCategories('', $limit, $offset);
         include 'views/store/store.php';
         break;
 }
