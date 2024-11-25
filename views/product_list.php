@@ -136,19 +136,46 @@
 
                 </table>
             </div>
+            <div class="mt-4">
+                <nav>
+                    <ul class="inline-flex items-center">
+                        <?php if ($page > 1): ?>
+                            <li>
+                                <a href="?modul=product&fitur=list&page=<?php echo $page - 1; ?>&search=<?php echo htmlspecialchars($search ?? ''); ?>&category_id=<?php echo htmlspecialchars($category_id ?? ''); ?>" 
+                                class="px-3 py-2 bg-gray-200 hover:bg-gray-300 rounded-l">Previous</a>
+                            </li>
+                        <?php endif; ?>
+
+                        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                            <li>
+                                <a href="?modul=product&fitur=list&page=<?php echo $i; ?>&search=<?php echo htmlspecialchars($search ?? ''); ?>&category_id=<?php echo htmlspecialchars($category_id ?? ''); ?>" 
+                                class="px-3 py-2 <?php echo ($i == $page) ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'; ?> rounded"><?php echo $i; ?></a>
+                            </li>
+                        <?php endfor; ?>
+
+                        <?php if ($page < $totalPages): ?>
+                            <li>
+                                <a href="?modul=product&fitur=list&page=<?php echo $page + 1; ?>&search=<?php echo htmlspecialchars($search ?? ''); ?>&category_id=<?php echo htmlspecialchars($category_id ?? ''); ?>" 
+                                class="px-3 py-2 bg-gray-200 hover:bg-gray-300 rounded-r">Next</a>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </nav>
+            </div>
+
         </div>
     </div>
     <!-- Tambahkan modal di akhir body -->
-<div id="deleteModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black bg-opacity-50">
-    <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
-        <h2 class="text-lg font-bold mb-4">Konfirmasi Penghapusan</h2>
-        <p class="mb-6 text-gray-700">Apakah Anda yakin ingin menghapus produk ini?</p>
-        <div class="flex justify-end">
-            <button id="cancelDelete" class="px-4 py-2 bg-gray-500 text-white rounded mr-2 hover:bg-gray-600">Batal</button>
-            <a id="confirmDelete" href="#" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Hapus</a>
+    <div id="deleteModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black bg-opacity-50">
+        <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+            <h2 class="text-lg font-bold mb-4">Konfirmasi Penghapusan</h2>
+            <p class="mb-6 text-gray-700">Apakah Anda yakin ingin menghapus produk ini?</p>
+            <div class="flex justify-end">
+                <button id="cancelDelete" class="px-4 py-2 bg-gray-500 text-white rounded mr-2 hover:bg-gray-600">Batal</button>
+                <a id="confirmDelete" href="#" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Hapus</a>
+            </div>
         </div>
     </div>
-</div>
 
 <!-- Script untuk menangani modal -->
 <script>

@@ -1,11 +1,11 @@
 <nav x-data="{ scrolled: false }" 
      x-on:scroll.window="scrolled = (window.pageYOffset > 0)" 
      :class="scrolled ? 'bg-opacity-70 backdrop-blur-md' : 'bg-opacity-100'" 
-     class="sticky top-0 bg-[#1A1B41] z-50 transition-all duration-300">
+     class="sticky top-0 bg-[#1A1B41] z-50 transition-all duration-300 shadow shadow-xl">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
       <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
-      <span class="self-center text-2xl font-semibold whitespace-nowrap text-[#63BF5F]">Top-up Game</span>
+      <span class="self-center text-2xl font-bold whitespace-nowrap text-[#63BF5F]">TOP-UP GAME</span>
     </a>
     <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
       <button type="button" class="text-white hover:text-white border border-white hover:bg-black-200 focus:ring-4 focus:outline-none focus:ring-[#63BF5F] font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Login</button>
@@ -18,7 +18,7 @@
       </button>
     </div>
     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
-      <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-[#1A1B41]">
+      <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  ">
         <li>
           <a href="store.php" class="block py-2 px-3 md:p-0 text-white bg-[#63BF5F] rounded md:bg-transparent md:text-[#63BF5F]" aria-current="page">Top-up</a>
         </li>

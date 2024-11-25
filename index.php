@@ -107,8 +107,14 @@ switch ($modul) {
                 $productModel = new ProductModel();
                 $search = isset($_GET['search']) ? $_GET['search'] : '';
                 $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : null;
+                $limit = 5;
+                $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                $offset = ($page - 1) * $limit;
             
-                $products = $productModel->GetProducts($search, $category_id);
+                $totalProducts = $productModel->GetTotalProducts($search, $category_id);
+                $totalPages = ceil($totalProducts / $limit);
+            
+                $products = $productModel->GetProducts($search, $category_id, $limit, $offset);
             
                 require_once 'models/category_model.php';
                 $categoryModel = new CategoryModel();
