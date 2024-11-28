@@ -58,7 +58,7 @@ class CategoryModel {
         return $row['total'] ?? 0;
     }
 
-    public function insertCategory($name, $description, $slug, $image) {
+    public function insertCategory($name, $description, $slug, $image,$tipe) {
         $uploadDir = 'assets/';
         $fileName = isset($image['name']) ? basename($image['name']) : null;
         $targetFile = $fileName ? $uploadDir . $fileName : null;
@@ -67,9 +67,9 @@ class CategoryModel {
             $targetFile = null;
         }
     
-        $sql = "INSERT INTO categories (name, description, slug, image) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO categories (name, description, slug, image,tipe) VALUES (?, ?, ?, ?,?)";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("ssss", $name, $description, $slug, $targetFile);
+        $stmt->bind_param("ssss", $name, $description, $slug, $targetFile,$tipe);
         $stmt->execute();
         $stmt->close();
     }
@@ -93,12 +93,32 @@ class CategoryModel {
         return $category;
     }
 
-    public function updateCategory($id, $name, $description, $slug, $image) {
-        $sql = "UPDATE categories SET name = ?, description = ?, slug = ?, image = ? WHERE id = ?";
+    public function updateCategory($id, $name, $description, $slug, $image, $tipe) {
+        $sql = "UPDATE categories SET name = ?, description = ?, slug = ?, image = ?, tipe = ? WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("ssssi", $name, $description, $slug, $image, $id);
+
+        $stmt->bind_param("sssssi", $name, $description, $slug, $image, $tipe, $id);
+    
         $stmt->execute();
         $stmt->close();
     }
+    
+
+public function getFilteredCategoriesByTipe($tipe) {
+    $sql = "SELECT *  FROM categories WHERE tipe = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("s", $tipe);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $categories = [];
+
+    while ($row = $result->fetch_assoc()) {
+        $categories[] = $row;
+    }
+
+    $stmt->close();
+    return $categories;
+}
+    
 }
 ?>

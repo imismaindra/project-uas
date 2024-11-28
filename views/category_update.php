@@ -55,6 +55,15 @@
                             Upload a new file to replace the current image.
                         </p>
                     </div>
+                    <div>
+                        <label for="tipe" class="block mb-2 text-sm font-medium text-gray-900">Tipe</label>
+                        <select id="tipe" name="tipe" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <option value="topup" <?php echo $category['tipe'] === 'topup' ? 'selected' : ''; ?>>Top-Up</option>
+                            <option value="joki" <?php echo $category['tipe'] === 'joki' ? 'selected' : ''; ?>>Joki</option>
+                            <option value="voucher" <?php echo $category['tipe'] === 'voucher' ? 'selected' : ''; ?>>Voucher</option>
+                        </select>
+                    </div>
+
                 </div>
 
                 <!-- Submit Button -->

@@ -68,7 +68,7 @@ switch ($modul) {
             case 'add':
                 $categoryModel = new CategoryModel();
                 $image = isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK ? $_FILES['image'] : null;
-                $categoryModel->insertCategory($_POST['name'], $_POST['description'], $_POST['slug'], $image);
+                $categoryModel->insertCategory($_POST['name'], $_POST['description'], $_POST['slug'], $image,$_POST['tipe']);
                 header('Location: index.php?modul=category&fitur=list');
                 break;
             case 'edit':
@@ -82,6 +82,7 @@ switch ($modul) {
                 $name = $_POST['name'];
                 $description = $_POST['description'];
                 $slug = $_POST['slug'];
+                $tipe = $_POST['tipe'];
                 $categoryModel = new CategoryModel();
                 if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
                     $image_name = $_FILES['image']['name'];
@@ -91,7 +92,7 @@ switch ($modul) {
                 } else {
                     $image_path = $categoryModel->getCategoryById($id)['image'];
                 }
-                $categoryModel->updateCategory($id, $name, $description, $slug, $image_path);
+                $categoryModel->updateCategory($id, $name, $description, $slug, $image_path,$tipe);
 
             
                 header('Location: index.php?modul=category&fitur=list');
@@ -167,26 +168,26 @@ switch ($modul) {
     case 'login-admmin':
         include 'login-admin.php';
         break;
-    default:
+    case 'store':
         require_once 'models/category_model.php';
         $limit = 6;
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $offset = ($page - 1) * $limit;
         $categoryModel = new CategoryModel();
         $categories = $categoryModel->getCategories('', $limit, $offset);
+        $categoriesCard = $categoryModel->getCategories('', 12, $offset);
+        $filter = isset($_GET['filter']) ? $_GET['filter'] : null;
+        if ($filter) {
+            $categoriesCard= $categoryModel->getFilteredCategoriesByTipe($filter);
+        } else {
+            // Jika tidak ada filter, ambil kategori default
+            $categoriesCard = $categoryModel->getFilteredCategoriesByTipe('topup');
+        }
         include 'views/store/store.php';
+        break;
+    default:
+        
         break;
 }
 
-//route front end store
-// switch ($slug) {
-//     case 'mobile-legends':
-//         require_once 'models/product_model.php';
-
-//         $productModel = new ProductModel();
-//         $products = $productModel->getProductsByCategorySlug($slug);
-//         include 'views/store/product-list.php';
-//         // header("Location: views/store/product-list.php");
-
-// }
 ?>

@@ -36,9 +36,6 @@
                             required 
                         />
                     </div>
-
-                    
-
                     <!-- Select for Category -->
                     <div>
                         <label for="category" class="block mb-2 text-sm font-medium text-gray-900">Category</label>
