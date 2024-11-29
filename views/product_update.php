@@ -42,7 +42,7 @@
                         <select id="category_id" name="category_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                             <option selected>pilih Category</option>
                             <?php  foreach ($categories as $category): ?>
-                            <option value="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></option>
+                            <option value="<?php echo $category['id'][0]; ?>"><?php echo $category['name']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>

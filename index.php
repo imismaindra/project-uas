@@ -143,7 +143,10 @@ switch ($modul) {
                 break;
             case 'edit':
                 $product_id = $_GET['id'];
+                require_once 'models/category_model.php';
                 $productModel = new ProductModel();
+                $categoryModel = new CategoryModel();
+                $categories = $categoryModel->getCategories();
                 $product = $productModel->getProductById($product_id);
                 // var_dump($product);
                 include 'views/product_update.php';
@@ -155,7 +158,7 @@ switch ($modul) {
                 $price = $_POST['price'];
                 $category_id = $_POST['category_id'];
                 $productModel = new ProductModel();
-                //$productModel->updateProduct($id, $name, $description, $price, $category_id);
+                // $productModel->updateProduct($id, $name, $description, $price, $category_id);
                 $message = isset($_SESSION['message']) ? $_SESSION['message'] : '';
                 header('Location: index.php?modul=product&fitur=list');
             case 'delete':
