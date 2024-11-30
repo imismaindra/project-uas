@@ -61,12 +61,13 @@
     <!-- carousell -->
     <?php include './views/components/carousell.php'; ?>
     <!-- content -->
-     <section class=" text-white mx-[5.5rem] px-4 md:px-8">
-        <h1 class="text-3xl font-bold mb-5">Yang sedang Populer 🔥</h>
-        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <section class="text-white mx-[5.5rem] px-4 md:px-8">
+        <h1 class="text-3xl font-bold mb-5">Yang sedang Populer 🔥</h1>
+        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-6">
             <?php include './views/components/cards.php'; ?>
         </div>
     </section>
+
     <section id = "more-items" class="mx-[7.6rem] my-10">
         <h1 class="text-3xl font-bold my-5 text-white">Items Lainnya</h1>
         <div class="my-5 flex transform items-center gap-2 space-x-3 overflow-auto duration-300 ease-in-out">

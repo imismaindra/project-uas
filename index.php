@@ -152,15 +152,24 @@ switch ($modul) {
                 include 'views/product_update.php';
                 break;
             case 'update':
+                
                 $id = $_POST['id'];
                 $name = $_POST['name'];
-                $description = $_POST['description'];
                 $price = $_POST['price'];
+                $stock = $_POST['stock'];
                 $category_id = $_POST['category_id'];
+                var_dump($_POST['id'],"-",$_POST['name'],"-",$_POST['price'],"-",$_POST['category_id']);
                 $productModel = new ProductModel();
-                // $productModel->updateProduct($id, $name, $description, $price, $category_id);
-                $message = isset($_SESSION['message']) ? $_SESSION['message'] : '';
-                header('Location: index.php?modul=product&fitur=list');
+                if ($productModel->updateProduct($id, $name, $price,$stock, $category_id)) {
+                    $_SESSION['message'] = "Produk berhasil diperbarui.";
+                    header('Location: index.php?modul=product&fitur=list');
+                    exit;
+                } else {
+                    $_SESSION['error'] = "Gagal memperbarui produk.";
+                    header('Location: index.php?modul=product&fitur=edit&id=' . $id);
+                    exit;
+                }
+                break;
             case 'delete':
                 $_SESSION['message'] = "Data berhasil diperbarui!"; // atau "Data berhasil dihapus!"
                 $productModel = new ProductModel();

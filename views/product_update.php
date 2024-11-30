@@ -21,8 +21,10 @@
         <!-- Main Content -->
         <div class="flex-1 ml-72 mt-20 p-8">
             <h1 class="text-2xl font-bold mb-8">Edit Product</h1>
-            <form method="post" action="../index.php?modul=product&fitur=add" enctype="multipart/form-data" class="bg-white px-6 py-8 rounded-lg shadow-lg">
+            <form method="post" action="../index.php?modul=product&fitur=update" class="bg-white px-6 py-8 rounded-lg shadow-lg">
                 <div class="grid gap-6 mb-6">
+                <input type="hidden" name="id" value="<?php echo htmlspecialchars($product['id']); ?>">
+
                     <!-- Input for Product Name -->
                     <div>
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Product Name</label>
@@ -38,13 +40,17 @@
                     </div>
                     <!-- Select for Category -->
                     <div>
-                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900">Category</label>
+                       
+                        <label for="category_id" class="block mb-2 text-sm font-medium text-gray-900">Category</label>
                         <select id="category_id" name="category_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                            <option selected>pilih Category</option>
-                            <?php  foreach ($categories as $category): ?>
-                            <option value="<?php echo $category['id'][0]; ?>"><?php echo $category['name']; ?></option>
+                            <option value="" disabled>Pilih Category</option>
+                            <?php foreach ($categories as $category): ?>
+                                <option value="<?php echo $category['id']; ?>" <?php echo $product['id'] == $category['id'] ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($category['name']); ?>
+                                </option>
                             <?php endforeach; ?>
                         </select>
+
                     </div>
 
                     <!-- Input for Stock -->
@@ -75,17 +81,6 @@
                         />
                     </div>
 
-                    <!-- Image Upload
-                    <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900" for="image">Upload Product Image</label>
-                        <input 
-                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" 
-                            id="image" 
-                            name="image" 
-                            type="file" 
-                            required>
-                        <p class="mt-1 text-sm text-gray-500">Supported formats: SVG, PNG, JPG, GIF (Max size: 800x400px).</p>
-                    </div> -->
                 </div>
 
                 <!-- Submit Button -->

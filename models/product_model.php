@@ -134,6 +134,16 @@ class ProductModel {
         return $this->conn->affected_rows;
     
     }
+
+    public function updateProduct($id, $name, $price, $stock, $category_id) {
+        $sql = "UPDATE products SET name = ?, price = ?, stock = ?, id_catagories = ? WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ssiii", $name, $price, $stock, $category_id, $id); // Correct format string
+        $stmt->execute();
+        $stmt->close();
+        return $this->conn->affected_rows;
+    }
+    
     
 }
 ?>
