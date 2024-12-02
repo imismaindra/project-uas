@@ -70,7 +70,7 @@
                 <a href="index.php?modul=product&fitur=insert">New Product</a>
                 
             </button>
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <div class="relative overflow-x-auto shadow-md">
                 
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
                     <thead class="text-xs text-white uppercase bg-[#1D1242]">

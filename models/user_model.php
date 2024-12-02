@@ -18,6 +18,7 @@ class Users {
             return "Error: " . $stmt->error;
         }
     }
+
     public function updateUser($userId, $username, $password, $email, $role) {
         $stmt = $this->conn->prepare("UPDATE users SET username = ?, password = ?, email = ?, role_id = ? WHERE id = ?");
         $stmt->bind_param("ssssi", $username, $password, $email, $role, $userId);
@@ -52,16 +53,31 @@ class Users {
             return "No users found.";
         }
     }
-    public function getAllUsers() {
-        $stmt = $this->conn->prepare("SELECT * FROM users");
+
+    public function getAllUsers($search = '', $username = null, $limit = 5, $offsite = 0) {
+        $sql = "SELECT users.*, roles.name AS role_name FROM users JOIN roles ON users.role_id = roles.id WHERE 1=1";
+        $params = [];
+        if (!empty($search)) {
+            $sql .= " AND (users.username LIKE ? OR users.email LIKE ?)";
+            $params[] = "%$search%";
+            $params[] = "%$search%";
+        }
+        if (!empty($username)) {
+            $sql .= " AND users.username = ?";
+            $params[] = $username;
+        }
+        $sql .= " LIMIT ? OFFSET ?";
+        $params[] = $limit;
+        $params[] = $offsite;
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param(str_repeat("s", count($params)), ...$params);
         $stmt->execute();
         $result = $stmt->get_result();
-
-        if ($result->num_rows > 0) {
-            return $result->fetch_all(MYSQLI_ASSOC);
-        } else {
-            return "No users found.";
+        $users = [];
+        while ($row = $result->fetch_assoc()) {
+            $users[] = $row;
         }
+        return $users;
     }
 }
 ?>

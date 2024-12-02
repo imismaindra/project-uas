@@ -1,5 +1,5 @@
 <?php foreach ($categories as $category): ?>
-    <a href="index.php?slug=<?php echo $category['slug']?>" 
+<a href="index.php?slug=<?php echo $category['slug']?>" 
    class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-md 
    hover:bg-gray-100 transition-all duration-300 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
     <img class="object-cover w-full rounded-t-lg h-40 md:h-[7rem] md:w-[6rem] md:rounded-none md:rounded-s-lg" 

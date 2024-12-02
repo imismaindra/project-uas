@@ -43,7 +43,28 @@ switch ($modul) {
                 break;
         }
         break;
-    case 'user':
+    case 'users':
+        $fitur = isset($_GET['fitur']) ? $_GET['fitur'] : 'dashboard';
+        require_once 'models/user_model.php';
+        switch($fitur){
+            case 'list':
+                $usermodel = new Users();
+                $users = $usermodel->getAllUsers();
+                include 'views/user_list.php';
+                break;
+            case 'insert':
+                require_once 'models/role_model.php';
+
+                $roleModel = new RoleModel();
+                $roles = $roleModel->getRoles(); 
+                include 'views/user_insert.php';
+                break;
+            case 'add':
+                $userModel = new Users();
+                $userModel->insertUser($_POST['username'],$_POST['password'],$_POST['email'],$_POST['role_id']);
+                header('Location: ?modul=users&fitur=list');
+                break;    
+        }
         break;
     case 'category':
         $fitur = isset($_GET['fitur']) ? $_GET['fitur'] : 'list';

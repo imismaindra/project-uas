@@ -56,7 +56,7 @@
     </style>
 
 </head>
-<body class="bg-[#1A1B41]">
+<body class="bg-[#1A1B41] ">
     <!-- navbar -->
     <?php include './views/components/navbar.php'; ?>
     <img alt="Mobile Legends" fetchpriority="high" width="1280" height="1280" decoding="async" data-img="1" class="w-full h-56 md:h-72 lg:h-96 object-cover object-center" src="https://i.ibb.co.com/mJmVkrG/mobile-legends.jpg" style="color: transparent;">
@@ -106,13 +106,13 @@
                             <div>
                                 <label for="id" class="block text-xs font-medium text-white pb-2">ID</label>
                                 <div class="flex flex-col items-start">
-                                    <input class="relative block w-full appearance-none rounded-lg border border-border bg-input px-3 py-2 text-xs text-white placeholder-muted-white focus:z-10 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-75" type="number" id="id" name="id" min="0" placeholder="Ketikan ID" autocomplete="id" value="">
+                                    <input class="relative block w-full appearance-none rounded-lg border border-border bg-input px-3 py-2 text-xs placeholder-muted-white focus:z-10 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-75" type="number" id="id" name="id" min="0" placeholder="Ketikan ID" autocomplete="id" value="">
                                 </div>
                             </div>
                         </div>
                         <div>
                             <div class="flex items-center">
-                                <input type="checkbox" class="h-4 w-4 cursor-pointer rounded border bg-background text-primary focus:ring-primary focus:ring-offset-background" id="save-inputs-to-cookie" checked value="true">
+                                <input type="checkbox" required class="h-4 w-4 cursor-pointer rounded border bg-background text-primary focus:ring-primary focus:ring-offset-background" id="save-inputs-to-cookie" checked value="true">
                                 <label for="save-inputs-to-cookie" class="block text-xs font-medium text-white ml-3 block select-none text-sm text-white">Save Informasi Untuk Pembelian Berikut Nya</label>
                             </div>
                         </div>
@@ -140,10 +140,14 @@
                             <label class="sr-only" id="headlessui-label-:r11:" role="none">Select a variant list</label>
                             <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3" role="none">
                                 <?php foreach ($products as $diamond): ?>
-                                <div class="relative flex cursor-pointer rounded-xl border border-transparent bg-white text-background shadow-sm outline-none md:p-4 bg-order-variant-background text-order-variant-foreground" id="headlessui-radiogroup-option-:r12:" role="radio" aria-checked="false" tabindex="0" data-headlessui-state="" aria-labelledby="headlessui-label-:r13:" aria-describedby="headlessui-description-:r14:">
+                                    <!-- prodct -->
+                                <div class="product-item relative flex cursor-pointer rounded-xl border border-transparent bg-white text-background shadow-sm outline-none 
+                                md:p-4 bg-order-variant-background text-order-variant-foreground"
+                                 data-id="<?php echo $diamond['id'];?>"data-name="<?php echo $diamond['name'];?>" 
+                                 data-price="<?php echo $diamond['price'];?>" data-image= "<?php echo $products[0]['category_image'];?>"id=<?php echo $diamond['id'];?> role="radio" aria-checked="false" tabindex="0" data-headlessui-state="" aria-labelledby="headlessui-label-:r13:" aria-describedby="headlessui-description-:r14:">
                                     <span class="flex flex-1">
                                         <span class="flex flex-col justify-between">
-                                        <span class="block text-xs font-semibold " id="headlessui-label-:r13:"><?php echo $diamond['name'];?></span>
+                                        <span class="block text-xs font-semibold " id="<?php echo $diamond['name'];?>"><?php echo $diamond['name'];?></span>
                                         <div><span class="mt-1 flex items-center text-xs font-semibold" id="headlessui-description-:r14:">Rp&nbsp; <?php echo $diamond['price'];?></span></div>
                                         </span>
                                     </span>
@@ -171,66 +175,112 @@
                 </div>
             </section>
 
-            <section class="relative scroll-mt-20 rounded-xl bg-card/50 shadow-2xl shadow-[#53B950] md:scroll-mt-[5.75rem] w-[45rem]" id="3">
+            <section 
+                id="3" 
+                class="relative w-[45rem] scroll-mt-20 rounded-xl bg-card/50 shadow-2xl shadow-[#53B950] md:scroll-mt-[5.75rem]"
+            >
                 <div class="flex items-center overflow-hidden rounded-t-xl bg-[#53B950]">
-                    <div class="flex h-10 w-10 items-center justify-center bg-primary font-semibold text-primary-foreground">3</div>
-                    <h2 class="px-4 py-2 text-sm/6 font-semibold text-white">Masukkan Jumlah Pemebelanjaan</h2>
+                    <div class="flex h-10 w-10 items-center justify-center bg-primary font-semibold text-primary-foreground">
+                        3
+                    </div>
+                    <h2 class="px-4 py-2 text-sm font-semibold text-white">
+                        Masukkan Jumlah Pembelanjaan
+                    </h2>
                 </div>
+                
+                <!-- Content Section -->
                 <div class="p-4">
                     <div class="space-y-4">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label for="id" class="block text-xs font-medium text-white pb-2">ID</label>
-                                <div class="flex flex-col items-start">
-                                    <input class="relative block w-full appearance-none rounded-lg border border-border bg-input px-3 py-2 text-xs text-white placeholder-muted-white focus:z-10 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-75" type="number" id="id" name="id" min="0" placeholder="Ketikan ID" autocomplete="id" value="">
-                                </div>
-                            </div>
-                        </div>
+                        <!-- Jumlah Pembelanjaan Input -->
                         <div>
-                            <div class="flex items-center">
-                                <input type="checkbox" class="h-4 w-4 cursor-pointer rounded border bg-background text-primary focus:ring-primary focus:ring-offset-background" id="save-inputs-to-cookie" checked value="true">
-                                <label for="save-inputs-to-cookie" class="block text-xs font-medium text-white ml-3 block select-none text-sm text-white">Save Informasi Untuk Pembelian Berikut Nya</label>
+                            <label for="amount" class="block pb-2 text-xs font-medium text-white">
+                                Jumlah Pembelanjaan
+                            </label>
+                            <div class="flex flex-col items-start">
+                                <input 
+                                    type="number" 
+                                    id="amount" 
+                                    name="amount" 
+                                    min="0" 
+                                    placeholder="Masukkan jumlah pembelanjaan" 
+                                    autocomplete="off" 
+                                    class="block w-full rounded-lg border border-border bg-input px-3 py-2 text-xs placeholder-muted-white focus:z-10 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-75"
+                                >
                             </div>
                         </div>
-                        <div class="text-xs text-white">
-                            <div>
-                                <p>
-                                    <em>Untuk menemukan ID Pemain Anda, klik gambar avatar Anda di pojok kiri atas layar Anda. ID Pemain Anda akan ditampilkan di bawah nama pengguna Anda.</em>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
+
             
             <section class="relative scroll-mt-20 rounded-xl bg-card/50 shadow-2xl shadow-[#53B950] md:scroll-mt-[5.75rem] w-[45rem]" id="4">
+                
                 <div class="flex items-center overflow-hidden rounded-t-xl bg-[#53B950]">
                     <div class="flex h-10 w-10 items-center justify-center bg-primary font-semibold text-primary-foreground">4</div>
                     <h2 class="px-4 py-2 text-sm/6 font-semibold text-white">Pilih Pembayaran</h2>
                 </div>
                 <div class="p-4">
-                <div class="flex flex-col gap-4" role="none">
-                    <div class="relative flex cursor-pointer rounded-lg border bg-white border-transparent bg-foreground/75 p-2.5 text-background shadow-sm outline-none md:px-5 md:py-3" id="headlessui-radiogroup-option-:raa:" role="radio" aria-checked="false" tabindex="0" data-headlessui-state="">
-                        <div class="flex w-full items-center justify-between">
-                            <div class="flex items-center gap-4">
-                                <div><img src="https://client-cdn.bangjeff.com/xinnstore.com/meta/ICONNNNNNNNNNNNNN.png" alt="" class="max-h-12"></div>
+                    <div class="flex flex-col gap-4" role="none">
+                        <div class="relative flex cursor-pointer rounded-lg border bg-white border-transparent bg-foreground/75 p-2.5 text-background shadow-sm outline-none md:px-5 md:py-3" id="headlessui-radiogroup-option-:raa:" role="radio" aria-checked="false" tabindex="0" data-headlessui-state="">
+                            <div class="flex w-full items-center justify-between">
+                                <div class="flex items-center gap-4">
+                                    <div><img src="https://client-cdn.bangjeff.com/xinnstore.com/meta/ICONNNNNNNNNNNNNN.png" alt="" class="max-h-12"></div>
+                                    <div>
+                                        <div class="block text-xs font-semibold sm:text-sm">test</div>
+                                    </div>
+                                </div>
                                 <div>
-                                    <div class="block text-xs font-semibold sm:text-sm">IndraPay</div>
+                                    <div class="relative mr-8 text-xs font-semibold sm:text-base">
+                                        <span class="text-xs text-destructive">Max. Rp&nbsp; 0</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div>
-                                <div class="relative mr-8 text-xs font-semibold sm:text-base">
-                                    <span class="text-xs text-destructive">Max. Rp&nbsp; 0</span>
+                        </div>
+                        <div class="relative flex cursor-pointer rounded-lg border bg-white border-transparent bg-foreground/75 p-2.5 text-background shadow-sm outline-none md:px-5 md:py-3" id="headlessui-radiogroup-option-:raa:" role="radio" aria-checked="false" tabindex="0" data-headlessui-state="">
+                            <div class="flex w-full items-center justify-between">
+                                <div class="flex items-center gap-4">
+                                    <div><img src="https://client-cdn.bangjeff.com/xinnstore.com/meta/ICONNNNNNNNNNNNNN.png" alt="" class="max-h-12"></div>
+                                    <div>
+                                        <div class="block text-xs font-semibold sm:text-sm">IndraPay</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="relative mr-8 text-xs font-semibold sm:text-base">
+                                        <span class="text-xs text-destructive">Max. Rp&nbsp; 0</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                </div>
-            </section>
+                    <div id="accordion-arrow-icon" data-accordion="open" class="mt-5 rounded rounded-lg">
+                        
+                        <h2 id="accordion-arrow-icon-heading-3">
+                            <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200
+                             focus:ring-4 focus:ring-gray-200 gap-3" data-accordion-target="#accordion-arrow-icon-body-3" aria-expanded="false" aria-controls="accordion-arrow-icon-body-3">
+                            <span>E-Wallet</span>
+                            <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                            </svg>
+                            </button>
+                        </h2>
+                        <div id="accordion-arrow-icon-body-3" class="hidden" aria-labelledby="accordion-arrow-icon-heading-3">
+                            <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
+                            <p class="mb-2 text-gray-500 dark:text-gray-400">The main difference is that the core components from Flowbite are open source under the MIT license, whereas Tailwind UI is a paid product. Another difference is that Flowbite relies on smaller and standalone components, whereas Tailwind UI offers sections of pages.</p>
+                            <p class="mb-2 text-gray-500 dark:text-gray-400">However, we actually recommend using both Flowbite, Flowbite Pro, and even Tailwind UI as there is no technical reason stopping you from using the best of two worlds.</p>
+                            <p class="mb-2 text-gray-500 dark:text-gray-400">Learn more about these technologies:</p>
+                            <ul class="ps-5 text-gray-500 list-disc dark:text-gray-400">
+                                <li><a href="https://flowbite.com/pro/" class="text-blue-600 dark:text-blue-500 hover:underline">Flowbite Pro</a></li>
+                                <li><a href="https://tailwindui.com/" rel="nofollow" class="text-blue-600 dark:text-blue-500 hover:underline">Tailwind UI</a></li>
+                            </ul>
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
+                
+            </section>
+            <!-- show product disini jika di klik -->
             <div class="relative scroll-mt-20 rounded-xl bg-card/50 shadow-2xl md:scroll-mt-[5.75rem] w-[45rem]">
-                <div class="rounded-lg border border-dashed bg-secondary p-4 text-sm text-secondary-foreground">
+                <div  id="showproduct" class="rounded-lg border border-dashed bg-secondary p-4 text-sm text-secondary-foreground">
                     <div class="text-center">Belum ada item produk yang dipilih.</div>
                 </div>
                 <button class="inline-flex items-center justify-center whitespace-nowrap text-xs font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-[#53B950] text-primary-foreground hover:bg-primary/90 h-8 rounded-md px-3 w-full gap-2" type="submit">
@@ -240,6 +290,55 @@
             </div>
         </form>
     </div>
+    <script>
+        // Ambil semua elemen produk
+        const products = document.querySelectorAll('.product-item');
+        const showProductDiv = document.getElementById('showproduct');
+
+        // Menambahkan event listener pada setiap produk
+        products.forEach(product => {
+            product.addEventListener('click', () => {
+                // Ambil data dari atribut data-* produk
+                const productId = product.getAttribute('data-id');
+                console.log(productId);
+                const productName = product.getAttribute('data-name');
+                console.log(productName);
+
+                const productPrice = product.getAttribute('data-price');
+                const productImage = product.getAttribute('data-image');
+
+                // Update isi dari #showproduct
+                showProductDiv.innerHTML = `
+                <div class="rounded-lg sticky border border-dashed bg-[#53B950] p-4 text-sm text-secondary-foreground">
+                    <div>
+                        <div class="flex items-center gap-4">
+                            <div class="aspect-square h-16">
+                                <img 
+                                    alt="Mobile Legends" 
+                                    loading="lazy" 
+                                    width="300" 
+                                    height="300" 
+                                    decoding="async" 
+                                    class="aspect-square h-16 rounded-lg object-cover"
+                                    src="${productImage}"
+                                    style="color: transparent;">
+                            </div>
+                            <div>
+                                <div class="text-xs">${productName}</div>
+                                <div class="flex items-center gap-2 pt-0.5 font-semibold">
+                                    <span class="text-warning">Rp&nbsp;${productPrice}</span>
+                                </div>
+                                <div class="text-xxs italic text-muted-foreground">
+                                    **Waktu proses instan
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `;
+            });
+        });
+    </script>
     <?php include 'views/components/footer.php';?>
 </body>
 </html>
