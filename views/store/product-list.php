@@ -264,13 +264,38 @@
                         </h2>
                         <div id="accordion-arrow-icon-body-3" class="hidden" aria-labelledby="accordion-arrow-icon-heading-3">
                             <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
-                            <p class="mb-2 text-gray-500 dark:text-gray-400">The main difference is that the core components from Flowbite are open source under the MIT license, whereas Tailwind UI is a paid product. Another difference is that Flowbite relies on smaller and standalone components, whereas Tailwind UI offers sections of pages.</p>
-                            <p class="mb-2 text-gray-500 dark:text-gray-400">However, we actually recommend using both Flowbite, Flowbite Pro, and even Tailwind UI as there is no technical reason stopping you from using the best of two worlds.</p>
-                            <p class="mb-2 text-gray-500 dark:text-gray-400">Learn more about these technologies:</p>
-                            <ul class="ps-5 text-gray-500 list-disc dark:text-gray-400">
-                                <li><a href="https://flowbite.com/pro/" class="text-blue-600 dark:text-blue-500 hover:underline">Flowbite Pro</a></li>
-                                <li><a href="https://tailwindui.com/" rel="nofollow" class="text-blue-600 dark:text-blue-500 hover:underline">Tailwind UI</a></li>
-                            </ul>
+                            <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3" role="none">
+                                <?php foreach ($products as $diamond): ?>
+                                    <!-- prodct -->
+                                <div class="product-item relative flex cursor-pointer rounded-xl border border-transparent bg-white text-background shadow-sm outline-none 
+                                md:p-4 bg-order-variant-background text-order-variant-foreground"
+                                 data-id="<?php echo $diamond['id'];?>"data-name="<?php echo $diamond['name'];?>" 
+                                 data-price="<?php echo $diamond['price'];?>" data-image= "<?php echo $products[0]['category_image'];?>"id=<?php echo $diamond['id'];?> role="radio" aria-checked="false" tabindex="0" data-headlessui-state="" aria-labelledby="headlessui-label-:r13:" aria-describedby="headlessui-description-:r14:">
+                                    <span class="flex flex-1">
+                                        <span class="flex flex-col justify-between">
+                                        <span class="block text-xs font-semibold " id="<?php echo $diamond['name'];?>"><?php echo $diamond['name'];?></span>
+                                        <div><span class="mt-1 flex items-center text-xs font-semibold" id="headlessui-description-:r14:">Rp&nbsp; <?php echo $diamond['price'];?></span></div>
+                                        </span>
+                                    </span>
+                                    <div class="flex aspect-square w-8 items-center">
+                                        <?php 
+                                        if (isset($category_images[$products[0]['category_name']])): ?>
+                                            <img 
+                                                alt="<?= $products[0]['category_name']; ?>" 
+                                                fetchpriority="high" 
+                                                width="300" 
+                                                height="300" 
+                                                decoding="async" 
+                                                data-nimg="1" 
+                                                class="object-contain object-right" 
+                                                sizes="80vh" 
+                                                src="<?= $category_images[$products[0]['category_name']]; ?>" 
+                                                style="color: transparent;">
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <?php endforeach; ?>
+                            </div>
                             </div>
                         </div>
                     </div>
