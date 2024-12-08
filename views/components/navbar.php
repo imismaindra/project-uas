@@ -20,13 +20,13 @@
     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
       <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  ">
         <li>
-          <a href="store.php" class="block py-2 px-3 md:p-0 text-white bg-[#3FC43B] rounded md:bg-transparent md:text-[#3FC43B]" aria-current="page">Top-up</a>
+          <a href="index.php" class="block py-2 px-3 md:p-0 text-white bg-[#3FC43B] rounded md:bg-transparent md:text-[#3FC43B]" aria-current="page">Top-up</a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-3 md:p-0 text-white rounded hover:bg-[#3FC43B] md:hover:bg-transparent md:hover:text-[#3FC43B]">About</a>
+          <a href="index.php?modul=transaksi&fitur=invoices " class="block py-2 px-3 md:p-0 text-white rounded hover:bg-[#3FC43B] md:hover:bg-transparent md:hover:text-[#3FC43B]">Transaksi</a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-3 md:p-0 text-white rounded hover:bg-[#3FC43B] md:hover:bg-transparent md:hover:text-[#3FC43B]">Services</a>
+          <a href="index.php?modul=transaksi&fitur=invoices" class="block py-2 px-3 md:p-0 text-white rounded hover:bg-[#3FC43B] md:hover:bg-transparent md:hover:text-[#3FC43B]">Services</a>
         </li>
         <li>
           <a href="#" class="block py-2 px-3 md:p-0 text-white rounded hover:bg-[#3FC43B] md:hover:bg-transparent md:hover:text-[#3FC43B]">Contact</a>

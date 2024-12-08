@@ -43,6 +43,32 @@ switch ($modul) {
                 break;
         }
         break;
+    case 'transaksi':
+        $fitur = isset($_GET['fitur']) ? $_GET['fitur'] : 'dashboard';
+        require_once 'models/transaksi_model.php';
+        switch($fitur){
+            case 'list':
+                $transaksiModel = new TransaksiModel();
+                $transaksis = $transaksiModel->getAllTransaksi();
+                break;
+            case 'add':
+                // http://project-uas.test/post?id=9879798798&product_id=1&amount=4&pembayaran=Dana&totalAmount=20500
+                $total_price = $_POST['totalAmount'];
+                $productId =$_POST['product_id'];
+                $pembayaran = $_POST['pembayaran'];
+                $accountId = $_POST['id'];
+                $qty = $_POST['amount'];
+                $transaksiModel = new TransaksiModel();
+                $transaksiModel->insertTransaksi(null,"guset","fufufafa@gmail.com",$productId,3,15500,"ShopeePay","2024-12-06 19:48:39");   
+                break;
+            case 'invoices':
+                include 'views/store/transactions.php';
+                $transaksiModel = new TransaksiModel();
+               
+                $transaksis = $transaksiModel->getTransaksiById(10);
+                break;
+        }
+        break;
     case 'users':
         $fitur = isset($_GET['fitur']) ? $_GET['fitur'] : 'dashboard';
         require_once 'models/user_model.php';
@@ -190,7 +216,7 @@ switch ($modul) {
                     header('Location: index.php?modul=product&fitur=edit&id=' . $id);
                     exit;
                 }
-                break;
+                
             case 'delete':
                 $_SESSION['message'] = "Data berhasil diperbarui!"; // atau "Data berhasil dihapus!"
                 $productModel = new ProductModel();

@@ -71,7 +71,7 @@
                 </div>
             </div>
             <div class="py-4 sm:py-0">
-                <h1 class="text-xs font-bold uppercase leading-7 tracking-wider sm:text-lg text-white">
+                <h1 data-productName=" <?php echo $products[0]['category_name']; ?>" class="catgeory-list text-xs font-bold uppercase leading-7 tracking-wider sm:text-lg text-white">
                     <?php echo $products[0]['category_name']; ?>
                 </h1>
                 <p class="text-xs text-[#53B950] font-medium sm:text-base/6"><?php echo $products[0]['category_description']; ?></p>
@@ -94,7 +94,7 @@
     </div>
     <div class="min-h-screen flex items-center justify-center mt-10 mb-10">
         <!-- Form -->
-        <form action="POST" class="col-auto col-start-1 flex flex-col gap-4 lg:col-auto lg:gap-8">
+        <form method="POST" action="index.php?modul=transaksi&fitur=add" class="col-auto col-start-1 flex flex-col gap-4 lg:col-auto lg:gap-8">
             <section class="relative scroll-mt-20 rounded-xl bg-card/50 shadow-2xl md:scroll-mt-[5.75rem] w-[45rem]" id="1">
                 <div class="flex items-center overflow-hidden rounded-t-xl bg-[#53B950]">
                     <div class="flex h-10 w-10 items-center justify-center bg-primary font-semibold text-primary-foreground">1</div>
@@ -139,9 +139,11 @@
                             <div id="headlessui-radiogroup-:r10:" role="radiogroup" aria-labelledby="headlessui-label-:r11:">
                             <label class="sr-only" id="headlessui-label-:r11:" role="none">Select a variant list</label>
                             <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3" role="none">
+                            <input type="hidden" name="product_id" id="hidden-product_id">
+
                                 <?php foreach ($products as $diamond): ?>
                                     <!-- prodct -->
-                                <div class="product-item relative flex cursor-pointer rounded-xl border border-transparent bg-white text-background shadow-sm outline-none 
+                                <div class="active:ring-2 active:ring-[#3FC43B]  product-item relative flex cursor-pointer rounded-xl border border-transparent bg-white text-background shadow-sm outline-none 
                                 md:p-4 bg-order-variant-background text-order-variant-foreground"
                                  data-id="<?php echo $diamond['id'];?>"data-name="<?php echo $diamond['name'];?>" 
                                  data-price="<?php echo $diamond['price'];?>" data-image= "<?php echo $products[0]['category_image'];?>"id=<?php echo $diamond['id'];?> role="radio" aria-checked="false" tabindex="0" data-headlessui-state="" aria-labelledby="headlessui-label-:r13:" aria-describedby="headlessui-description-:r14:">
@@ -198,6 +200,7 @@
                             </label>
                             <div class="flex flex-col items-start">
                                 <input 
+                                value="1"
                                     type="number" 
                                     id="amount" 
                                     name="amount" 
@@ -218,6 +221,8 @@
                     <div class="flex h-10 w-10 items-center justify-center bg-primary font-semibold text-primary-foreground">4</div>
                     <h2 class="px-4 py-2 text-sm/6 font-semibold text-white">Pilih Pembayaran</h2>
                 </div>
+                <input type="hidden" name="pembayaran" id="hidden-pembayaran">
+
                 <div class="p-4">
                     <div class="flex flex-col gap-4" role="none">
                         <div class="relative flex cursor-pointer rounded-lg border bg-white border-transparent bg-foreground/75 p-2.5 text-background shadow-sm outline-none md:px-5 md:py-3" id="headlessui-radiogroup-option-:raa:" role="radio" aria-checked="false" tabindex="0" data-headlessui-state="">
@@ -265,36 +270,69 @@
                         <div id="accordion-arrow-icon-body-3" class="hidden" aria-labelledby="accordion-arrow-icon-heading-3">
                             <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
                             <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3" role="none">
-                                <?php foreach ($products as $diamond): ?>
-                                    <!-- prodct -->
-                                <div class="product-item relative flex cursor-pointer rounded-xl border border-transparent bg-white text-background shadow-sm outline-none 
-                                md:p-4 bg-order-variant-background text-order-variant-foreground"
-                                 data-id="<?php echo $diamond['id'];?>"data-name="<?php echo $diamond['name'];?>" 
-                                 data-price="<?php echo $diamond['price'];?>" data-image= "<?php echo $products[0]['category_image'];?>"id=<?php echo $diamond['id'];?> role="radio" aria-checked="false" tabindex="0" data-headlessui-state="" aria-labelledby="headlessui-label-:r13:" aria-describedby="headlessui-description-:r14:">
+                                <div  id="payment-method-dana" class=" relative flex cursor-pointer rounded-xl border border-transparent bg-white text-background shadow-sm outline-none 
+                                    md:p-4 bg-order-variant-background text-order-variant-foreground" role="radio" aria-checked="false" tabindex="0" data-headlessui-state="" aria-labelledby="headlessui-label-:r13:" aria-describedby="headlessui-description-:r14:">
                                     <span class="flex flex-1">
                                         <span class="flex flex-col justify-between">
-                                        <span class="block text-xs font-semibold " id="<?php echo $diamond['name'];?>"><?php echo $diamond['name'];?></span>
-                                        <div><span class="mt-1 flex items-center text-xs font-semibold" id="headlessui-description-:r14:">Rp&nbsp; <?php echo $diamond['price'];?></span></div>
+                                        <span class="block text-xs font-semibold">Dana</span>
+                                        <div><span class="mt-1 flex items-center text-xs font-semibold cash" id="cash">Rp&nbsp; 0 </span></div>
                                         </span>
                                     </span>
                                     <div class="flex aspect-square w-8 items-center">
-                                        <?php 
-                                        if (isset($category_images[$products[0]['category_name']])): ?>
-                                            <img 
-                                                alt="<?= $products[0]['category_name']; ?>" 
-                                                fetchpriority="high" 
-                                                width="300" 
-                                                height="300" 
-                                                decoding="async" 
-                                                data-nimg="1" 
-                                                class="object-contain object-right" 
-                                                sizes="80vh" 
-                                                src="<?= $category_images[$products[0]['category_name']]; ?>" 
-                                                style="color: transparent;">
-                                        <?php endif; ?>
+                                        <img alt="<?= $products[0]['category_name']; ?>" 
+                                            fetchpriority="high" 
+                                            width="300" 
+                                            height="300" 
+                                            decoding="async" 
+                                            data-nimg="1" 
+                                            class="object-contain object-right" 
+                                            sizes="80vh" 
+                                            src="assets/payments/dana.webp" 
+                                            style="color: transparent;">
                                     </div>
                                 </div>
-                                <?php endforeach; ?>
+                                <div id="payment-method-linkAja" class=" relative flex cursor-pointer rounded-xl border border-transparent bg-white text-background shadow-sm outline-none 
+                                md:p-4 bg-order-variant-background text-order-variant-foreground" id=<?php echo $diamond['id'];?> role="radio" aria-checked="false" tabindex="0" data-headlessui-state="" aria-labelledby="headlessui-label-:r13:" aria-describedby="headlessui-description-:r14:">
+                                    <span class="flex flex-1">
+                                        <span class="flex flex-col justify-between">
+                                        <span class="block text-xs font-semibold " id="payment-method">Shopee Pay</span>
+                                        <div><span class="mt-1 flex items-center text-xs font-semibold cash" id="cash">Rp&nbsp; 0 </span></div>
+                                        </span>
+                                    </span>
+                                    <div class="flex aspect-square w-8 items-center">
+                                        <img alt="<?= $products[0]['category_name']; ?>" 
+                                            fetchpriority="high" 
+                                            width="300" 
+                                            height="300" 
+                                            decoding="async" 
+                                            data-nimg="1" 
+                                            class="object-contain object-right" 
+                                            sizes="80vh" 
+                                            src="assets/payments/shopee.webp" 
+                                            style="color: transparent;">
+                                    </div>
+                                </div>
+                                <div class=" relative flex cursor-pointer rounded-xl border border-transparent bg-white text-background shadow-sm outline-none 
+                                    md:p-4 bg-order-variant-background text-order-variant-foreground" id=<?php echo $diamond['id'];?> role="radio" aria-checked="false" tabindex="0" data-headlessui-state="" aria-labelledby="headlessui-label-:r13:" aria-describedby="headlessui-description-:r14:">
+                                    <span class="flex flex-1">
+                                        <span class="flex flex-col justify-between">
+                                        <span class="block text-xs font-semibold " >LinkAja</span>
+                                        <div><span class="mt-1 flex items-center text-xs font-semibold cash" id="cash">Rp&nbsp; 0 </span></div>
+                                        </span>
+                                    </span>
+                                    <div class="flex aspect-square w-8 items-center">
+                                        <img alt="<?= $products[0]['category_name']; ?>" 
+                                            fetchpriority="high" 
+                                            width="300" 
+                                            height="300" 
+                                            decoding="async" 
+                                            data-nimg="1" 
+                                            class="object-contain object-right" 
+                                            sizes="80vh" 
+                                            src="assets/payments/linkaja.webp" 
+                                            style="color: transparent;">
+                                    </div>
+                                </div>
                             </div>
                             </div>
                         </div>
@@ -303,55 +341,106 @@
                 </div>
                 
             </section>
+            <input type="hidden" name="totalAmount" id="hidden-total-amount">
             <!-- show product disini jika di klik -->
             <div class="relative scroll-mt-20 rounded-xl bg-card/50 shadow-2xl md:scroll-mt-[5.75rem] w-[45rem]">
                 <div  id="showproduct" class="rounded-lg border border-dashed bg-secondary p-4 text-sm text-secondary-foreground">
                     <div class="text-center">Belum ada item produk yang dipilih.</div>
                 </div>
-                <button class="inline-flex items-center justify-center whitespace-nowrap text-xs font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-[#53B950] text-primary-foreground hover:bg-primary/90 h-8 rounded-md px-3 w-full gap-2" type="submit">
+                <span id="open-modal" class="inline-flex items-center justify-center whitespace-nowrap text-xs font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-[#53B950] text-primary-foreground hover:bg-primary/90 h-8 rounded-md px-3 w-full gap-2" type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-bag h-4 w-4"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
                     <span>Pesan Sekarang!</span>
-                </button>
+                </span>
+
+                <div id="popup-modal" tabindex="-1" class="hidden flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 
+                z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                    <div class="relative p-4 w-full max-w-md max-h-full">
+                       
+                        <div class="relative bg-[#1A1B41] rounded-lg shadow">
+                            <button  class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+                             data-modal-hide="popup-modal" id="close-modal">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                            <div class="p-4 md:p-5 text-center  rounded rounded-lg">
+                                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                </svg>
+                                <p class ="text-white font-semibold">
+                                    Buat Pesanan
+                                    Pastikan data akun Kamu dan produk yang Kamu pilih valid dan sesuai.
+                                </p>
+                                <div class="bg-[#3FC43B] detail-order my-4 grid grid-cols-3 gap-3 rounded-md bg-secondary/50 p-4 text-left text-sm text-secondary-foreground">
+                                    <!-- <div class="line-clamp-1">Username</div>
+                                    <div class="col-span-2">Casanova</div> -->
+                                   
+                                </div>
+                                <button data-modal-hide="popup-modal" type="submit" class="text-white bg-[#3FC43B] hover:bg-[#3FC43B] focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                    Pesan Sekarang
+                                </button>
+                                <button data-modal-hide="popup-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-white focus:outline-none bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 rounded-lg
+                                 hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100">Batalkan Pesanan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
     <script>
-        // Ambil semua elemen produk
         const products = document.querySelectorAll('.product-item');
+        const categories = document.querySelectorAll('.catgeory-list');
+        const detailOrder = document.querySelector('.detail-order');
         const showProductDiv = document.getElementById('showproduct');
+        const paymentMethods = document.querySelectorAll('[id^="payment-method"]');
+        let selectedPaymentName = "";
+        let totalAmount = 0;
 
-        // Menambahkan event listener pada setiap produk
-        products.forEach(product => {
-            product.addEventListener('click', () => {
-                // Ambil data dari atribut data-* produk
-                const productId = product.getAttribute('data-id');
-                console.log(productId);
-                const productName = product.getAttribute('data-name');
-                console.log(productName);
+        function calculateTotal(productPrice, amount) {
+            const price = parseFloat(productPrice) || 0;
+            const qty = parseInt(amount) || 1;
+            return price * qty + 500; // pajek gw
+        }
 
-                const productPrice = product.getAttribute('data-price');
-                const productImage = product.getAttribute('data-image');
+        function updateDetailOrder(itemName, productName, paymentName,idAccount,totalAmount) {
+            detailOrder.innerHTML = `
+                <div class="line-clamp-1">ID</div>
+                <div id="id-akun" class="col-span-2 font-semibold">${idAccount}</div>
+                <div class="line-clamp-1">Server</div>
+                <div class="col-span-2 font-semibold">9276</div>
+                <div class="line-clamp-1">Item</div>
+                <div class="col-span-2 font-semibold">${itemName}</div>
+                <div class="line-clamp-1">Product</div>
+                <div class="col-span-2 font-semibold">${productName}</div>
+                <div class="line-clamp-1">Payment</div>
+                <div class="col-span-2 font-semibold">${paymentName}</div>
+                <div class="line-clamp-1">Total</div>
+                <div class="col-span-2 font-semibold">Rp&nbsp;${totalAmount}</div>
+            `;
+        }
 
-                // Update isi dari #showproduct
-                showProductDiv.innerHTML = `
+        function updateProductUI(productName, productPrice, productImage, totalAmount) {
+            showProductDiv.innerHTML = `
                 <div class="rounded-lg sticky border border-dashed bg-[#53B950] p-4 text-sm text-secondary-foreground">
                     <div>
                         <div class="flex items-center gap-4">
                             <div class="aspect-square h-16">
                                 <img 
-                                    alt="Mobile Legends" 
+                                    alt="${productName}" 
                                     loading="lazy" 
                                     width="300" 
                                     height="300" 
                                     decoding="async" 
                                     class="aspect-square h-16 rounded-lg object-cover"
-                                    src="${productImage}"
+                                    src="${productImage}" 
                                     style="color: transparent;">
                             </div>
                             <div>
                                 <div class="text-xs">${productName}</div>
                                 <div class="flex items-center gap-2 pt-0.5 font-semibold">
-                                    <span class="text-warning">Rp&nbsp;${productPrice}</span>
+                                    <span class="text-warning" id="final-amount">Rp&nbsp;${totalAmount}</span>
                                 </div>
                                 <div class="text-xxs italic text-muted-foreground">
                                     **Waktu proses instan
@@ -360,10 +449,76 @@
                         </div>
                     </div>
                 </div>
-                `;
+            `;
+        }
+        products.forEach(product => {
+            product.addEventListener('click', () => {
+                const productId = product.getAttribute('data-id');
+                const productName = product.getAttribute('data-name');
+                const productPrice = product.getAttribute('data-price');
+                const productImage = product.getAttribute('data-image');
+                const amountInput = document.getElementById("amount");
+                const amount = amountInput ? amountInput.value : 1;
+                const idAccount = document.querySelector('[name="id"]').value;
+                document.getElementById("hidden-product_id").value =productId;
+                // Hitung total harga
+                totalAmount = calculateTotal(productPrice, amount);
+
+                // Update UI produk
+                updateProductUI(productName, productPrice, productImage, totalAmount);
+
+                // Event untuk mengubah jumlah
+                if (amountInput) {
+                    amountInput.addEventListener("change", () => {
+                        const updatedAmount = amountInput.value;
+                        totalAmount = calculateTotal(productPrice, updatedAmount);
+
+                        // Update harga
+                        document.querySelectorAll('.cash').forEach(cashElement => {
+                            cashElement.innerText = `Rp ${totalAmount}`;
+                        });
+                        document.getElementById("final-amount").innerText = `Rp ${totalAmount}`
+                        document.getElementById("hidden-total-amount").value = totalAmount;
+
+                        
+                    });
+                }
+
+                // Event untuk memilih metode pembayaran
+                paymentMethods.forEach(method => {
+                    method.addEventListener("click", function () {
+                        selectedPaymentName = this.querySelector('.block.text-xs.font-semibold')?.textContent || "Tidak Diketahui";
+                        const itemName = categories[0]?.getAttribute('data-productName') || "Tidak Diketahui";
+
+                        console.log("Metode Pembayaran Dipilih:", selectedPaymentName);
+                        document.getElementById("hidden-pembayaran").value = selectedPaymentName;
+
+                        updateDetailOrder(itemName, productName, selectedPaymentName, idAccount, totalAmount);
+                    });
+                });
             });
         });
+
+        // Event untuk modal
+        document.getElementById("close-modal").addEventListener("click", function (event) {
+            event.preventDefault();
+            document.getElementById("popup-modal").classList.add("hidden");
+            const backdrop = document.querySelector('[modal-backdrop]');
+            if (backdrop) backdrop.remove();
+        });
+
+        document.getElementById("open-modal").addEventListener("click", function (event) {
+            document.getElementById("popup-modal").classList.remove("hidden");
+            let backdrop = document.querySelector('[modal-backdrop]');
+            if (!backdrop) {
+                backdrop = document.createElement('div');
+                backdrop.setAttribute('modal-backdrop', '');
+                backdrop.className = 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40';
+                document.body.appendChild(backdrop);
+            }
+        });
     </script>
+
     <?php include 'views/components/footer.php';?>
 </body>
 </html>
