@@ -80,8 +80,8 @@
     <?php include './views/components/navbar.php'; ?>
     <!-- content -->
     <?php if (isset($transaksibyInvoices) && !empty($transaksibyInvoices)): ?>
-      <?php $products = $productModel->getProductById( $transaksibyInvoices[0]['product_id']); var_dump($products);?>
-      <?php $categories = $categoryModel->getCategoryById( $products['id_catagories']); var_dump($categories);?>
+      <?php $products = $productModel->getProductById( $transaksibyInvoices[0]['product_id']); ?>
+      <?php $categories = $categoryModel->getCategoryById( $products['id_catagories']);?>
         <section id="main" class="flex flex-col  my-10">
         <section class="bg-darkblue flex flex-col justify-center items-center py-10">
           <h2 class="text-center text-white text-xl font-bold mb-8">Progress Transaksi</h2>
@@ -151,8 +151,8 @@
           <p class="text-white font-bold text-3xl text-center mb-4">
               Detail Invoice Kamu
           </p>
-        <div class="container grid grid-cols-12 gap-y-8 md:gap-8 md:mx-[5.5rem]">
-            <div class="col-span-12 sm:col-span-8 md:col-span-6">
+        <div class="container grid grid-cols-12 gap-y-8 md:gap-8">
+            <div class="col-span-12 sm:col-span-8 md:col-span-6 ml-[6rem]">
                 <div class="grid grid-cols-5 gap-4 rounded-3xl border border-border/25 bg-[#161934] p-4 md:grid-cols-4">
                     <a class="col-span-2 rounded-2xl duration-200 ease-in-out hover:ring-2 hover:ring-primary hover:ring-offset-2 hover:ring-offset-muted md:col-span-1" href="#" style="outline: none;">
                         <div class="relative aspect-square overflow-hidden rounded-t-2xl">
@@ -190,20 +190,20 @@
                         <dl class="space-y-4 text-sm">
                         <div class="flex justify-between">
                             <div class="font-medium text-white">Harga</div>
-                            <div class="flex flex-col text-muted-foreground"><span>Rp&nbsp; 15.211</span></div>
+                            <div class="flex flex-col text-muted-foreground"><span>Rp&nbsp; <?php echo $products['price'];?></span></div>
                         </div>
                         <div class="flex justify-between">
                             <div class="font-medium text-white">Jumlah</div>
-                            <div class="text-muted-foreground">1x</div>
+                            <div class="text-muted-foreground"><?php echo $transaksibyInvoices[0]['amount']; ?>x</div>
                         </div>
                         <div class="h-px w-full bg-background"></div>
                         <div class="flex justify-between">
                             <div class="font-medium text-white">Subtotal</div>
-                            <div class="text-muted-foreground">Rp&nbsp; 15.211</div>
+                            <div class="text-muted-foreground">Rp&nbsp; <?php echo $transaksibyInvoices[0]['total_price']-500; ?></div>
                         </div>
                         <div class="flex justify-between">
                             <div class="font-medium text-white">Biaya</div>
-                            <div class="text-muted-foreground">Rp&nbsp; 305</div>
+                            <div class="text-muted-foreground">Rp&nbsp; 500</div>
                         </div>
                         </dl>
                     </div>
@@ -211,17 +211,17 @@
                 <div class="mt-4 flex justify-between rounded-lg border border-border/25 bg-secondary/50 p-4">
                     <div class="font-medium text-white">Total Pembayaran</div>
                     <div class="flex items-center gap-2 font-bold text-muted-foreground">
-                        <span>Rp&nbsp; 15.516</span>
+                        <span>Rp&nbsp; <?php echo $transaksibyInvoices[0]['total_price']; ?></span>
                         <button type="button">
-                        <svg width="20" height="20" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M14.8233 6.28561H10.1766C9.42742 6.28561 8.82031 5.67849 8.82031 4.92933V4.35627C8.82031 3.60711 9.42742 3 10.1766 3H14.8233C15.5725 3 16.1796 3.60711 16.1796 4.35627V4.92933C16.1796 5.67849 15.5725 6.28561 14.8233 6.28561Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                            <path opacity="0.4" d="M16.1793 4.59375C18.2526 4.59375 19.9338 6.27498 19.9338 8.34831V17.2458C19.9338 19.3191 18.2526 21.0004 16.1793 21.0004H8.81999C6.74666 21.0004 5.06543 19.3191 5.06543 17.2458V8.34831C5.06543 6.27498 6.74666 4.59375 8.81999 4.59375" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
+                            <svg width="20" height="20" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M14.8233 6.28561H10.1766C9.42742 6.28561 8.82031 5.67849 8.82031 4.92933V4.35627C8.82031 3.60711 9.42742 3 10.1766 3H14.8233C15.5725 3 16.1796 3.60711 16.1796 4.35627V4.92933C16.1796 5.67849 15.5725 6.28561 14.8233 6.28561Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path opacity="0.4" d="M16.1793 4.59375C18.2526 4.59375 19.9338 6.27498 19.9338 8.34831V17.2458C19.9338 19.3191 18.2526 21.0004 16.1793 21.0004H8.81999C6.74666 21.0004 5.06543 19.3191 5.06543 17.2458V8.34831C5.06543 6.27498 6.74666 4.59375 8.81999 4.59375" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
                         </button>
                     </div>
                 </div>
                 <div class="mt-4">
-                    <button class="inline-flex items-center justify-center whitespace-nowrap transition-all rounded-lg shadow-sm text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2 w-full gap-x-2" type="button">
+                    <button class="bg-secondary inline-flex items-center justify-center whitespace-nowrap transition-all rounded-lg shadow-sm text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2 w-full gap-x-2" type="button">
                         <svg width="20" height="20" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M16.4046 20.9973H8.5882C5.7181 20.9973 3.51348 19.9602 4.13906 15.7864L4.86777 10.1298C5.24916 8.04682 6.58205 7.25 7.7476 7.25H17.2783C18.4613 7.25 19.7125 8.10617 20.1581 10.1298L20.8868 15.7864C21.418 19.4893 19.2757 20.9973 16.4046 20.9973Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                         <path opacity="0.4" d="M16.5526 7.04542C16.5526 4.81161 14.742 3.00004 12.5072 3.00004C10.2734 2.99031 8.45407 4.79312 8.44434 7.02791C8.44434 7.03375 8.44434 7.03958 8.44434 7.04542" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -280,18 +280,6 @@
                 <div class="flex flex-col gap-2"></div>
             </div>
         </div>          
-          
-          <section class="items-center sm:flex md:mx-[5.5rem]">
-              <div class="relative mb-6 sm:mb-0">
-                  <div class="mt-3 sm:pe-8">
-                      <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Invoice: <?php echo $transaksibyInvoices[0]['invoices']; ?></h3>
-                      <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Tanggal: <?php echo $transaksibyInvoices[0]['create_at']; ?></time>
-                      <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Tanggal: <?php echo $products['name']; ?></time>
-                      <p class="text-base font-normal text-gray-500 dark:text-gray-400">Status: <?php echo $transaksibyInvoices[0]['status']; ?></p>
-                      <p class="text-base font-normal text-gray-500 dark:text-gray-400">Total: Rp<?php echo number_format($transaksibyInvoices[0]['total_price'], 0, ',', '.'); ?></p>
-                  </div>  
-              </div>
-          </section>
       </section>
     <?php else: ?>
       <section id="main" class="flex flex-col justify-center items-center my-10">
