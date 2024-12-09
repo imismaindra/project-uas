@@ -23,7 +23,7 @@
           <a href="index.php" class="block py-2 px-3 md:p-0 text-white bg-[#3FC43B] rounded md:bg-transparent md:text-[#3FC43B]" aria-current="page">Top-up</a>
         </li>
         <li>
-          <a href="index.php?modul=transaksi&fitur=invoices " class="block py-2 px-3 md:p-0 text-white rounded hover:bg-[#3FC43B] md:hover:bg-transparent md:hover:text-[#3FC43B]">Transaksi</a>
+          <a href="index.php?modul=transaksi&fitur=invoice " class="block py-2 px-3 md:p-0 text-white rounded hover:bg-[#3FC43B] md:hover:bg-transparent md:hover:text-[#3FC43B]">Transaksi</a>
         </li>
         <li>
           <a href="index.php?modul=transaksi&fitur=invoices" class="block py-2 px-3 md:p-0 text-white rounded hover:bg-[#3FC43B] md:hover:bg-transparent md:hover:text-[#3FC43B]">Services</a>

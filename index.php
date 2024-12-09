@@ -52,21 +52,40 @@ switch ($modul) {
                 $transaksis = $transaksiModel->getAllTransaksi();
                 break;
             case 'add':
-                // http://project-uas.test/post?id=9879798798&product_id=1&amount=4&pembayaran=Dana&totalAmount=20500
+                $memberId = isset($_POST['member_id']) && $_POST['member_id'] !== '' ? $_POST['member_id'] : NULL;
                 $total_price = $_POST['totalAmount'];
-                $productId =$_POST['product_id'];
+                $productId = $_POST['product_id'];
                 $pembayaran = $_POST['pembayaran'];
                 $accountId = $_POST['id'];
                 $qty = $_POST['amount'];
+                $email = $_POST['email'];
                 $transaksiModel = new TransaksiModel();
-                $transaksiModel->insertTransaksi(null,"guset","fufufafa@gmail.com",$productId,3,15500,"ShopeePay","2024-12-06 19:48:39");   
+                $invoiceId = $transaksiModel->insertTransaksi($memberId, $email, $productId, $qty, $total_price, $pembayaran, 0);   
+                if ($invoiceId) {
+                    header("Location: ?modul=transaksi&fitur=invoice&invoices=$invoiceId");
+                    exit();
+                } else {
+                    echo "Error: " . $invoiceId;
+                }
                 break;
-            case 'invoices':
-                include 'views/store/transactions.php';
+            case 'invoice':
+                require_once 'models/product_model.php';
+                require_once 'models/user_model.php';
+                require_once 'models/category_model.php';
+                $productModel =  new productModel();
+                $usermodel = new Users();
                 $transaksiModel = new TransaksiModel();
-               
-                $transaksis = $transaksiModel->getTransaksiById(10);
+                $categoryModel = new CategoryModel();
+                $invoiceId = $_GET['invoices']??null;
+                $transaksibyInvoices = $transaksiModel->getTransaksiById($invoiceId);
+                if ($transaksibyInvoices) {
+                    include 'views/store/transactions.php';
+                } else {
+                    include 'views/store/transactions.php';
+                    echo "Invoice tidak ditemukan.";
+                }
                 break;
+                
         }
         break;
     case 'users':

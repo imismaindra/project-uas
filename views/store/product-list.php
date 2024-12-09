@@ -342,6 +342,40 @@
                 
             </section>
             <input type="hidden" name="totalAmount" id="hidden-total-amount">
+            <input type="hidden" name="member_id" id="hidden-member_id">
+            <section 
+                id="3" 
+                class="relative w-[45rem] scroll-mt-20 rounded-xl bg-card/50 shadow-2xl shadow-[#53B950] md:scroll-mt-[5.75rem]"
+            >
+                <div class="flex items-center overflow-hidden rounded-t-xl bg-[#53B950]">
+                    <div class="flex h-10 w-10 items-center justify-center bg-primary font-semibold text-primary-foreground">
+                        5
+                    </div>
+                    <h2 class="px-4 py-2 text-sm font-semibold text-white">
+                        Email
+                    </h2>
+                </div>
+                
+                <!-- Content Section -->
+                <div class="p-4">
+                    <div class="space-y-4">
+                        <div>
+                            <label for="amount" class="block pb-2 text-xs font-medium text-white">
+                               Email kamu yang aktif
+                            </label>
+                            <div class="flex flex-col items-start">
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    placeholder="Masukkan email kamu yang aktif" 
+                                    autocomplete="off" 
+                                    class="block w-full rounded-lg border border-border bg-input px-3 py-2 text-xs placeholder-muted-white focus:z-10 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-75"
+                                >
+                            </div>
+                        </div>
+                </div>
+            </section>
             <!-- show product disini jika di klik -->
             <div class="relative scroll-mt-20 rounded-xl bg-card/50 shadow-2xl md:scroll-mt-[5.75rem] w-[45rem]">
                 <div  id="showproduct" class="rounded-lg border border-dashed bg-secondary p-4 text-sm text-secondary-foreground">
