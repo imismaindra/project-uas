@@ -58,6 +58,20 @@ switch ($modul) {
                 $transaksis = $transaksiModel->getAllTransaksi();
                 include 'views/transaction_list.php';
                 break;
+            case 'get_detail':
+                $transaksiModel = new TransaksiModel();
+                if (isset($_GET['id'])) {
+                    $id = intval($_GET['id']);
+                    $transaksi = $transaksiModel->getTransaksiById($id);
+                    if ($transaksi) {
+                        echo json_encode($transaksi[0]); // Kirim data transaksi sebagai JSON
+                    } else {
+                        echo json_encode(['error' => 'Transaksi tidak ditemukan']);
+                    }
+                } else {
+                    echo json_encode(['error' => 'ID tidak valid']);
+                }
+                break;                
             case 'add':
                 $memberId = isset($_POST['member_id']) && $_POST['member_id'] !== '' ? $_POST['member_id'] : NULL;
                 $total_price = $_POST['totalAmount'];

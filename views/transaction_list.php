@@ -122,7 +122,7 @@
                                         <!-- <a href="index.php?modul=product&fitur=edit&id=<?php echo htmlspecialchars($product['id']); ?>" class="text-gray-400 hover:text-gray-100 mx-2">
                                             <i class="material-icons-outlined text-blue-600">edit</i>
                                         </a> -->
-                                        <a href="#" id="detailButton" class="detailButton text-gray-400 hover:text-gray-100 mx-2">
+                                        <a href="#" id="detailButton" data-id-transaksi="<?= $tsk['id']; ?>"  class="detailButton text-gray-400 hover:text-gray-100 mx-2">
                                             <i class="material-icons-outlined text-green-600">visibility</i>
                                         </a>
                                         <!-- <a href="#" 
@@ -187,24 +187,23 @@
             </div>
         </div>
     </div>
-    <?php foreach($transaksis as $tsk): ?>
     <div id="detailModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black bg-opacity-50">
         <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
-            <h2 class="text-lg font-bold mb-4">Detail Transaksi <?php echo $tsk['invoices']?></h2>
-            <label for="status" class="block mb-2 text-sm font-medium text-gray-900">Member: </label>
-            <p><?php echo $tsk["user_id"] != ""?$tsk["user_id"]:"Guest" ?></p>
-            <label for="status" class="block mb-2 text-sm font-medium text-gray-900">Email: </label>
-            <p><?php echo $tsk["guest_email"]!= ""?$tsk["guest_email"]: "-" ?></p>
-            <label for="status" class="block mb-2 text-sm font-medium text-gray-900">Id Akun: </label>
-            <p><?php echo $tsk["akungame_Id"] ?></p>
-            <label for="status" class="block mb-2 text-sm font-medium text-gray-900">Product: </label>
-            <p><?php echo $tsk["product_id"] ?></p>
+            <h2 class="text-lg font-bold mb-4">Detail Transaksi</h2>
+            <label class="block mb-2 text-sm font-medium text-gray-900">Member: </label>
+            <p class="member">Loading...</p>
+            <label class="block mb-2 text-sm font-medium text-gray-900">Email: </label>
+            <p class="email">Loading...</p>
+            <label class="block mb-2 text-sm font-medium text-gray-900">Id Akun: </label>
+            <p class="akun">Loading...</p>
+            <label class="block mb-2 text-sm font-medium text-gray-900">Product: </label>
+            <p class="product">Loading...</p>
             <div class="flex justify-end mt-5">
                 <button id="closeDetail" class="px-4 py-2 bg-red-500 text-white rounded mr-2 hover:bg-red-600">Batal</button>
             </div>
         </div>
     </div>
-    <?php endforeach;?>
+
 
 <!-- Script untuk menangani modal -->
 <script>
@@ -214,22 +213,46 @@
         const closeBtn = document.getElementById("closeDetail");
         const confirmLink = document.getElementById("confirmUpdate");
         const statusSelect = document.getElementById("status");
+
         const modalDetail = document.getElementById("detailModal"); 
         const updateButtons = document.querySelectorAll(".status-update");
         const detailButtons = document.querySelectorAll(".detailButton");
-        detailButtons.forEach(button =>{
-            button.addEventListener("click", function (e){
+        function openDetailModal(id) {
+            // AJAX Request untuk mendapatkan detail transaksi
+            fetch(`index.php?modul=transaksi&fitur=get_detail&id=${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                    } else {
+                        // Isi data ke modal
+                        document.querySelector("#detailModal .member").textContent = data.user_id || "Guest";
+                        document.querySelector("#detailModal .email").textContent = data.guest_email || "-";
+                        document.querySelector("#detailModal .akun").textContent = data.akungame_Id;
+                        document.querySelector("#detailModal .product").textContent = data.product_id;
+
+                        // Tampilkan modal
+                        modalDetail.classList.remove("hidden");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching detail:", error);
+                    alert("Gagal mengambil data transaksi.");
+                });
+                console.log(transaksi);
+        }
+
+        detailButtons.forEach(button => {
+            button.addEventListener("click", function (e) {
                 e.preventDefault();
-                modalDetail.classList.remove("hidden"); 
+                const transactionId = this.getAttribute("data-id-transaksi");
+                openDetailModal(transactionId);
             });
         });
-        closeBtn.addEventListener("click", function(){
-            modalDetail.classList.add("hidden")
-        });
-        function openDetailModal(id){
 
-        }
-        
+        closeBtn.addEventListener("click", function () {
+            modalDetail.classList.add("hidden");
+        });
         updateButtons.forEach(button => {
             button.addEventListener("click", function (e) {
                 e.preventDefault();
