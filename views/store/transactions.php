@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rusdi Store - TopUp paling murah se-Indonesia</title>
+    <?php if(!empty($transaksibyInvoices[0]['invoices'])): ?>
+        <title>Invoice <?php echo $transaksibyInvoices[0]['invoices'] ?></title>
+    <?php else:?>
+        <title>Cari Transaksi - Mas Rusdi Store</title>
+    <?php endif;?>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
@@ -80,7 +85,8 @@
     <?php include './views/components/navbar.php'; ?>
     <!-- content -->
     <?php if (isset($transaksibyInvoices) && !empty($transaksibyInvoices)): ?>
-      <?php $products = $productModel->getProductById( $transaksibyInvoices[0]['product_id']); ?>
+<?php $products = $productModel->getProductById( $transaksibyInvoices[0]['product_id']); ?>
+        
       <?php $categories = $categoryModel->getCategoryById( $products['id_catagories']);?>
         <section id="main" class="flex flex-col  my-10">
         <section class="bg-darkblue flex flex-col justify-center items-center py-10">
@@ -257,14 +263,16 @@
                                 <spa class="inline-flex rounded-sm px-2 text-xs font-semibold uppercase leading-5 print:p-0 bg-yellow-200 text-yellow-900">On Prose</spa>
                             </div>
                             <div class="col-span-12 pt-2 md:col-span-4 md:pt-0">Pesan</div>
-                            <div class="col-span-12 flex items-center gap-2 font-semibold md:col-span-8 text-yellow-200">Transaksi Belum Selesai</div>
-                        </div>
+                                <div class="col-span-12 flex items-center gap-2 font-semibold md:col-span-8 text-yellow-200">Transaksi Belum Selesai</div>
+                            </div>
                         <?php elseif($transaksibyInvoices[0]['status'] == 1): ?>
                             <div class="col-span-12 pt-2 md:col-span-4 md:pt-0">Status Pembayaran</div>
 
                             <div class="col-span-12 flex items-center gap-2 font-semibold md:col-span-8"><span class="inline-flex rounded-sm px-2 text-xs font-semibold uppercase leading-5 print:p-0 bg-emerald-200 text-emerald-900">Paid</span></div>
                             <div class="col-span-12 pt-2 md:col-span-4 md:pt-0">Status Transaksi</div>
-                            <div class="col-span-12 flex items-center gap-2 font-semibold md:col-span-8"><spa class="inline-flex rounded-sm px-2 text-xs font-semibold uppercase leading-5 print:p-0 bg-emerald-200 text-emerald-900">Success</spa></div>
+                            <div class="col-span-12 flex items-center gap-2 font-semibold md:col-span-8">
+                                <span class="inline-flex rounded-sm px-2 text-xs font-semibold uppercase leading-5 print:p-0 bg-emerald-200 text-emerald-900">Success</span>
+                            </div>
                         <?php else: ?>
                             <div class="col-span-12 pt-2 md:col-span-4 md:pt-0">Status Pembayaran</div>
 

@@ -27,7 +27,7 @@
         </li>
         <li class="flex items-center pl-6 py-2 text-gray-300 hover:text-white">
             <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M19 2H5a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3Zm-7 3a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0V6a1 1 0 0 1 1-1Zm0 10a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/></svg>
-            <span><a href="index.php?modul=order&fitur=list">Orders</a></span>
+            <span><a href="index.php?modul=transaksi&fitur=list">transaksis</a></span>
         </li>
         <li class="flex items-center pl-6 py-2 text-gray-300 hover:text-white">
             <svg class="w-5 h-5 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">

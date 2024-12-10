@@ -46,10 +46,17 @@ switch ($modul) {
     case 'transaksi':
         $fitur = isset($_GET['fitur']) ? $_GET['fitur'] : 'dashboard';
         require_once 'models/transaksi_model.php';
+        require_once 'models/product_model.php';
+        require_once 'models/user_model.php';
+        require_once 'models/category_model.php';
+       
+
         switch($fitur){
             case 'list':
+                $productModel =  new productModel();
                 $transaksiModel = new TransaksiModel();
                 $transaksis = $transaksiModel->getAllTransaksi();
+                include 'views/transaction_list.php';
                 break;
             case 'add':
                 $memberId = isset($_POST['member_id']) && $_POST['member_id'] !== '' ? $_POST['member_id'] : NULL;
@@ -68,16 +75,28 @@ switch ($modul) {
                     echo "Error: " . $invoiceId;
                 }
                 break;
+        
+            case 'update':
+                $transaksiId = $_GET['id'];
+                $transaksiModel = new TransaksiModel();
+                $status = $_GET['status'];
+                if(isset($transaksiId) && isset($status)){
+                    try {
+                        $transaksiModel->updateTransaksi($transaksiId,$status);
+                        header('Location: index.php?modul=transaksi&fitur=list');
+
+                    } catch (Exception $e) {
+                        echo "Error: " . $e->getMessage();
+                    }
+                }
+                break;
             case 'invoice':
-                require_once 'models/product_model.php';
-                require_once 'models/user_model.php';
-                require_once 'models/category_model.php';
                 $productModel =  new productModel();
                 $usermodel = new Users();
                 $transaksiModel = new TransaksiModel();
                 $categoryModel = new CategoryModel();
                 $invoiceId = $_GET['invoices']??null;
-                $transaksibyInvoices = $transaksiModel->getTransaksiById($invoiceId);
+                $transaksibyInvoices = $transaksiModel->getTransaksiByInvoice($invoiceId);
                 if ($transaksibyInvoices) {
                     include 'views/store/transactions.php';
                 } else {

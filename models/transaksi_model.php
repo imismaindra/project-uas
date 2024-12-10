@@ -45,8 +45,49 @@ class TransaksiModel {
         }
         return $transaksi;
     }
-    public function getTransaksiById($invoices){
+    public function updateTransaksi($id, $status) {
+        // Query dengan placeholder untuk parameter
+        $sql = "UPDATE transactions SET status = ? WHERE id = ?";
+        
+        // Persiapkan statement
+        $stmt = $this->conn->prepare($sql);
+        
+        // Periksa jika statement berhasil dipersiapkan
+        if ($stmt === false) {
+            throw new Exception("Error preparing statement: " . $this->conn->error);
+        }
+        
+        // Bind parameter ke statement (keduanya bertipe integer)
+        $stmt->bind_param("ii", $status, $id);
+        
+        // Eksekusi statement
+        $stmt->execute();
+        
+        // Periksa jika ada error saat eksekusi
+        if ($stmt->error) {
+            throw new Exception("Error executing statement: " . $stmt->error);
+        }
+        
+        // Tutup statement
+        $stmt->close();
+        
+        // Return jumlah baris yang terpengaruh
+        return $this->conn->affected_rows;
+    }
+    
+    public function getTransaksiByInvoice($invoices){
         $sql = "SELECT * FROM transactions WHERE invoices = '$invoices'";
+        $result = $this->conn->query($sql);
+        $transaksi = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $transaksi[] = $row;
+            }
+        }
+        return $transaksi;
+    }
+    public function getTransaksiById($id){
+        $sql = "SELECT * FROM transactions WHERE id = '$id'";
         $result = $this->conn->query($sql);
         $transaksi = [];
         if ($result->num_rows > 0) {
