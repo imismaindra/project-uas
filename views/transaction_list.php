@@ -189,7 +189,7 @@
     </div>
     <div id="detailModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black bg-opacity-50">
         <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
-            <h2 class="text-lg font-bold mb-4">Detail Transaksi</h2>
+            <h2 class="invc text-lg font-bold mb-4">Loading..</h2>
             <label class="block mb-2 text-sm font-medium text-gray-900">Member: </label>
             <p class="member">Loading...</p>
             <label class="block mb-2 text-sm font-medium text-gray-900">Email: </label>
@@ -198,6 +198,8 @@
             <p class="akun">Loading...</p>
             <label class="block mb-2 text-sm font-medium text-gray-900">Product: </label>
             <p class="product">Loading...</p>
+            <label class="block mb-2 text-sm font-medium text-gray-900">Pembayaran: </label>
+            <p class="payment">Loading...</p>
             <div class="flex justify-end mt-5">
                 <button id="closeDetail" class="px-4 py-2 bg-red-500 text-white rounded mr-2 hover:bg-red-600">Batal</button>
             </div>
@@ -226,10 +228,12 @@
                         alert(data.error);
                     } else {
                         // Isi data ke modal
+                        document.querySelector("#detailModal .invc").textContent = "Detail Transaksi "+data.invoices;
                         document.querySelector("#detailModal .member").textContent = data.user_id || "Guest";
                         document.querySelector("#detailModal .email").textContent = data.guest_email || "-";
                         document.querySelector("#detailModal .akun").textContent = data.akungame_Id;
                         document.querySelector("#detailModal .product").textContent = data.product_id;
+                        document.querySelector("#detailModal .payment").textContent = data.payment_method;
 
                         // Tampilkan modal
                         modalDetail.classList.remove("hidden");
