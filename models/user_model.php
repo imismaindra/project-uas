@@ -79,5 +79,19 @@ class Users {
         }
         return $users;
     }
+
+    public function checkLogin($email, $password) {
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = ? AND password = ?");
+        $stmt->bind_param("ss", $email, $password);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $user = $result->fetch_assoc();
+            return $user;
+        } else {
+            return false;
+        }
+    }   
 }
 ?>

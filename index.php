@@ -26,7 +26,22 @@ $slug =  isset($_GET['slug']) ? $_GET['slug'] : null;
 switch ($modul) {
     case 'auth':
         $fitur = isset($_GET['fitur']);
-        
+        require_once 'models/user_model.php';
+        $userModel = new Users();
+        switch($fitur){
+            case 'login':           
+                try {
+                    $check = $usermodel->checkLogin($_GET['email'],$_GET['password']);
+                    if ($check) {
+                        // code here
+                    }
+                } catch (Exception $e) {
+                    echo "Error: " . $e->getMessage();
+                }   
+                break;
+            case 'register':
+                break;
+        }
         break;
     case 'role': 
         $fitur = isset($_GET['fitur']) ? $_GET['fitur'] : 'dashboard';
