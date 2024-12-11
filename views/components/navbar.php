@@ -8,7 +8,7 @@
       <span class="self-center text-2xl font-bold whitespace-nowrap text-[#3FC43B]">TOP-UP GAME</span>
     </a>
     <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-      <button type="button" class="text-white hover:text-white border border-white hover:bg-black-200 focus:ring-4 focus:outline-none focus:ring-[#3FC43B] font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Login</button>
+      <a href="views/login.php" type="button"  class="text-white hover:text-white border border-white hover:bg-black-200 focus:ring-4 focus:outline-none focus:ring-[#3FC43B] font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Login</a>
       <button type="button" class="text-black bg-[#3FC43B] hover:bg-[#53B950] font-medium rounded-lg text-sm px-4 py-2 text-center text-sm px-5 py-2.5 text-center me-2 mb-2">Daftar</button>
       <button data-collapse-toggle="navbar-cta" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-cta" aria-expanded="false">
         <span class="sr-only">Open main menu</span>

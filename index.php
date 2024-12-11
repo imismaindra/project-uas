@@ -5,25 +5,29 @@ session_start();
 $modul = isset($_GET['modul']) ? $_GET['modul'] : 'store';
 $slug =  isset($_GET['slug']) ? $_GET['slug'] : null;
 
-if ($slug) {
-    require_once 'models/product_model.php';
-    $productModel = new ProductModel();
-    $products = $productModel->getProductsByCategorySlug($slug);
+// if ($slug) {
+//     require_once 'models/product_model.php';
+//     $productModel = new ProductModel();
+//     $products = $productModel->getProductsByCategorySlug($slug);
     
-    $category_images = [
-        'Mobile Legends' => '/assets/include/dm.webp',
-        'Free Fire' => '/assets/include/dm.webp',
-        'PUBG' => '/assets/include/uc.webp',
-        'Valorant' => '/assets/include/vp.webp',
-        'Genshin Impact' => '/assets/include/gc.webp',
-        'Honor of Kings' => '/assets/include/dm.webp',
-        'EA FC' => '/assets/include/dm.webp',
-    ];
+//     $category_images = [
+//         'Mobile Legends' => '/assets/include/dm.webp',
+//         'Free Fire' => '/assets/include/dm.webp',
+//         'PUBG' => '/assets/include/uc.webp',
+//         'Valorant' => '/assets/include/vp.webp',
+//         'Genshin Impact' => '/assets/include/gc.webp',
+//         'Honor of Kings' => '/assets/include/dm.webp',
+//         'EA FC' => '/assets/include/dm.webp',
+//     ];
 
-    include 'views/store/product-list.php';
-    exit; // Hentikan eksekusi agar tidak masuk ke switch $modul
-}
+//     include 'views/store/product-list.php';
+//     exit; // Hentikan eksekusi agar tidak masuk ke switch $modul
+// }
 switch ($modul) {
+    case 'auth':
+        $fitur = isset($_GET['fitur']);
+        
+        break;
     case 'role': 
         $fitur = isset($_GET['fitur']) ? $_GET['fitur'] : 'dashboard';
         require_once 'models/role_model.php';

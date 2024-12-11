@@ -6,6 +6,8 @@
     <title>Rusdi Store - TopUp paling murah se-Indonesia</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
     <style>
         
@@ -79,6 +81,7 @@
 <body class="bg-[#1A1B41]">
     <!-- navbar -->
     <?php include './views/components/navbar.php'; ?>
+   
     <!-- carousell -->
     <?php include './views/components/carousell.php'; ?>
     <!-- content -->
