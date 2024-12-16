@@ -105,17 +105,22 @@ class TransaksiModel {
         return $transaksi;
     }
     
-    public function getTransaksiByVaCode($kodeVA){
-        $sql = "SELECT * FROM transactions WHERE kodeVA = '$kodeVA'";
-        $result = $this->conn->query($sql);
-        $transaksi = [];
+    public function getTransaksiByVaCode($kodeVA) {
+        $sql = "SELECT * FROM transactions WHERE kodeVA = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("s", $kodeVA); 
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $transaksiByVa = [];
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $transaksi[] = $row;
+                $transaksiByVa[] = $row;
             }
         }
-        return $transaksi;
+        $stmt->close();
+        return $transaksiByVa;
     }
+    
 
     public function verifyKodeVA($kodeVA) {
         $sql = "SELECT * FROM transactions WHERE kodeVA = ?";

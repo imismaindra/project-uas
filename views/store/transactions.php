@@ -243,6 +243,16 @@
                     <div class="font-semibold text-secondary"><?php echo $transaksibyInvoices[0]['payment_method']; ?></div>
                     <div class="flex flex-col gap-x-4 gap-y-6 pt-6">
                         <div class="grid grid-cols-12 gap-x-4 gap-y-1 md:gap-2">
+                        <div class="col-span-12 pt-2 md:col-span-4 md:pt-0">Kode VA</div>
+                        <div class="col-span-12 flex items-center gap-2 font-semibold md:col-span-8 text-secondary">
+                            <span><?php echo $transaksibyInvoices[0]['kodeVA']; ?></span>
+                            <button type="button">
+                                <svg width="20" height="20" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M14.8233 6.28561H10.1766C9.42742 6.28561 8.82031 5.67849 8.82031 4.92933V4.35627C8.82031 3.60711 9.42742 3 10.1766 3H14.8233C15.5725 3 16.1796 3.60711 16.1796 4.35627V4.92933C16.1796 5.67849 15.5725 6.28561 14.8233 6.28561Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path opacity="0.4" d="M16.1793 4.59375C18.2526 4.59375 19.9338 6.27498 19.9338 8.34831V17.2458C19.9338 19.3191 18.2526 21.0004 16.1793 21.0004H8.81999C6.74666 21.0004 5.06543 19.3191 5.06543 17.2458V8.34831C5.06543 6.27498 6.74666 4.59375 8.81999 4.59375" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </button>
+                        </div>
                         <div class="col-span-12 pt-2 md:col-span-4 md:pt-0">Nomor Invoice</div>
                         <div class="col-span-12 flex items-center gap-2 font-semibold md:col-span-8 text-secondary">
                             <span><?php echo $transaksibyInvoices[0]['invoices']; ?></span>

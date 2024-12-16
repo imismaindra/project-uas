@@ -148,7 +148,15 @@ switch ($modul) {
                 break;
             case 'pembayaran':
                 $transaksiModel = new TransaksiModel();
-                include 'views/store/pembayaran.php';
+                $VaCode = $_GET['vacode']??null;
+                $transaksibyVA = $transaksiModel->getTransaksiByVaCode($VaCode);
+                if ($transaksibyVA) {
+                    include 'views/store/pembayaran.php';
+                    
+                } else {
+                    include 'views/store/pembayaran.php';
+                    echo "Invoice tidak ditemukan.";
+                }
                 break;
         
             case 'update':
