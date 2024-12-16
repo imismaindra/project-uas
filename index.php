@@ -128,6 +128,8 @@ switch ($modul) {
             case 'add':
                 $memberId = isset($_SESSION['user']['id']) && $_SESSION['user']['id']  !== NULL ? $_SESSION['user']['id'] : NULL;
                 $akungame_id = isset($_POST['akungame_id']) ? $_POST['akungame_id'] : NULL;
+                $bank_id = isset($_POST['bank_id']) ? $_POST['bank_id'] : NULL;
+
 
                 $total_price = $_POST['totalAmount'];
                 $productId = $_POST['product_id'];
@@ -136,7 +138,7 @@ switch ($modul) {
                 $qty = $_POST['amount'];
                 $email = $_POST['email'];
                 $transaksiModel = new TransaksiModel();
-                $invoiceId = $transaksiModel->insertTransaksi($memberId, $email, $productId, $qty, $total_price, $pembayaran,$akungame_id, 0);   
+                $invoiceId = $transaksiModel->insertTransaksi($memberId, $email, $productId, $qty, $total_price, $pembayaran,$akungame_id,$bank_id, 0);   
                 if ($invoiceId) {
                     header("Location: ?modul=transaksi&fitur=invoice&invoices=$invoiceId");
                     exit();

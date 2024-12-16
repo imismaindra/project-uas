@@ -96,49 +96,76 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $uid = $_SESSION['user']['id']; ?>
                         <?php if (count($transaksis) > 0): ?>
-                            <?php foreach ($transaksis as $tsk): ?>
-                                <?php $product= $productModel->getProductById($tsk['product_id']);?>
+                            <?php if(!isset($_SESSION['user']['role_id'])||  $_SESSION['user']['role_id'] == 1):?>
+                                <?php foreach ($transaksis as $tsk): ?>
+                                    
+                                    <?php $product= $productModel->getProductById($tsk['product_id']);?>
 
-                                <tr class="bg-white border-b hover:bg-gray-50">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                        <?php echo htmlspecialchars($tsk['id']); ?>
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        <?php echo htmlspecialchars($product['name']); ?>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <?php echo htmlspecialchars($tsk['amount']); ?>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                    Rp&nbsp;<?php echo htmlspecialchars($tsk['total_price']); ?>
-                                    </td>
-                                    <td id="status-update" class="status-update px-6 py-4 hover:cursor-pointer"  data-update-url="index.php?modul=transaksi&fitur=update&id=<?php echo htmlspecialchars($tsk['id']); ?>">
-                                        <span class="<?php echo  $tsk['status'] == 1 ? 'bg-green-400' : 'bg-yellow-200 text-yellow-600'; ?> text-gray-50 rounded-md px-2">
-                                            <?php echo htmlspecialchars( $tsk['status'] == 1 ? "Paid" : "Unpaid") ?>
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 text-right">
-                                        <!-- <a href="index.php?modul=product&fitur=edit&id=<?php echo htmlspecialchars($product['id']); ?>" class="text-gray-400 hover:text-gray-100 mx-2">
-                                            <i class="material-icons-outlined text-blue-600">edit</i>
-                                        </a> -->
-                                        <a href="#" id="detailButton" data-id-transaksi="<?= $tsk['id']; ?>"  class="detailButton text-gray-400 hover:text-gray-100 mx-2">
-                                            <i class="material-icons-outlined text-green-600">visibility</i>
-                                        </a>
-                                        <!-- <a href="#" 
-                                        class="deleteButton text-gray-400 hover:text-gray-100 ml-2" 
-                                        data-delete-url="index.php?modul=product&fitur=delete&id=<?php echo htmlspecialchars($product['id']); ?>">
-                                            <i class="material-icons-round text-red-600">delete_outline</i>
-                                        </a> -->
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
+                                    <tr class="bg-white border-b hover:bg-gray-50">
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                            <?php echo htmlspecialchars($tsk['id']); ?>
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            <?php echo htmlspecialchars($product['name']); ?>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <?php echo htmlspecialchars($tsk['amount']); ?>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                        Rp&nbsp;<?php echo htmlspecialchars($tsk['total_price']); ?>
+                                        </td>
+                                        <td id="status-update" class="status-update px-6 py-4 hover:cursor-pointer"  data-update-url="index.php?modul=transaksi&fitur=update&id=<?php echo htmlspecialchars($tsk['id']); ?>">
+                                            <span class="<?php echo  $tsk['status'] == 1 ? 'bg-green-400' : 'bg-yellow-200 text-yellow-600'; ?> text-gray-50 rounded-md px-2">
+                                                <?php echo htmlspecialchars( $tsk['status'] == 1 ? "Paid" : "Unpaid") ?>
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 text-right">
+                                            <a href="#" id="detailButton" data-id-transaksi="<?= $tsk['id']; ?>"  class="detailButton text-gray-400 hover:text-gray-100 mx-2">
+                                                <i class="material-icons-outlined text-green-600">visibility</i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else:?>
+                                <?php $tskuserid = $transaksiModel->getAllTransaksiByUserId( $uid);?>
+                                <?php foreach ($tskuserid as $tsk): ?>
+                                    
+                                    <?php $product= $productModel->getProductById($tsk['product_id']);?>
+
+                                    <tr class="bg-white border-b hover:bg-gray-50">
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                            <?php echo htmlspecialchars($tsk['id']); ?>
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            <?php echo htmlspecialchars($product['name']); ?>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <?php echo htmlspecialchars($tsk['amount']); ?>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                        Rp&nbsp;<?php echo htmlspecialchars($tsk['total_price']); ?>
+                                        </td>
+                                        <td id="status-update" class="status-update px-6 py-4 hover:cursor-pointer"  data-update-url="index.php?modul=transaksi&fitur=update&id=<?php echo htmlspecialchars($tsk['id']); ?>">
+                                            <span class="<?php echo  $tsk['status'] == 1 ? 'bg-green-400' : 'bg-yellow-200 text-yellow-600'; ?> text-gray-50 rounded-md px-2">
+                                                <?php echo htmlspecialchars( $tsk['status'] == 1 ? "Paid" : "Unpaid") ?>
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 text-right">
+                                            <a href="#" id="detailButton" data-id-transaksi="<?= $tsk['id']; ?>"  class="detailButton text-gray-400 hover:text-gray-100 mx-2">
+                                                <i class="material-icons-outlined text-green-600">visibility</i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         <?php else: ?>
                             <tr>
                                 <td colspan="6" class="text-center text-gray-500 py-4">Tidak ada produk yang ditemukan.</td>
                             </tr>
                         <?php endif; ?>
-                    </tbody>
+                    </tbody>    
 
                 </table>
             </div>

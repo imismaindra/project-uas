@@ -13,9 +13,15 @@ class TransaksiModel {
         $randomNumber = random_int(10000000, 99999999); // Menghasilkan angka acak 8 digit
         return $prefix . $randomNumber;
     }
+    public function generateVaCode() {
+        $prefix = "IRA";
+        $randomNumber = random_int(100000000000, 999999999999);
+        return $prefix . $randomNumber;
+    }
 
-    public function insertTransaksi($userid, $g_email, $product_id, $amount, $total_price, $payment_method,$akungameId,$bank_id,$kodeVA, $status) {
+    public function insertTransaksi($userid, $g_email, $product_id, $amount, $total_price, $payment_method,$akungameId,$bank_id, $status) {
         $invoices = $this->generateInvoiceNumber();
+        $VaCode = $this->generateVaCode();
         $sql = "INSERT INTO transactions (user_id, guest_email, product_id, amount, total_price, payment_method, status, invoices, bank_id, kodeVA, akungame_id)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
@@ -23,7 +29,7 @@ class TransaksiModel {
             return "Error preparing statement: " . $this->conn->error;
         }
 
-        $stmt->bind_param("isiiisisiss", $userid, $g_email, $product_id, $amount, $total_price, $payment_method, $status, $invoices, $bank_id, $kodeVA, $akungameId);
+        $stmt->bind_param("isiiisisiss", $userid, $g_email, $product_id, $amount, $total_price, $payment_method, $status, $invoices, $bank_id, $VaCode, $akungameId);
 
 
         if ($stmt->execute()) {
@@ -45,6 +51,17 @@ class TransaksiModel {
             }
         }
         return $transaksi;
+    }
+    public function getAllTransaksiByUserId($id){
+        $sql = "SELECT * FROM transactions WHERE user_id = $id";
+        $result = $this->conn->query($sql);
+        $transaksiByUserId = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $transaksiByUserId[] = $row;
+            }
+        }
+        return $transaksiByUserId;
     }
     public function updateTransaksi($id, $status) {
         // Query dengan placeholder untuk parameter
