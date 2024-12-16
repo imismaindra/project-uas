@@ -1,3 +1,8 @@
+
+<?php 
+    if (isset($_SESSION['user'])) {
+    }
+?>
 <div class="navbar flex justify-between items-center bg-white p-4 shadow-lg fixed w-full z-10">
     <div class="flex items-center">
         <!-- Logo Section -->
@@ -11,8 +16,8 @@
     <!-- User Section -->
     <div class="flex items-center space-x-4">
         <div class="text-right">
-            <p class="text-sm font-semibold">Mas Rusdi</p>
-            <p class="text-xs text-gray-500">Admin</p>
+            <p class="text-sm font-semibold"><?php echo $_SESSION['user']['username']; ?></p>
+            <p class="text-xs text-gray-500"><?php echo $_SESSION['user']['email']; ?></p>
         </div>
         <img src="https://i.pravatar.cc/150" alt="Foto Profil" class="w-10 h-10 rounded-full border border-gray-200">
     </div>

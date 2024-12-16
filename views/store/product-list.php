@@ -59,7 +59,8 @@
 <body class="bg-[#1A1B41] ">
     <!-- navbar -->
     <?php include './views/components/navbar.php'; ?>
-    <img alt="Mobile Legends" fetchpriority="high" width="1280" height="1280" decoding="async" data-img="1" class="w-full h-56 md:h-72 lg:h-96 object-cover object-center" src="https://i.ibb.co.com/mJmVkrG/mobile-legends.jpg" style="color: transparent;">
+    <img alt="Mobile Legends" fetchpriority="high" width="1280" height="1280" decoding="async" data-img="1" class="w-full h-56 md:h-72 lg:h-96 object-cover object-center" 
+    src="<?= $banner[$products[0]['category_name']]; ?>" style="color: transparent;">
     <div class="bg-title-product flex min-h-32 w-full items-center border-b bg-transparent lg:min-h-[160px] bg-order-header-background text-order-header-foreground">
         <div class="container flex items-center gap-2">
             <div>
@@ -106,7 +107,7 @@
                             <div>
                                 <label for="id" class="block text-xs font-medium text-white pb-2">ID</label>
                                 <div class="flex flex-col items-start">
-                                    <input class="relative block w-full appearance-none rounded-lg border border-border bg-input px-3 py-2 text-xs placeholder-muted-white focus:z-10 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-75" type="number" id="id" name="id" min="0" placeholder="Ketikan ID" autocomplete="id" value="">
+                                    <input class="relative block w-full appearance-none rounded-lg border border-border bg-input px-3 py-2 text-xs placeholder-muted-white focus:z-10 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-75" type="number" id="akungame_id" name="akungame_id" min="0" placeholder="Ketikan ID" autocomplete="id" value="">
                                 </div>
                             </div>
                         </div>
@@ -224,33 +225,19 @@
                 <input type="hidden" name="pembayaran" id="hidden-pembayaran">
 
                 <div class="p-4">
-                    <div class="flex flex-col gap-4" role="none">
+                    <div id="payment-method-indrapay" class="flex flex-col gap-4" role="none">
                         <div class="relative flex cursor-pointer rounded-lg border bg-white border-transparent bg-foreground/75 p-2.5 text-background shadow-sm outline-none md:px-5 md:py-3" id="headlessui-radiogroup-option-:raa:" role="radio" aria-checked="false" tabindex="0" data-headlessui-state="">
                             <div class="flex w-full items-center justify-between">
                                 <div class="flex items-center gap-4">
-                                    <div><img src="https://client-cdn.bangjeff.com/xinnstore.com/meta/ICONNNNNNNNNNNNNN.png" alt="" class="max-h-12"></div>
                                     <div>
-                                        <div class="block text-xs font-semibold sm:text-sm">test</div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="relative mr-8 text-xs font-semibold sm:text-base">
-                                        <span class="text-xs text-destructive">Max. Rp&nbsp; 0</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="relative flex cursor-pointer rounded-lg border bg-white border-transparent bg-foreground/75 p-2.5 text-background shadow-sm outline-none md:px-5 md:py-3" id="headlessui-radiogroup-option-:raa:" role="radio" aria-checked="false" tabindex="0" data-headlessui-state="">
-                            <div class="flex w-full items-center justify-between">
-                                <div class="flex items-center gap-4">
-                                    <div><img src="https://client-cdn.bangjeff.com/xinnstore.com/meta/ICONNNNNNNNNNNNNN.png" alt="" class="max-h-12"></div>
+                                        <img src="https://client-cdn.bangjeff.com/xinnstore.com/meta/ICONNNNNNNNNNNNNN.png" alt="" class="max-h-12"></div>
                                     <div>
                                         <div class="block text-xs font-semibold sm:text-sm">IndraPay</div>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="relative mr-8 text-xs font-semibold sm:text-base">
-                                        <span class="text-xs text-destructive">Max. Rp&nbsp; 0</span>
+                                        <span id ="cash"class="text-xs text-destructive cash">Max. Rp&nbsp; 0</span>
                                     </div>
                                 </div>
                             </div>
@@ -291,7 +278,7 @@
                                             style="color: transparent;">
                                     </div>
                                 </div>
-                                <div id="payment-method-linkAja" class=" relative flex cursor-pointer rounded-xl border border-transparent bg-white text-background shadow-sm outline-none 
+                                <div id="payment-method-shopeepay" class=" relative flex cursor-pointer rounded-xl border border-transparent bg-white text-background shadow-sm outline-none 
                                 md:p-4 bg-order-variant-background text-order-variant-foreground" id=<?php echo $diamond['id'];?> role="radio" aria-checked="false" tabindex="0" data-headlessui-state="" aria-labelledby="headlessui-label-:r13:" aria-describedby="headlessui-description-:r14:">
                                     <span class="flex flex-1">
                                         <span class="flex flex-col justify-between">
@@ -312,7 +299,7 @@
                                             style="color: transparent;">
                                     </div>
                                 </div>
-                                <div class=" relative flex cursor-pointer rounded-xl border border-transparent bg-white text-background shadow-sm outline-none 
+                                <div id="payment-method-linkAja" class=" relative flex cursor-pointer rounded-xl border border-transparent bg-white text-background shadow-sm outline-none 
                                     md:p-4 bg-order-variant-background text-order-variant-foreground" id=<?php echo $diamond['id'];?> role="radio" aria-checked="false" tabindex="0" data-headlessui-state="" aria-labelledby="headlessui-label-:r13:" aria-describedby="headlessui-description-:r14:">
                                     <span class="flex flex-1">
                                         <span class="flex flex-col justify-between">
@@ -343,6 +330,7 @@
             </section>
             <input type="hidden" name="totalAmount" id="hidden-total-amount">
             <input type="hidden" name="member_id" id="hidden-member_id">
+            <!-- <input type="hidden" name="akungame_id" id="hidden-akungame_id"> -->
             <section 
                 id="3" 
                 class="relative w-[45rem] scroll-mt-20 rounded-xl bg-card/50 shadow-2xl shadow-[#53B950] md:scroll-mt-[5.75rem]"
@@ -424,6 +412,7 @@
         </form>
     </div>
     <script>
+        
         const products = document.querySelectorAll('.product-item');
         const categories = document.querySelectorAll('.catgeory-list');
         const detailOrder = document.querySelector('.detail-order');
@@ -485,6 +474,7 @@
                 </div>
             `;
         }
+
         products.forEach(product => {
             product.addEventListener('click', () => {
                 const productId = product.getAttribute('data-id');
@@ -492,29 +482,34 @@
                 const productPrice = product.getAttribute('data-price');
                 const productImage = product.getAttribute('data-image');
                 const amountInput = document.getElementById("amount");
-                const amount = amountInput ? amountInput.value : 1;
-                const idAccount = document.querySelector('[name="id"]').value;
-                document.getElementById("hidden-product_id").value =productId;
+                const idAccount = document.querySelector('[name="akungame_id"]').value;
+
+                document.getElementById("hidden-product_id").value = productId;
+
+                // Ambil jumlah awal (default 1 jika kosong)
+                const amount = amountInput ? parseInt(amountInput.value) || 1 : 1;
+
                 // Hitung total harga
                 totalAmount = calculateTotal(productPrice, amount);
 
-                // Update UI produk
+                // Update UI Produk
                 updateProductUI(productName, productPrice, productImage, totalAmount);
-
-                // Event untuk mengubah jumlah
-                if (amountInput) {
+                document.querySelectorAll('.cash').forEach(cashElement => {
+                    cashElement.innerText = `Rp ${totalAmount}`;
+                });
+                // Pastikan event listener untuk `amountInput` hanya ditambahkan sekali
+                if (amountInput && !amountInput.dataset.listenerAdded) {
+                    amountInput.dataset.listenerAdded = true; // Tandai sudah ditambahkan
                     amountInput.addEventListener("change", () => {
-                        const updatedAmount = amountInput.value;
+                        const updatedAmount = parseInt(amountInput.value) || 1; // Ambil jumlah baru
                         totalAmount = calculateTotal(productPrice, updatedAmount);
 
-                        // Update harga
+                        // Update harga di UI
                         document.querySelectorAll('.cash').forEach(cashElement => {
                             cashElement.innerText = `Rp ${totalAmount}`;
                         });
-                        document.getElementById("final-amount").innerText = `Rp ${totalAmount}`
+                        document.getElementById("final-amount").innerText = `Rp ${totalAmount}`;
                         document.getElementById("hidden-total-amount").value = totalAmount;
-
-                        
                     });
                 }
 
@@ -532,6 +527,7 @@
                 });
             });
         });
+
 
         // Event untuk modal
         document.getElementById("close-modal").addEventListener("click", function (event) {

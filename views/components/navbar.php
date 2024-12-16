@@ -8,8 +8,18 @@
       <span class="self-center text-2xl font-bold whitespace-nowrap text-[#3FC43B]">TOP-UP GAME</span>
     </a>
     <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-      <a href="views/login.php" type="button"  class="text-white hover:text-white border border-white hover:bg-black-200 focus:ring-4 focus:outline-none focus:ring-[#3FC43B] font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Login</a>
-      <button type="button" class="text-black bg-[#3FC43B] hover:bg-[#53B950] font-medium rounded-lg text-sm px-4 py-2 text-center text-sm px-5 py-2.5 text-center me-2 mb-2">Daftar</button>
+      <?php if(isset($_SESSION['user'])):?>
+      <div class="flex items-center space-x-4">
+          <div class="text-right">
+              <p class="text-sm text-[#3FC43B] font-semibold"><?php echo $_SESSION['user']['username']; ?></p>
+              <p class="text-xs text-white"><?php echo $_SESSION['user']['email']; ?></p>
+          </div>
+          <img src="https://i.pravatar.cc/150" alt="Foto Profil" class="w-10 h-10 rounded-full border border-gray-200">
+      </div>
+      <?php else:?>
+        <a href="views/login.php" type="button"  class="text-white hover:text-white border border-white hover:bg-black-200 focus:ring-4 focus:outline-none focus:ring-[#3FC43B] font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Login</a>
+        <button type="button" class="text-black bg-[#3FC43B] hover:bg-[#53B950] font-medium rounded-lg text-sm px-4 py-2 text-center text-sm px-5 py-2.5 text-center me-2 mb-2">Daftar</button>
+      <?php endif;?>  
       <button data-collapse-toggle="navbar-cta" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-cta" aria-expanded="false">
         <span class="sr-only">Open main menu</span>
         <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
@@ -26,7 +36,7 @@
           <a href="index.php?modul=transaksi&fitur=invoice " class="block py-2 px-3 md:p-0 text-white rounded hover:bg-[#3FC43B] md:hover:bg-transparent md:hover:text-[#3FC43B]">Transaksi</a>
         </li>
         <li>
-          <a href="index.php?modul=transaksi&fitur=invoices" class="block py-2 px-3 md:p-0 text-white rounded hover:bg-[#3FC43B] md:hover:bg-transparent md:hover:text-[#3FC43B]">Services</a>
+          <a href="index.php?modul=transaksi&fitur=pembayaran" class="block py-2 px-3 md:p-0 text-white rounded hover:bg-[#3FC43B] md:hover:bg-transparent md:hover:text-[#3FC43B]">Pembayaran</a>
         </li>
         <li>
           <a href="#" class="block py-2 px-3 md:p-0 text-white rounded hover:bg-[#3FC43B] md:hover:bg-transparent md:hover:text-[#3FC43B]">Contact</a>

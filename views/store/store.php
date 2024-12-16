@@ -1,3 +1,9 @@
+
+<?php 
+    if (isset($_SESSION['user'])) {
+       
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,7 +87,6 @@
 <body class="bg-[#1A1B41]">
     <!-- navbar -->
     <?php include './views/components/navbar.php'; ?>
-   
     <!-- carousell -->
     <?php include './views/components/carousell.php'; ?>
     <!-- content -->
@@ -97,7 +102,7 @@
         <div class="my-5 flex transform items-center gap-2 space-x-3 overflow-auto duration-300 ease-in-out">
             <a href="index.php?modul=store&filter=topup" class="text-black bg-[#3FC43B] font-bold rounded-lg text-sm px-5 py-2.5">Top-Up Games</a>
             <a href="index.php?modul=store&filter=joki" class="text-black bg-[#3FC43B] font-bold rounded-lg text-sm px-5 py-2.5 ">Joki</a>
-            <a href="index.php?modul=store&filter=vocher" class="text-black bg-[#3FC43B] font-bold rounded-lg text-sm px-5 py-2.5 ">Vocher</a>
+            <a href="index.php?modul=store&filter=voucher" class="text-black bg-[#3FC43B] font-bold rounded-lg text-sm px-5 py-2.5 ">Vocher</a>
         </div>
         <?php include './views/components/moreitemscard.php'; ?>
     </section>

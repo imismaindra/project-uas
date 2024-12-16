@@ -5,42 +5,76 @@ session_start();
 $modul = isset($_GET['modul']) ? $_GET['modul'] : 'store';
 $slug =  isset($_GET['slug']) ? $_GET['slug'] : null;
 
-// if ($slug) {
-//     require_once 'models/product_model.php';
-//     $productModel = new ProductModel();
-//     $products = $productModel->getProductsByCategorySlug($slug);
+if ($slug) {
+    require_once 'models/product_model.php';
+    $productModel = new ProductModel();
+    $products = $productModel->getProductsByCategorySlug($slug);
     
-//     $category_images = [
-//         'Mobile Legends' => '/assets/include/dm.webp',
-//         'Free Fire' => '/assets/include/dm.webp',
-//         'PUBG' => '/assets/include/uc.webp',
-//         'Valorant' => '/assets/include/vp.webp',
-//         'Genshin Impact' => '/assets/include/gc.webp',
-//         'Honor of Kings' => '/assets/include/dm.webp',
-//         'EA FC' => '/assets/include/dm.webp',
-//     ];
+    $category_images = [
+        'Mobile Legends' => '/assets/include/dm.webp',
+        'Free Fire' => '/assets/include/dm.webp',
+        'PUBG' => '/assets/include/uc.webp',
+        'Valorant' => '/assets/include/vp.webp',
+        'Genshin Impact' => '/assets/include/gc.webp',
+        'Honor of Kings' => '/assets/include/dm.webp',
+        'EA FC' => '/assets/include/FUT.png',
+    ];
+    $banner = [
+        'Mobile Legends' => '/assets/include/banner-ml.webp',
+        'Free Fire' => '/assets/include/dm.webp',
+        'PUBG' => '/assets/include/banner-pubg.jpg',
+        'Valorant' => '/assets/include/vp.webp',
+        'Genshin Impact' => '/assets/include/gc.webp',
+        'Honor of King' => '/assets/include/banner-hok.jpg',
+        'EA FC' => '/assets/include/banner-EA.jpeg',
+    ];
 
-//     include 'views/store/product-list.php';
-//     exit; // Hentikan eksekusi agar tidak masuk ke switch $modul
-// }
+    include 'views/store/product-list.php';
+    exit; // Hentikan eksekusi agar tidak masuk ke switch $modul
+}
 switch ($modul) {
+    case 'dashboard':
+        include 'views/dashboard.php';
+        break;
     case 'auth':
-        $fitur = isset($_GET['fitur']);
-        require_once 'models/user_model.php';
-        $userModel = new Users();
-        switch($fitur){
-            case 'login':           
-                try {
-                    $check = $usermodel->checkLogin($_GET['email'],$_GET['password']);
-                    if ($check) {
-                        // code here
-                    }
-                } catch (Exception $e) {
-                    echo "Error: " . $e->getMessage();
-                }   
-                break;
-            case 'register':
-                break;
+        $fitur = isset($_GET['fitur']) ? $_GET['fitur'] : null;
+        if (file_exists('models/user_model.php')) {
+            require_once 'models/user_model.php';
+            $userModel = new Users();
+            switch ($fitur) {
+                case 'login':           
+                    $email = isset($_POST['email']) ? $_POST['email'] : null;
+                    $password = isset($_POST['password']) ? $_POST['password'] : null;
+                    try {
+                        $check = $userModel->checkLogin($email, $password);
+                        if ($check != null && $check['role_id'] == 1) {
+                            $_SESSION['user'] = $check;
+                            header('Location: index.php?modul=dashboard');
+                            exit();
+                        }elseif($check != null && $check['role_id'] == 3){
+                            $_SESSION['user'] = $check;
+                            header('Location:index.php?');
+                        } else {
+                            echo "Login gagal. Periksa email dan password Anda.";
+                        }
+                    } catch (Exception $e) {
+                        echo "Error: " . $e->getMessage();
+                    }   
+                    break;
+                case 'register':
+                    // Logika untuk registrasi
+                    break;
+                case 'logout':
+                    session_unset();
+                    session_destroy();
+                    header('Location: index.php?'); 
+                    exit();
+                default:
+                    echo "Fitur tidak valid.";
+                    break;
+            }
+        } else {
+            die('File user_model.php tidak ditemukan.');
         }
         break;
     case 'role': 
@@ -92,7 +126,9 @@ switch ($modul) {
                 }
                 break;                
             case 'add':
-                $memberId = isset($_POST['member_id']) && $_POST['member_id'] !== '' ? $_POST['member_id'] : NULL;
+                $memberId = isset($_SESSION['user']['id']) && $_SESSION['user']['id']  !== NULL ? $_SESSION['user']['id'] : NULL;
+                $akungame_id = isset($_POST['akungame_id']) ? $_POST['akungame_id'] : NULL;
+
                 $total_price = $_POST['totalAmount'];
                 $productId = $_POST['product_id'];
                 $pembayaran = $_POST['pembayaran'];
@@ -100,13 +136,17 @@ switch ($modul) {
                 $qty = $_POST['amount'];
                 $email = $_POST['email'];
                 $transaksiModel = new TransaksiModel();
-                $invoiceId = $transaksiModel->insertTransaksi($memberId, $email, $productId, $qty, $total_price, $pembayaran, 0);   
+                $invoiceId = $transaksiModel->insertTransaksi($memberId, $email, $productId, $qty, $total_price, $pembayaran,$akungame_id, 0);   
                 if ($invoiceId) {
                     header("Location: ?modul=transaksi&fitur=invoice&invoices=$invoiceId");
                     exit();
                 } else {
                     echo "Error: " . $invoiceId;
                 }
+                break;
+            case 'pembayaran':
+                $transaksiModel = new TransaksiModel();
+                include 'views/store/pembayaran.php';
                 break;
         
             case 'update':

@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="flex w-1/2 justify-center items-center bg-[#1A1B41]">
-        <form class="bg-[#1A1B41]">
+        <form method="post" action="../index.php?modul=auth&fitur=login" class="bg-[#1A1B41]">
         <h1 class="text-white font-bold text-2xl mb-1">Hello Again!</h1>
         <p class="text-sm font-normal text-white mb-7">Welcome Back</p>
         <div class="flex items-center bg-white border-2 py-2 px-3 rounded-2xl mb-4">

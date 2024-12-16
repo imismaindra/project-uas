@@ -14,16 +14,17 @@ class TransaksiModel {
         return $prefix . $randomNumber;
     }
 
-    public function insertTransaksi($userid, $g_email, $product_id, $amount, $total_price, $payment_method, $status) {
+    public function insertTransaksi($userid, $g_email, $product_id, $amount, $total_price, $payment_method,$akungameId,$bank_id,$kodeVA, $status) {
         $invoices = $this->generateInvoiceNumber();
-        $sql = "INSERT INTO transactions (user_id, guest_email, product_id, amount, total_price, payment_method, status, invoices) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO transactions (user_id, guest_email, product_id, amount, total_price, payment_method, status, invoices, bank_id, kodeVA, akungame_id)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
         if (!$stmt) {
             return "Error preparing statement: " . $this->conn->error;
         }
 
-        $stmt->bind_param("isiiisis", $userid, $g_email, $product_id, $amount, $total_price, $payment_method, $status, $invoices);
+        $stmt->bind_param("isiiisisiss", $userid, $g_email, $product_id, $amount, $total_price, $payment_method, $status, $invoices, $bank_id, $kodeVA, $akungameId);
+
 
         if ($stmt->execute()) {
             $stmt->close();
@@ -86,6 +87,33 @@ class TransaksiModel {
         }
         return $transaksi;
     }
+    
+    public function getTransaksiByVaCode($kodeVA){
+        $sql = "SELECT * FROM transactions WHERE kodeVA = '$kodeVA'";
+        $result = $this->conn->query($sql);
+        $transaksi = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $transaksi[] = $row;
+            }
+        }
+        return $transaksi;
+    }
+
+    public function verifyKodeVA($kodeVA) {
+        $sql = "SELECT * FROM transactions WHERE kodeVA = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("s", $kodeVA);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc(); // Mengembalikan data transaksi
+        } else {
+            return false; // Kode VA tidak ditemukan
+        }
+    }
+    
     public function getTransaksiById($id){
         $sql = "SELECT * FROM transactions WHERE id = '$id'";
         $result = $this->conn->query($sql);
