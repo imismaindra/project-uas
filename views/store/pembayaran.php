@@ -85,26 +85,26 @@
     <?php include './views/components/navbar.php'; ?>
     <!-- content -->
     <?php if (isset($transaksibyVA) && !empty($transaksibyVA)): ?>
-        <?php var_dump($transaksibyVA) ?>
         <section id="main" class="flex flex-col justify-center items-center my-10">
           <p class="text-white font-bold text-3xl text-center mb-4">
               Lakukan Pembayaranmu dengan IndraPay
           </p>
           <p class="text-secondary font-semibold text-xl text-secondary text-center mb-6">
-              Masukkan kode VA yang valid untuk melakukan pembayaran.
+              Masukkan nominal sesuai dengan tagihanmu.
           </p>
-          <form method="post" action= "index.php?modul=transaksi&fitur=pembayaran&vacode=" id="kodevaForm" class="w-full max-w-md bg-[#161934] px-5 py-5 rounded rounded-xl">
-          <div class="px-5 py-5 bg-secondary rounded-xl">
-            <span class="font-bold text-white"><?php echo $transaksibyVA[0]['total_price']?></span>
+          <form method="post" action= "index.php?modul=transaksi&fitur=pembayaran&vacode=" id="pemabayaran" class="w-full max-w-md bg-[#161934] px-5 py-5 rounded rounded-xl">
+            <label class = "text-white font-semibold mb-2">Tagihan yang harus dibayar:</label>
+          <div class="px-5 py-5 bg-secondary rounded-xl flex flex-col">
+            <span class="font-bold text-white text-3xl"> Rp&nbsp;<?php echo $transaksibyVA[0]['total_price']?></span>
           </div>    
-          <label for="kodeva" class="block mb-2 text-sm font-medium text-white">Masukkan kode VA disini
+          <label for="kodeva" class="block mb-2 text-sm font-medium text-white">Masukkan nominal sesuai tagihan:
               </label>
               <input 
-                  id="kodeva"
-                  name="kodeva"
-                  type="text" 
+                  id="nominalpembayaran"
+                  name="nominalpembayaran"
+                  type="number" 
                   class="w-full rounded-lg border border-secondary bg-[#262659] p-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2" 
-                  placeholder="Masukkan kode VA kamu di sini" 
+                  placeholder="Rp xx.xxx" 
               />
               <button class="bg-secondary rounded rounded-lg font-semibold my-5 w-full" type="submit">
                   Lanjutkan
@@ -138,6 +138,7 @@
     <script>
       document.getElementById('kodevaForm').addEventListener('submit', function(event) {
           const kodevaValue = document.getElementById('kodeva').value;
+
           console.log(kodevaValue);
           if (kodevaValue.trim() !== "") {
               this.action = `index.php?modul=transaksi&fitur=pembayaran&vacode=${encodeURIComponent(kodevaValue)}`;

@@ -155,7 +155,6 @@ switch ($modul) {
                     
                 } else {
                     include 'views/store/pembayaran.php';
-                    echo "Invoice tidak ditemukan.";
                 }
                 break;
         

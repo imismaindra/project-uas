@@ -1,4 +1,4 @@
-<nav x-data="{ scrolled: false }" 
+<nav x-data="{ scrolled: false, showDropdown: false }" 
      x-on:scroll.window="scrolled = (window.pageYOffset > 0)" 
      :class="scrolled ? 'bg-opacity-70 backdrop-blur-md' : 'bg-opacity-100'" 
      class="sticky top-0 bg-[#1A1B41] z-50 transition-all duration-300 shadow shadow-xl">
@@ -9,12 +9,23 @@
     </a>
     <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
       <?php if(isset($_SESSION['user'])):?>
-      <div class="flex items-center space-x-4">
+      <div class="akun relative" x-data="{ showDropdown: false }">
+        <!-- Akun Info -->
+        <div class="flex items-center space-x-4 cursor-pointer" @click="showDropdown = !showDropdown">
           <div class="text-right">
-              <p class="text-sm text-[#3FC43B] font-semibold"><?php echo $_SESSION['user']['username']; ?></p>
-              <p class="text-xs text-white"><?php echo $_SESSION['user']['email']; ?></p>
+            <p class="text-sm text-[#3FC43B] font-semibold"><?php echo $_SESSION['user']['username']; ?></p>
+            <p class="text-xs text-white"><?php echo $_SESSION['user']['email']; ?></p>
           </div>
           <img src="https://i.pravatar.cc/150" alt="Foto Profil" class="w-10 h-10 rounded-full border border-gray-200">
+        </div>
+        <!-- Dropdown Menu -->
+        <div x-show="showDropdown" 
+             @click.outside="showDropdown = false" 
+             x-transition 
+             class="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg py-2">
+          <a href="index.php?modul=auth&fitur=logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+          <a href="index.php?modul=dashboard" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
+        </div>
       </div>
       <?php else:?>
         <a href="views/login.php" type="button"  class="text-white hover:text-white border border-white hover:bg-black-200 focus:ring-4 focus:outline-none focus:ring-[#3FC43B] font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Login</a>
