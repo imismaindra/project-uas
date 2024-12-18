@@ -47,7 +47,7 @@
           <a href="index.php?modul=transaksi&fitur=invoice " class="block py-2 px-3 md:p-0 text-white rounded hover:bg-[#3FC43B] md:hover:bg-transparent md:hover:text-[#3FC43B]">Transaksi</a>
         </li>
         <li>
-          <a href="index.php?modul=transaksi&fitur=pembayaran" class="block py-2 px-3 md:p-0 text-white rounded hover:bg-[#3FC43B] md:hover:bg-transparent md:hover:text-[#3FC43B]">Pembayaran</a>
+          <a href="index.php?modul=leaderboard" class="block py-2 px-3 md:p-0 text-white rounded hover:bg-[#3FC43B] md:hover:bg-transparent md:hover:text-[#3FC43B]">Leaderboard</a>
         </li>
         <li>
           <a href="#" class="block py-2 px-3 md:p-0 text-white rounded hover:bg-[#3FC43B] md:hover:bg-transparent md:hover:text-[#3FC43B]">Contact</a>

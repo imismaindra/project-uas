@@ -33,6 +33,17 @@ if ($slug) {
     exit; // Hentikan eksekusi agar tidak masuk ke switch $modul
 }
 switch ($modul) {
+    case 'leaderboard':
+        require_once 'models/dashboard_model.php';
+        require_once 'models/user_model.php';
+
+        $dashboard = new DashboardModel();
+        $userModel = new Users();
+      
+        $top5order = $dashboard->getTop5Transaksi();
+        include 'views/store/leaderboard.php';
+
+        break;
     case 'dashboard':
         include 'views/dashboard.php';
         break;
@@ -102,6 +113,7 @@ switch ($modul) {
         require_once 'models/product_model.php';
         require_once 'models/user_model.php';
         require_once 'models/category_model.php';
+        require_once 'models/dashboard_model.php';
        
 
         switch($fitur){

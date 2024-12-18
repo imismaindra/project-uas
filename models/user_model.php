@@ -53,6 +53,19 @@ class Users {
             return "No users found.";
         }
     }
+    public function getUserById($userId) {
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE id = ?");
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $user = $result->fetch_assoc();
+            return $user['username'];
+        } else {
+            return false;
+        }
+    }
 
     public function getAllUsers($search = '', $username = null, $limit = 5, $offsite = 0) {
         $sql = "SELECT users.*, roles.name AS role_name FROM users JOIN roles ON users.role_id = roles.id WHERE 1=1";
