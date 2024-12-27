@@ -147,6 +147,39 @@ class TransaksiModel {
         }
         return $transaksi;
     }
+    public function getFilteredTransactions($filter, $status)
+    {
+        $query = "SELECT * FROM transactions WHERE status = ?";
+        
+        switch ($filter) {
+            case 'week':
+                $query .= " AND WEEK(create_at) = WEEK(CURDATE())";
+                break;
+            case 'month':
+                $query .= " AND MONTH(create_at) = MONTH(CURDATE())";
+                break;
+            case 'year':
+                $query .= " AND YEAR(create_at) = YEAR(CURDATE())";
+                break;
+        }
+
+        // echo "Query: $query\n";
+        
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $status); // Mengikat parameter status
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $transactions = [];
+        while ($row = $result->fetch_assoc()) {
+            $transactions[] = $row;
+        }
+        return $transactions;
+    }
+
+
+
 }
 
 ?>

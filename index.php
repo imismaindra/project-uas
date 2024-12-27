@@ -117,6 +117,19 @@ switch ($modul) {
        
 
         switch($fitur){
+            case 'export_pdf':
+                require_once 'services/ExportPDFService.php';
+                $status = $_GET['status'] ?$_GET['status']: '';
+                $status = (int) $status;
+                $timeframe = $_GET['timeframe'] ?? '';
+                $exportPDFService = new ExportPDFService();
+                $productModel =  new productModel();
+                $transaksiModel = new TransaksiModel();
+                $transaksis = $transaksiModel->getAllTransaksi();
+                $filter = isset($timeframe) ? $timeframe : '';
+                $transactions = $transaksiModel->getFilteredTransactions($filter,$status);
+                $exportPDFService->export($transactions, $filter);
+                break;
             case 'list':
                 $productModel =  new productModel();
                 $transaksiModel = new TransaksiModel();

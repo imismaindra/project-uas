@@ -245,13 +245,24 @@
                         <div class="grid grid-cols-12 gap-x-4 gap-y-1 md:gap-2">
                         <div class="col-span-12 pt-2 md:col-span-4 md:pt-0">Kode VA</div>
                         <div class="col-span-12 flex items-center gap-2 font-semibold md:col-span-8 text-secondary">
-                            <span><?php echo $transaksibyInvoices[0]['kodeVA']; ?></span>
-                            <button type="button">
-                                <svg width="20" height="20" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M14.8233 6.28561H10.1766C9.42742 6.28561 8.82031 5.67849 8.82031 4.92933V4.35627C8.82031 3.60711 9.42742 3 10.1766 3H14.8233C15.5725 3 16.1796 3.60711 16.1796 4.35627V4.92933C16.1796 5.67849 15.5725 6.28561 14.8233 6.28561Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path opacity="0.4" d="M16.1793 4.59375C18.2526 4.59375 19.9338 6.27498 19.9338 8.34831V17.2458C19.9338 19.3191 18.2526 21.0004 16.1793 21.0004H8.81999C6.74666 21.0004 5.06543 19.3191 5.06543 17.2458V8.34831C5.06543 6.27498 6.74666 4.59375 8.81999 4.59375" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
+                            <span id="contact-details" ><?php echo $transaksibyInvoices[0]['kodeVA']; ?></span>
+                            <button data-copy-to-clipboard-target="contact-details" data-copy-to-clipboard-content-type="textContent" data-tooltip-target="tooltip-contact-details" class="text-white dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg p-2 inline-flex items-center justify-center">
+                                <span id="default-icon-contact-details">
+                                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                                    </svg>
+                                </span>
+                                <span id="success-icon-contact-details" class="hidden inline-flex items-center">
+                                    <svg class="w-3.5 h-3.5 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                    </svg>
+                                </span>
                             </button>
+                            <div id="tooltip-contact-details" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                <span id="default-tooltip-message-contact-details">Copy to clipboard</span>
+                                <span id="success-tooltip-message-contact-details" class="hidden">Copied!</span>
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
                         </div>
                         <div class="col-span-12 pt-2 md:col-span-4 md:pt-0">Nomor Invoice</div>
                         <div class="col-span-12 flex items-center gap-2 font-semibold md:col-span-8 text-secondary">
@@ -337,6 +348,46 @@
       });
       const result = <?php echo json_encode($transaksibyInvoices, JSON_PRETTY_PRINT); ?>;
       console.log(result);
+
+      
+       
+        window.addEventListener('load', function() {
+            const clipboard = FlowbiteInstances.getInstance('CopyClipboard', 'contact-details');
+            const tooltip = FlowbiteInstances.getInstance('Tooltip', 'tooltip-contact-details');
+
+            const $defaultIcon = document.getElementById('default-icon-contact-details');
+            const $successIcon = document.getElementById('success-icon-contact-details');
+
+            const $defaultTooltipMessage = document.getElementById('default-tooltip-message-contact-details');
+            const $successTooltipMessage = document.getElementById('success-tooltip-message-contact-details');
+
+            clipboard.updateOnCopyCallback((clipboard) => {
+                showSuccess();
+
+                // reset to default state
+                setTimeout(() => {
+                    resetToDefault();
+                }, 2000);
+            })
+
+            const showSuccess = () => {
+                $defaultIcon.classList.add('hidden');
+                $successIcon.classList.remove('hidden');
+                $defaultTooltipMessage.classList.add('hidden');
+                $successTooltipMessage.classList.remove('hidden');    
+                tooltip.show();
+            }
+
+            const resetToDefault = () => {
+                $defaultIcon.classList.remove('hidden');
+                $successIcon.classList.add('hidden');
+                $defaultTooltipMessage.classList.remove('hidden');
+                $successTooltipMessage.classList.add('hidden');
+                tooltip.hide();
+            }
+        })
+
+
     </script>
     <?php include './views/components/footer.php'; ?>
 </body>
