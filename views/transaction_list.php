@@ -27,7 +27,30 @@
         <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
             rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-
+        <script>
+            tailwind.config = {
+                theme: {
+                // screens: {
+                // 'tablet': '640px',
+                // 'laptop': '1024px',
+                
+                // 'desktop': '1280px',
+                // },
+                extend: {
+                    colors: {
+                    secondary: '#3FC43B',
+                    },
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                    screens: {
+                    'hp': '465px',
+                },
+                    
+                }
+                }
+            }
+        </script>
     </head>
     <body class="bg-[#B5C2CA] font-poppins">
         <!-- Navbar -->
@@ -73,7 +96,9 @@
                         <!-- Tombol Submit -->
                         <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Filter</button>
                     </form>
-                    <form method="GET" action="index.php" target="_blank" class="mb-4">
+
+                </div>
+                <form method="GET" action="index.php" target="_blank" class="mb-4">
                         <input type="hidden" name="modul" value="transaksi">
                         <input type="hidden" name="fitur" value="export_pdf">
 
@@ -92,15 +117,7 @@
 
                         <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded">Export to PDF</button>
                     </form>
-                </div>
 
-                <!-- <button type="button" class="px-3 py-2 text-sm mb-5 font-medium text-center inline-flex items-center text-white bg-[#1D1242] rounded-lg hover:bg-[#1D1242] focus:ring-4 focus:outline-none focus:ring-blue-300">
-                    <svg class="w-[24px] h-[24px] text-gray-800 dark:text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z" clip-rule="evenodd"/>
-                    </svg>
-                    <a href="index.php?modul=product&fitur=insert">New Transaction</a>
-                    
-                </button> -->
                 <div class="relative overflow-x-auto shadow-md">
                     
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">

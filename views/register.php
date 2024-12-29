@@ -9,6 +9,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          // screens: {
+          // 'tablet': '640px',
+          // 'laptop': '1024px',
+          
+          // 'desktop': '1280px',
+          // },
+          extend: {
+            colors: {
+              secondary: '#3FC43B',
+            },
+            fontFamily: {
+                poppins: ['Poppins', 'sans-serif'],
+            },
+            screens: {
+              'hp': '465px',
+          },
+            
+          }
+        }
+      }
+    </script>
 </head>
 <body>
 <!-- component -->
