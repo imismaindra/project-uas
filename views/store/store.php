@@ -11,9 +11,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rusdi Store - TopUp paling murah se-Indonesia</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
     <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
     <style>
         
@@ -60,31 +64,34 @@
             50% {transform: translateX(-25%);}
             100% {transform: translateX(-50%);}
         }
-
+        
     </style>
     <script>
-    tailwind.config = {
-      theme: {
-        // screens: {
-        // 'tablet': '640px',
-        // 'laptop': '1024px',
-        
-        // 'desktop': '1280px',
-        // },
-        extend: {
-          colors: {
-            clifford: '#da373d',
-          },
-          screens: {
-            'hp': '465px',
-         },
+      tailwind.config = {
+          theme: {
+          // screens: {
+          // 'tablet': '640px',
+          // 'laptop': '1024px',
           
-        }
+          // 'desktop': '1280px',
+          // },
+          extend: {
+              colors: {
+              secondary: '#3FC43B',
+              },
+              fontFamily: {
+                  poppins: ['Poppins', 'sans-serif'],
+              },
+              screens: {
+              'hp': '465px',
+          },
+              
+          }
+          }
       }
-    }
   </script>
 </head>
-<body class="bg-[#1A1B41]">
+<body class="bg-[#1A1B41] font-poppins">
     <!-- navbar -->
     <?php include './views/components/navbar.php'; ?>
     <!-- carousell -->

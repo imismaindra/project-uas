@@ -1,5 +1,5 @@
-<?php 
-include 'user_model.php';
+<?php
+require_once 'user_model.php';
 
 class Member extends Users {
     public function updateSaldo($userId, $newSaldo) {
@@ -10,6 +10,20 @@ class Member extends Users {
             return "Saldo updated successfully!";
         } else {
             return "Error: " . $stmt->error;
+        }
+    }
+
+    public function getSaldoMember($userId) {
+        $stmt = $this->conn->prepare("SELECT saldo FROM members WHERE user_id = ?");
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows > 0) {
+            $saldo = $result->fetch_assoc();
+            return $saldo['saldo'];
+        } else {
+            return 0;
         }
     }
 
@@ -33,9 +47,8 @@ class Member extends Users {
         if ($result->num_rows > 0) {
             return $result->fetch_all(MYSQLI_ASSOC);
         } else {
-            return "No transactions found.";
+            return [];
         }
     }
-
 }
 ?>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TopUp Store - Users</title>
+    <title>List Members - TopUp Store</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,14 +44,14 @@
         <?php include 'components/sidebar-admin.php'; ?>
         <!-- Main Content -->
         <div class="flex-1 ml-72 mt-20 p-8">
-            <h1 class="text-3xl font-bold mb-5">Users</h1>
-            <button type="button" class="px-3 py-2 text-sm mb-5 font-medium text-center inline-flex items-center text-white bg-[#1D1242] rounded-lg hover:bg-[#1D1242] focus:ring-4 focus:outline-none focus:ring-blue-300">
+            <h1 class="text-3xl font-bold mb-5">Members</h1>
+            <!-- <button type="button" class="px-3 py-2 text-sm mb-5 font-medium text-center inline-flex items-center text-white bg-[#1D1242] rounded-lg hover:bg-[#1D1242] focus:ring-4 focus:outline-none focus:ring-blue-300">
                 <svg class="w-[24px] h-[24px] text-gray-800 dark:text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                     <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z" clip-rule="evenodd"/>
                 </svg>
-                <a href="index.php?modul=users&fitur=insert">New User</a>
+                <a href="index.php?modul=users&fitur=insert">New Member</a>
                 
-            </button>
+            </button> -->
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
                     <thead class="text-xs text-white uppercase bg-[#1D1242]">
@@ -66,8 +66,9 @@
                                 Password
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Role
+                                Saldo
                             </th>
+
                             <th scope="col" class="px-6 py-3">
                                 <span class="sr-only">Edit</span>
                             </th>
@@ -76,7 +77,7 @@
                     <tbody>
                        <!-- /<?php var_dump($users) ?>/-->
                     <?php foreach ($users as $user): ?>
-                        <?php if($user['role_id'] == 1):?>
+                        <?php if($user['role_id'] == 3):?>
                         <tr class="bg-white border-b hover:bg-gray-50">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                 <?php echo $user['id']; ?>
@@ -88,7 +89,7 @@
                                 <?php echo $user['password']; ?>
                             </td>
                             <td class="px-6 py-4">
-                               <?php echo $user['role_name']?>
+                               <?php echo $memberModel->getSaldoMember($user['id']);?>
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <a href="../index.php?modul=users&fitur=edit&id=<?php echo htmlspecialchars($user['id']); ?>" class="text-gray-400 hover:text-gray-100 mx-2">

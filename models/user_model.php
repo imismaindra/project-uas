@@ -2,7 +2,7 @@
 include 'config/connection.php';
 
 class Users {
-    public $conn;
+    protected $conn; 
 
     public function __construct() {
         global $conn;

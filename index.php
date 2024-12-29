@@ -237,6 +237,18 @@ switch ($modul) {
                 break;    
         }
         break;
+    case 'member':
+        $fitur = isset($_GET['fitur']) ? $_GET['fitur'] : 'dashboard';
+        require_once 'models/user_model.php';
+        require_once 'models/member_model.php';
+        switch($fitur){
+            case 'list':
+                $memberModel = new Member();
+                $users = $memberModel->getAllUsers();
+                include 'views/member_list.php';
+                break;
+        }
+        break;
     case 'category':
         $fitur = isset($_GET['fitur']) ? $_GET['fitur'] : 'list';
         require_once 'models/category_model.php';
