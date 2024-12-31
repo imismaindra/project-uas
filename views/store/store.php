@@ -14,6 +14,8 @@
 
     <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -77,6 +79,7 @@
           // },
           extend: {
               colors: {
+                base: '#1A1B41',
               secondary: '#3FC43B',
               },
               fontFamily: {
@@ -91,29 +94,141 @@
       }
   </script>
 </head>
-<body class="bg-[#1A1B41] font-poppins">
-    <!-- navbar -->
-    <?php include './views/components/navbar.php'; ?>
-    <!-- carousell -->
-    <?php include './views/components/carousell.php'; ?>
-    <!-- content -->
-    <section class="text-white md:mx-[5.5rem] px-4 md:px-8">
-        <h1 class="text-3xl font-bold mb-5">Yang sedang Populer 🔥</h1>
-        <div class="mt-5 grid grid-cols-2 gap-6 md:grid-cols-3 gap-6">
-            <?php include './views/components/cards.php'; ?>
-        </div>
-    </section>
+<body class="bg-base font-poppins relative">
+    <!-- Partikel Latar Belakang -->
+    <div id="particles-js" class="absolute inset-0 z-0"></div>
+    
+    <!-- Konten Utama -->
+    <div class="relative z-10">
+        <?php include './views/components/navbar.php'; ?>
+        <?php include './views/components/carousell.php'; ?>
 
-    <section id = "more-items" class="mx-5 md:mx-[7.6rem] my-10">
-        <h1 class="text-3xl font-bold my-5 text-white">Items Lainnya</h1>
-        <div class="my-5 flex transform items-center gap-2 space-x-3 overflow-auto duration-300 ease-in-out">
-            <a href="index.php?modul=store&filter=topup" class="text-black bg-[#3FC43B] font-bold rounded-lg text-sm px-5 py-2.5">Top-Up Games</a>
-            <a href="index.php?modul=store&filter=joki" class="text-black bg-[#3FC43B] font-bold rounded-lg text-sm px-5 py-2.5 ">Joki</a>
-            <a href="index.php?modul=store&filter=voucher" class="text-black bg-[#3FC43B] font-bold rounded-lg text-sm px-5 py-2.5 ">Vocher</a>
-        </div>
-        <?php include './views/components/moreitemscard.php'; ?>
-    </section>
-   
-    <?php include './views/components/footer.php'; ?>
+        <section class="text-white md:mx-[5.5rem] px-4 md:px-8">
+            <h1 class="text-3xl font-bold mb-5">Yang sedang Populer 🔥</h1>
+            <div class="mt-5 grid grid-cols-2 gap-6 md:grid-cols-3 gap-6">
+                <?php include './views/components/cards.php'; ?>
+            </div>
+        </section>
+
+        <section id="more-items" class="mx-5 md:mx-[7.6rem] my-10">
+            <h1 class="text-3xl font-bold my-5 text-white">Items Lainnya</h1>
+            <div class="my-5 flex transform items-center gap-2 space-x-3 overflow-auto duration-300 ease-in-out">
+                <a href="index.php?modul=store&filter=topup" class="text-black bg-[#3FC43B] font-bold rounded-lg text-sm px-5 py-2.5">Top-Up Games</a>
+                <a href="index.php?modul=store&filter=joki" class="text-black bg-[#3FC43B] font-bold rounded-lg text-sm px-5 py-2.5">Joki</a>
+                <a href="index.php?modul=store&filter=voucher" class="text-black bg-[#3FC43B] font-bold rounded-lg text-sm px-5 py-2.5">Voucher</a>
+            </div>
+            <?php include './views/components/moreitemscard.php'; ?>
+        </section>
+
+        <?php include './views/components/footer.php'; ?>
+    </div>
 </body>
+<script>
+    particlesJS('particles-js', {
+        "particles": {
+            "number": {
+                "value": 100,
+                "density": {
+                    "enable": true,
+                    "value_area": 800
+                }
+            },
+            "color": {
+                "value": "#ffffff"
+            },
+            "shape": {
+                "type": "circle",
+                "stroke": {
+                    "width": 0,
+                    "color": "#000000"
+                },
+                "polygon": {
+                    "nb_sides": 5
+                }
+            },
+            "opacity": {
+                "value": 0.5,
+                "random": false,
+                "anim": {
+                    "enable": false,
+                    "speed": 1,
+                    "opacity_min": 0.1,
+                    "sync": false
+                }
+            },
+            "size": {
+                "value": 3,
+                "random": true,
+                "anim": {
+                    "enable": false,
+                    "speed": 40,
+                    "size_min": 0.1,
+                    "sync": false
+                }
+            },
+            "line_linked": {
+                "enable": true,
+                "distance": 150,
+                "color": "#ffffff",
+                "opacity": 0.4,
+                "width": 1
+            },
+            "move": {
+                "enable": true,
+                "speed": 3,
+                "direction": "none",
+                "random": false,
+                "straight": false,
+                "out_mode": "out",
+                "bounce": false,
+                "attract": {
+                    "enable": false,
+                    "rotateX": 600,
+                    "rotateY": 1200
+                }
+            }
+        },
+        "interactivity": {
+            "detect_on": "canvas",
+            "events": {
+                "onhover": {
+                    "enable": true,
+                    "mode": "repulse"
+                },
+                "onclick": {
+                    "enable": true,
+                    "mode": "push"
+                },
+                "resize": true
+            },
+            "modes": {
+                "grab": {
+                    "distance": 400,
+                    "line_linked": {
+                        "opacity": 1
+                    }
+                },
+                "bubble": {
+                    "distance": 400,
+                    "size": 40,
+                    "duration": 2,
+                    "opacity": 8,
+                    "speed": 3
+                },
+                "repulse": {
+                    "distance": 200,
+                    "duration": 0.4
+                },
+                "push": {
+                    "particles_nb": 4
+                },
+                "remove": {
+                    "particles_nb": 2
+                }
+            }
+        },
+        "retina_detect": true
+    });
+</script>
+
 </html>

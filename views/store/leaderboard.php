@@ -8,7 +8,10 @@
     <?php else:?>
         <title>Leaderboard - Mas Rusdi Store</title>
     <?php endif;?>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
@@ -81,7 +84,7 @@
       }
     </script>
 </head>
-<body class="bg-[#1A1B41]">
+<body class="bg-[#1A1B41] font-poppins">
     <!-- navbar -->
     <?php include './views/components/navbar.php'; ?>
     <div class="my-5">

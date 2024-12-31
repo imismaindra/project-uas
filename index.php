@@ -208,7 +208,7 @@ switch ($modul) {
                     include 'views/store/transactions.php';
                 } else {
                     include 'views/store/transactions.php';
-                    echo "Invoice tidak ditemukan.";
+                  
                 }
                 break;
                 
