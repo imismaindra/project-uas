@@ -130,6 +130,8 @@ switch ($modul) {
                 $transactions = $transaksiModel->getFilteredTransactions($filter,$status);
                 $exportPDFService->export($transactions, $filter);
                 break;
+            case 'export_excel':
+                break;
             case 'list':
                 $productModel =  new productModel();
                 $transaksiModel = new TransaksiModel();
@@ -211,7 +213,6 @@ switch ($modul) {
                   
                 }
                 break;
-                
         }
         break;
     case 'users':

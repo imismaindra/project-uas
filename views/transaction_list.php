@@ -26,6 +26,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
             rel="stylesheet">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">            
         <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
         <script>
             tailwind.config = {
@@ -73,30 +74,6 @@
                 <h1 class="text-3xl font-bold mb-5">Transactions</h1>
 
                 <div class="mb-4">
-                    <form method="GET" action="index.php">
-                        <input type="hidden" name="modul" value="transaction">
-                        <input type="hidden" name="fitur" value="list">
-
-                        <!-- Input Pencarian -->
-                        <input type="text" name="search" placeholder="Cari transaksi" 
-                            value="<?php echo htmlspecialchars(isset($_GET['search']) ? $_GET['search'] : ''); ?>" 
-                            class="border rounded rounded-xl px-4 py-2">
-
-                        <!-- Dropdown Filter Kategori -->
-                        <select name="category_id" class="border rounded rounded-xl px-4 py-2">
-                            <option value="">Semua Kategori</option>
-                            <?php foreach ($categories as $category): ?>
-                                <option value="<?php echo htmlspecialchars($category['id']); ?>" 
-                                    <?php echo (isset($_GET['category_id']) && $_GET['category_id'] == $category['id']) ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($category['name']); ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-
-                        <!-- Tombol Submit -->
-                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Filter</button>
-                    </form>
-
                 </div>
                 <form method="GET" action="index.php" target="_blank" class="mb-4">
                         <input type="hidden" name="modul" value="transaksi">
@@ -114,8 +91,16 @@
                             <option value="month">Bulan Ini</option>
                             <option value="year">Tahun Ini</option>
                         </select>
-
-                        <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded">Export to PDF</button>
+                                            
+                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">
+                            <i class="fas fa-filter"></i>
+                        </button>
+                        <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded">
+                            <i class="fas fa-file-pdf"></i>
+                        </button>
+                        <!-- <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">
+                            <i class="fas fa-file-excel"></i>
+                        </button>     -->
                     </form>
 
                 <div class="relative overflow-x-auto shadow-md">
