@@ -4,13 +4,13 @@ require_once 'models/category_model.php';
 class CategoryController {
     public function list() {
         $categoryModel = new CategoryModel();
-        $categories = $categoryModel->getAllCategories();
+        $categories = $categoryModel->getCategories();
         include 'views/category_list.php';
     }
 
     public function add() {
         $categoryModel = new CategoryModel();
-        $categoryModel->createCategory($_POST['name']);
+        $categoryModel->insertCategory($_POST['name'], $_POST['description'], $_POST['created_at'], $_POST['updated_at'], $_POST['status']);
         header('Location: index.php?modul=category&fitur=list');
     }
 

@@ -1,28 +1,22 @@
 <?php
 require_once 'models/transaksi_model.php';
 
-class TransaksiController {
-    public function list() {
-        $transaksiModel = new TransaksiModel();
-        $transactions = $transaksiModel->getAllTransaksi();
-        include 'views/transaksi_list.php';
-    }
+function handleTransaksi() {
+    $transaksiModel = new TransaksiModel();
+    $fitur = isset($_GET['fitur']) ? $_GET['fitur'] : null;
 
-    public function detail() {
-        $transaksiModel = new TransaksiModel();
-        $id = $_GET['id'] ?? null;
-
-        if ($id) {
-            $transaction = $transaksiModel->getTransaksiById($id);
+    switch ($fitur) {
+        case 'list':
+            $transaksi = $transaksiModel->getAllTransaksi();
+            include 'views/transaksi_list.php';
+            break;
+        case 'detail':
+            $id = $_GET['id'] ?? null;
+            $detail = $transaksiModel->getTransaksiById($id);
             include 'views/transaksi_detail.php';
-        } else {
-            echo "ID transaksi tidak ditemukan.";
-        }
-    }
-
-    public function add() {
-        $transaksiModel = new TransaksiModel();
-        $transaksiModel->insertTransaksi($_POST);
-        header('Location: index.php?modul=transaksi&fitur=list');
+            break;
+        default:
+            echo "Fitur Transaksi tidak valid.";
+            break;
     }
 }
