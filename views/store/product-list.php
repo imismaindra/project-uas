@@ -67,7 +67,7 @@
                 <div class="flex items-start gap-4 ml-[7.5rem]">
                     <div class="product-thumbnail-container relative -top-28 md:ml-[10%]">
                         <img alt="" loading="lazy" width="300" height="300" decoding="async" data-nimg="1" class="z-20 -mb-14 aspect-square w-32 rounded-2xl object-cover shadow-2xl md:-mb-20 md:w-60" sizes="100vw" 
-                        src=<?php echo $products[0]['category_image'];?>>
+                        src=/<?php echo $products[0]['category_image'];?>>
                     </div>
                 </div>
             </div>
@@ -95,7 +95,7 @@
     </div>
     <div class="min-h-screen flex items-center justify-center mt-10 mb-10">
         <!-- Form -->
-        <form method="POST" action="index.php?modul=transaksi&fitur=add" class="col-auto col-start-1 flex flex-col gap-4 lg:col-auto lg:gap-8">
+        <form method="POST" action="/transaksi/add" class="col-auto col-start-1 flex flex-col gap-4 lg:col-auto lg:gap-8">
             <section class="relative scroll-mt-20 rounded-xl bg-card/50 shadow-2xl md:scroll-mt-[5.75rem] w-[45rem]" id="1">
                 <div class="flex items-center overflow-hidden rounded-t-xl bg-[#53B950]">
                     <div class="flex h-10 w-10 items-center justify-center bg-primary font-semibold text-primary-foreground">1</div>
@@ -274,7 +274,7 @@
                                             data-nimg="1" 
                                             class="object-contain object-right" 
                                             sizes="80vh" 
-                                            src="assets/payments/dana.webp" 
+                                            src="/./assets/payments/dana.webp" 
                                             style="color: transparent;">
                                     </div>
                                 </div>
@@ -295,7 +295,7 @@
                                             data-nimg="1" 
                                             class="object-contain object-right" 
                                             sizes="80vh" 
-                                            src="assets/payments/shopee.webp" 
+                                            src="/./assets/payments/shopee.webp" 
                                             style="color: transparent;">
                                     </div>
                                 </div>
@@ -316,7 +316,7 @@
                                             data-nimg="1" 
                                             class="object-contain object-right" 
                                             sizes="80vh" 
-                                            src="assets/payments/linkaja.webp" 
+                                            src="/./assets/payments/linkaja.webp" 
                                             style="color: transparent;">
                                     </div>
                                 </div>
@@ -457,7 +457,7 @@
                                     height="300" 
                                     decoding="async" 
                                     class="aspect-square h-16 rounded-lg object-cover"
-                                    src="${productImage}" 
+                                    src="/${productImage}" 
                                     style="color: transparent;">
                             </div>
                             <div>

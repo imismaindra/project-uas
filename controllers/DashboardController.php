@@ -5,6 +5,6 @@ class DashboardController {
     public function index() {
         $dashboardModel = new DashboardModel();
         $stats = $dashboardModel->getTop5Transaksi();
-        include 'views/dashboard.php';
+        include 'views/dashboard/dashboard.php';
     }
 }

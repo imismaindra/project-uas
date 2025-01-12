@@ -1,5 +1,5 @@
     <?php
-    require_once __DIR__ . '/../services/ExportPDFService.php';
+    require_once __DIR__ . '../../../services/ExportPDFService.php';
 
     if (isset($_GET['export_pdf'])) {
         $filter = isset($_GET['filter']) ? $_GET['filter'] : 'Semua';
@@ -55,11 +55,11 @@
     </head>
     <body class="bg-[#B5C2CA] font-poppins">
         <!-- Navbar -->
-        <?php include 'components/navbar-admin.php'; ?>
+        <?php include './views/components/navbar-admin.php'; ?>
 
         <div class="flex">
             <!-- Sidebar -->
-            <?php include 'components/sidebar-admin.php'; ?>
+            <?php include './views/components/sidebar-admin.php'; ?>
             <!-- Main Content -->
             <div class="flex-1 ml-72 mt-20 p-8">
             <?php if ($message): ?>
@@ -75,7 +75,7 @@
 
                 <div class="mb-4">
                 </div>
-                <form method="GET" action="index.php" target="_blank" class="mb-4">
+                <form method="GET" action="/transaksi/export_pdf" target="_blank" class="mb-4">
                         <input type="hidden" name="modul" value="transaksi">
                         <input type="hidden" name="fitur" value="export_pdf">
 
@@ -133,7 +133,7 @@
                             <?php if (count($transaksis) > 0): ?>
                                 <?php if(!isset($_SESSION['user']['role_id'])||  $_SESSION['user']['role_id'] == 1):?>
                                     <?php foreach ($transaksis as $tsk): ?>
-                                        
+                                            <?php //echo $tsk['id'];?>
                                         <?php $product= $productModel->getProductById($tsk['product_id']);?>
 
                                         <tr class="bg-white border-b hover:bg-gray-50">
@@ -149,7 +149,7 @@
                                             <td class="px-6 py-4">
                                             Rp&nbsp;<?php echo htmlspecialchars($tsk['total_price']); ?>
                                             </td>
-                                            <td id="status-update" class="status-update px-6 py-4 hover:cursor-pointer"  data-update-url="index.php?modul=transaksi&fitur=update&id=<?php echo htmlspecialchars($tsk['id']); ?>">
+                                            <td id="status-update" class="status-update px-6 py-4 hover:cursor-pointer"  data-update-url="/transaksi/update/<?php echo htmlspecialchars($tsk['id']); ?>">
                                                 <span class="<?php echo  $tsk['status'] == 1 ? 'bg-green-400' : 'bg-yellow-200 text-yellow-600'; ?> text-gray-50 rounded-md px-2">
                                                     <?php echo htmlspecialchars( $tsk['status'] == 1 ? "Paid" : "Unpaid") ?>
                                                 </span>
@@ -295,8 +295,7 @@
             const updateButtons = document.querySelectorAll(".status-update");
             const detailButtons = document.querySelectorAll(".detailButton");
             function openDetailModal(id) {
-                // AJAX Request untuk mendapatkan detail transaksi
-                fetch(`index.php?modul=transaksi&fitur=get_detail&id=${id}`)
+                fetch(`/transaksi/detail/${id}`)
                     .then(response => response.json())
                     .then(data => {
                         if (data.error) {
@@ -318,13 +317,15 @@
                         console.error("Error fetching detail:", error);
                         alert("Gagal mengambil data transaksi.");
                     });
-                    console.log(transaksi);
+                    // console.log(transaksi);
             }
 
             detailButtons.forEach(button => {
                 button.addEventListener("click", function (e) {
+                    // alert("clicked");
                     e.preventDefault();
                     const transactionId = this.getAttribute("data-id-transaksi");
+                    // alert(transactionId);
                     openDetailModal(transactionId);
                 });
             });

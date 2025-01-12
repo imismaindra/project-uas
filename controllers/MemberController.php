@@ -4,8 +4,9 @@ require_once 'models/member_model.php';
 class MemberController {
     public function list() {
         $memberModel = new Member();
+        $users = $memberModel->getAllUsers();
         $members = $memberModel->getAllUsers();
-        include 'views/member_list.php';
+        include 'views/member/member_list.php';
     }
 
     // public function add() {

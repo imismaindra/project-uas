@@ -36,7 +36,7 @@
 </head>
 <body class="bg-[#B5C2CA] font-poppins">
     <!-- Navbar -->
-    <?php include 'components/navbar-admin.php'; ?>
+    <?php include './views/components/navbar-admin.php'; ?>
 
     <div class="flex">
         <!-- Sidebar -->
@@ -45,7 +45,7 @@
         <!-- Main Content -->
         <div class="flex-1 ml-72 mt-20 p-8">
             <h1 class="text-2xl font-bold mb-8">Edit Category</h1>
-            <form method="post" action="../index.php?modul=category&fitur=update" enctype="multipart/form-data" class="bg-white px-6 py-8 rounded-lg shadow-lg">
+            <form method="post" action="/category/update" enctype="multipart/form-data" class="bg-white px-6 py-8 rounded-lg shadow-lg">
                 <div class="grid gap-6 mb-6">
                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($category['id']); ?>">
                     <!-- Input for Category Name -->

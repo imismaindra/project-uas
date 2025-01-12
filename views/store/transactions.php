@@ -168,7 +168,7 @@
                 <div class="grid grid-cols-5 gap-4 rounded-3xl border border-border/25 bg-[#161934] p-4 md:grid-cols-4">
                     <a class="col-span-2 rounded-2xl duration-200 ease-in-out hover:ring-2 hover:ring-primary hover:ring-offset-2 hover:ring-offset-muted md:col-span-1" href="#" style="outline: none;">
                         <div class="relative aspect-square overflow-hidden rounded-t-2xl">
-                           <img src="<?php echo $categories['image'] ?>" class="object-cover object-center" alt="" sizes="100vw" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
+                           <img src="/<?php echo $categories['image'] ?>" class="object-cover object-center" alt="" sizes="100vw" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                         </div>
                         <div class="rounded-b-2xl bg-[#111827] px-3 pb-2.5 pt-1.5 text-center">
                         <h3 class="truncate text-xs font-semibold text-white"><?php echo $categories['name']; ?></h3>
@@ -324,7 +324,7 @@
           <p class="text-secondary font-semibold text-xl text-secondary text-center mb-6">
               Masukkan nomor invoice yang valid untuk melihat detail pembelian.
           </p>
-          <form method="post" action= "index.php?modul=transaksi&fitur=invoice&invoices=" id="invoiceForm" class="w-full max-w-md bg-[#161934] px-5 py-5 rounded rounded-xl">
+          <form method="post" action= "/transaksi/checkinvoice/" id="invoiceForm" class="w-full max-w-md bg-[#161934] px-5 py-5 rounded rounded-xl">
               <label for="invoices" class="block mb-2 text-sm font-medium text-white">Cari detail pembelian kamu di sini
               </label>
               <input 
@@ -346,14 +346,13 @@
           const invoiceValue = document.getElementById('invoicesInput').value;
           // Jika input tidak kosong, tambahkan ke action
           if (invoiceValue.trim() !== "") {
-              this.action = `index.php?modul=transaksi&fitur=invoice&invoices=${encodeURIComponent(invoiceValue)}`;
+              this.action = `/transaksi/checkinvoice/${encodeURIComponent(invoiceValue)}`;
           } else {
               alert("Nomor invoice harus diisi!");
-              event.preventDefault(); // Mencegah submit jika kosong
+              event.preventDefault();
           }
       });
-      const result = <?php echo json_encode($transaksibyInvoices, JSON_PRETTY_PRINT); ?>;
-      console.log(result);
+ 
 
       
        

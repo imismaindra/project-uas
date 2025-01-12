@@ -1,6 +1,6 @@
 <div class="mb-4 grid grid-cols-3 md:grid-cols-3 gap-4 sm:mb-8 sm:grid-cols-4 sm:gap-x-6 sm:gap-y-8 lg:grid-cols-5 xl:grid-cols-6">
     <?php foreach ($categoriesCard as $category): ?>    
-        <a tabindex="0" href="index.php?slug=<?php echo $category['slug']?>" 
+        <a tabindex="0" href="/topup/<?php echo $category['slug']?>" 
             style="outline: none; opacity: 1; transform: none;">
             <div 
                 class="group relative transform overflow-hidden rounded-2xl bg-gray-200 duration-300 

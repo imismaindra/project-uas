@@ -42,11 +42,11 @@
 </head>
 <body class="bg-[#B5C2CA] font-poppins">
     <!-- Navbar -->
-    <?php include 'components/navbar-admin.php'; ?>
+    <?php include './views/components/navbar-admin.php'; ?>
 
     <div class="flex">
         <!-- Sidebar -->
-        <?php include 'components/sidebar-admin.php'; ?>
+        <?php include './views/components/sidebar-admin.php'; ?>
         <!-- Main Content -->
         <div class="flex-1 ml-72 mt-20 p-8">
         <?php if ($message): ?>
@@ -61,36 +61,37 @@
             <h1 class="text-3xl font-bold mb-5">Products</h1>
 
             <div class="mb-4">
-                <form method="GET" action="index.php">
-                    <input type="hidden" name="modul" value="product">
-                    <input type="hidden" name="fitur" value="list">
+            <form method="GET" action="/product/list">
+                <input type="hidden" name="modul" value="product">
+                <input type="hidden" name="fitur" value="list">
 
-                    <!-- Input Pencarian -->
-                    <input type="text" name="search" placeholder="Cari produk..." 
-                        value="<?php echo htmlspecialchars(isset($_GET['search']) ? $_GET['search'] : ''); ?>" 
-                        class="border rounded rounded-xl px-4 py-2">
+                <!-- Input Pencarian -->
+                <input type="text" name="search" placeholder="Cari produk..." 
+                    value="<?php echo htmlspecialchars($search); ?>" 
+                    class="border rounded rounded-xl px-4 py-2">
 
-                    <!-- Dropdown Filter Kategori -->
-                    <select name="category_id" class="border rounded rounded-xl px-4 py-2">
-                        <option value="">Semua Kategori</option>
-                        <?php foreach ($categories as $category): ?>
-                            <option value="<?php echo htmlspecialchars($category['id']); ?>" 
-                                <?php echo (isset($_GET['category_id']) && $_GET['category_id'] == $category['id']) ? 'selected' : ''; ?>>
-                                <?php echo htmlspecialchars($category['name']); ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+                <!-- Dropdown Filter Kategori -->
+                <select name="category_id" class="border rounded rounded-xl px-4 py-2">
+                    <option value="">Semua Kategori</option>
+                    <?php foreach ($categories as $category): ?>
+                        <option value="<?php echo htmlspecialchars($category['id']); ?>" 
+                            <?php echo ($category_id == $category['id']) ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($category['name']); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
 
-                    <!-- Tombol Submit -->
-                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Filter</button>
-                </form>
+                <!-- Tombol Submit -->
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Filter</button>
+            </form>
+
             </div>
 
             <button type="button" class="px-3 py-2 text-sm mb-5 font-medium text-center inline-flex items-center text-white bg-[#1D1242] rounded-lg hover:bg-[#1D1242] focus:ring-4 focus:outline-none focus:ring-blue-300">
                 <svg class="w-[24px] h-[24px] text-gray-800 dark:text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                     <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z" clip-rule="evenodd"/>
                 </svg>
-                <a href="index.php?modul=product&fitur=insert">New Product</a>
+                <a href="/product/add">New Product</a>
                 
             </button>
             <div class="relative overflow-x-auto shadow-md">
@@ -139,10 +140,10 @@
                                         <?php echo htmlspecialchars($product['price']); ?>
                                     </td>
                                     <td class="px-6 py-4 text-right">
-                                        <a href="index.php?modul=product&fitur=edit&id=<?php echo htmlspecialchars($product['id']); ?>" class="text-gray-400 hover:text-gray-100 mx-2">
+                                        <a href="/product/edit/<?php echo htmlspecialchars($product['id']); ?>" class="text-gray-400 hover:text-gray-100 mx-2">
                                             <i class="material-icons-outlined text-blue-600">edit</i>
                                         </a>
-                                        <a href="#" 
+                                        <a href="/product/delete/<?php echo htmlspecialchars($product['id']); ?>" 
                                         class="deleteButton text-gray-400 hover:text-gray-100 ml-2" 
                                         data-delete-url="index.php?modul=product&fitur=delete&id=<?php echo htmlspecialchars($product['id']); ?>">
                                             <i class="material-icons-round text-red-600">delete_outline</i>
@@ -164,7 +165,7 @@
                     <ul class="inline-flex items-center">
                         <?php if ($page > 1): ?>
                             <li>
-                                <a href="?modul=product&fitur=list&page=<?php echo $page - 1; ?>&search=<?php echo htmlspecialchars($search ?? ''); ?>&category_id=<?php echo htmlspecialchars($category_id ?? ''); ?>" 
+                                <a href="?search=<?= urlencode($search) ?>&page=<?= $page - 1  ?>" 
                                 class="px-3 py-2 bg-gray-200 hover:bg-gray-300 rounded-l">Previous</a>
                             </li>
                         <?php endif; ?>
@@ -178,7 +179,7 @@
 
                         <?php if ($page < $totalPages): ?>
                             <li>
-                                <a href="?modul=product&fitur=list&page=<?php echo $page + 1; ?>&search=<?php echo htmlspecialchars($search ?? ''); ?>&category_id=<?php echo htmlspecialchars($category_id ?? ''); ?>" 
+                                <a href="?search=<?= urlencode($search) ?>&page=<?= $page + 1 ?>" 
                                 class="px-3 py-2 bg-gray-200 hover:bg-gray-300 rounded-r">Next</a>
                             </li>
                         <?php endif; ?>

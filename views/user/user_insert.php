@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TopUp Store - Roles</title>
+    <title>TopUp Store - Users</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,75 +36,63 @@
 </head>
 <body class="bg-[#B5C2CA] font-poppins">
     <!-- Navbar -->
-    <?php include 'components/navbar-admin.php'; ?>
+    <?php include './views/components/navbar-admin.php'; ?>
 
     <div class="flex">
         <!-- Sidebar -->
-        <?php include 'components/sidebar-admin.php'; ?>
+        <?php include './views/components/sidebar-admin.php'; ?>
 
         <!-- Main Content -->
-        <div class="flex-1 ml-72 mt-20 p-8">
-            <h1 class="text-2xl font-bold mb-8">Edit Product</h1>
-            <form method="post" action="../index.php?modul=product&fitur=update" class="bg-white px-6 py-8 rounded-lg shadow-lg">
+        <div class="flex-1 flex justify-center ml-72 mt-20 p-8">
+            <form method="post" action="/user/add" class="bg-white px-6 py-8 rounded-lg shadow-lg w-[45rem]">
+                <h1 class="text-xl font-bold mb-8">Insert Users</h1>
                 <div class="grid gap-6 mb-6">
-                <input type="hidden" name="id" value="<?php echo htmlspecialchars($product['id']); ?>">
-
-                    <!-- Input for Product Name -->
+                    <!-- Input for Category Name -->
                     <div>
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Product Name</label>
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Username</label>
                         <input 
                             type="text" 
-                            id="name" 
-                            name="name" 
+                            id="username" 
+                            name="username" 
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-                            placeholder="Enter product name" 
-                            value="<?php echo $product['name']?>"
+                            placeholder="Enter username" 
                             required 
                         />
                     </div>
-                    <!-- Select for Category -->
+
+                    <!-- Input for Description -->
                     <div>
-                       
-                        <label for="category_id" class="block mb-2 text-sm font-medium text-gray-900">Category</label>
-                        <select id="category_id" name="category_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                            <option value="" disabled>Pilih Category</option>
-                            <?php foreach ($categories as $category): ?>
-                                <option value="<?php echo $category['id']; ?>" <?php echo $product['id'] == $category['id'] ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($category['name']); ?>
-                                </option>
+                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
+                        <input 
+                            type="text" 
+                            id="password" 
+                            name="password" 
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                            placeholder="Enter password" 
+                            required 
+                        />
+                    </div>
+                    <div>
+                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                            placeholder="Enter email" 
+                            required 
+                        />
+                    </div>
+                    <div>
+                        
+                        <label for="role_id" class="block mb-2 text-sm font-medium text-gray-900">Role</label>
+                        <select id="role_id" name="role_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                        <option selected>pilih Roles</option>
+                            <?php  foreach ($roles as $role): ?>
+                            <option value="<?php echo $role['id']; ?>"><?php echo $role['name']; ?></option>
                             <?php endforeach; ?>
                         </select>
-
                     </div>
-
-                    <!-- Input for Stock -->
-                    <div>
-                        <label for="stock" class="block mb-2 text-sm font-medium text-gray-900">Stock</label>
-                        <input 
-                            value="<?php echo $product['stock']?>"
-                            type="number" 
-                            id="stock" 
-                            name="stock" 
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-                            placeholder="Enter stock quantity" 
-                            required 
-                        />
-                    </div>
-
-                    <!-- Input for Price -->
-                    <div>
-                        <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Price</label>
-                        <input 
-                        value="<?php echo $product['price']?>"
-                            type="number" 
-                            id="price" 
-                            name="price" 
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-                            placeholder="Enter product price" 
-                            required 
-                        />
-                    </div>
-
                 </div>
 
                 <!-- Submit Button -->

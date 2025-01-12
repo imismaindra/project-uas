@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TopUp Store - Users</title>
+    <title>TopUp Store - Roles</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,60 +36,47 @@
 </head>
 <body class="bg-[#B5C2CA] font-poppins">
     <!-- Navbar -->
-    <?php include 'components/navbar-admin.php'; ?>
+    <?php include './views/components/navbar-admin.php'; ?>
 
     <div class="flex">
         <!-- Sidebar -->
-        <?php include 'components/sidebar-admin.php'; ?>
+        <?php include './views/components/sidebar-admin.php'; ?>
 
         <!-- Main Content -->
         <div class="flex-1 flex justify-center ml-72 mt-20 p-8">
-            <form method="post" action="../index.php?modul=users&fitur=add" class="bg-white px-6 py-8 rounded-lg shadow-lg w-[45rem]">
-                <h1 class="text-xl font-bold mb-8">Insert Users</h1>
+            <form method="post" action="/role/add" class="bg-white px-6 py-8 rounded-lg shadow-lg w-[45rem]">
+                <h1 class="text-xl font-bold mb-8">Insert Role</h1>
                 <div class="grid gap-6 mb-6">
                     <!-- Input for Category Name -->
                     <div>
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Username</label>
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Role Name</label>
                         <input 
                             type="text" 
-                            id="username" 
-                            name="username" 
+                            id="name" 
+                            name="name" 
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-                            placeholder="Enter username" 
+                            placeholder="Enter role name" 
                             required 
                         />
                     </div>
 
                     <!-- Input for Description -->
                     <div>
-                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
-                        <input 
-                            type="text" 
-                            id="password" 
-                            name="password" 
+                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+                        <textarea 
+                            id="description" 
+                            name="description" 
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-                            placeholder="Enter password" 
-                            required 
-                        />
+                            placeholder="Enter role description" 
+                            required>
+                        </textarea>
                     </div>
                     <div>
-                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-                            placeholder="Enter email" 
-                            required 
-                        />
-                    </div>
-                    <div>
-                        <label for="role_id" class="block mb-2 text-sm font-medium text-gray-900">Role</label>
-                        <select id="role_id" name="role_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                        <option selected>pilih Roles</option>
-                            <?php  foreach ($roles as $role): ?>
-                            <option value="<?php echo $role['id']; ?>"><?php echo $role['name']; ?></option>
-                            <?php endforeach; ?>
+                        <label for="is_aktif" class="block mb-2 text-sm font-medium text-gray-900">Status</label>
+                        <select id="is_aktif" name="is_aktif" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                            <option selected>pilih Status</option>
+                            <option value="1">Aktif</option>
+                            <option value="0">Tidak Aktif</option>
                         </select>
                     </div>
                 </div>

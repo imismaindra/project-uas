@@ -37,11 +37,12 @@
 </head>
 <body class="bg-[#B5C2CA] font-poppins">
     <!-- Navbar -->
-    <?php include 'components/navbar-admin.php'; ?>
+   
+    <?php include './views/components/navbar-admin.php'; ?>
 
     <div class="flex">
         <!-- Sidebar -->
-        <?php include 'components/sidebar-admin.php'; ?>
+        <?php include './views/components/sidebar-admin.php'; ?>
         <!-- Main Content -->
         <div class="flex-1 ml-72 mt-20 p-8">
             <h1 class="text-3xl font-bold mb-5">Dashboard</h1>

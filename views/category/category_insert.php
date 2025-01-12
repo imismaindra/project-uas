@@ -34,28 +34,29 @@
       }
     </script>
 </head>
+
 <body class="bg-[#B5C2CA] font-poppins">
     <!-- Navbar -->
-    <?php include 'components/navbar-admin.php'; ?>
+    <?php include './views/components/navbar-admin.php'; ?>
 
     <div class="flex">
         <!-- Sidebar -->
-        <?php include 'components/sidebar-admin.php'; ?>
+        <?php include './views/components/sidebar-admin.php'; ?>
 
         <!-- Main Content -->
-        <div class="flex-1 flex justify-center ml-72 mt-20 p-8">
-            <form method="post" action="../index.php?modul=role&fitur=add" class="bg-white px-6 py-8 rounded-lg shadow-lg w-[45rem]">
-                <h1 class="text-xl font-bold mb-8">Insert Role</h1>
+        <div class="flex-1 ml-72 mt-20 p-8">
+            <h1 class="text-2xl font-bold mb-8">Insert Category</h1>
+            <form method="post" action="../index.php?modul=category&fitur=add" enctype="multipart/form-data" class="bg-white px-6 py-8 rounded-lg shadow-lg">
                 <div class="grid gap-6 mb-6">
                     <!-- Input for Category Name -->
                     <div>
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Role Name</label>
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Category Name</label>
                         <input 
                             type="text" 
                             id="name" 
                             name="name" 
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-                            placeholder="Enter role name" 
+                            placeholder="Enter category name" 
                             required 
                         />
                     </div>
@@ -67,20 +68,37 @@
                             id="description" 
                             name="description" 
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-                            placeholder="Enter role description" 
+                            placeholder="Enter category description" 
                             required>
                         </textarea>
                     </div>
                     <div>
-                        <label for="is_aktif" class="block mb-2 text-sm font-medium text-gray-900">Status</label>
-                        <select id="is_aktif" name="is_aktif" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                            <option selected>pilih Status</option>
-                            <option value="1">Aktif</option>
-                            <option value="0">Tidak Aktif</option>
+                        <label for="slug" class="block mb-2 text-sm font-medium text-gray-900">Category slug</label>
+                        <input 
+                            type="text" 
+                            id="slug" 
+                            name="slug" 
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                            placeholder="Enter category slug" 
+                            required 
+                        />
+                    </div>
+                    <div>
+                        <label for="tipe" class="block mb-2 text-sm font-medium text-gray-900">Tipe</label>
+                        <select id="tipe" name="tipe" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                            <option selected>pilih tipe</option>
+                            <option value="topup">Top-Up</option>
+                            <option value="joki">Joki</option>
+                            <option value="voucher">Voucher</option>
                         </select>
                     </div>
                 </div>
-
+                <!-- image upload -->
+                 <div>
+                     <label class="block mb-2 text-sm font-medium text-gray-900" for="file_input">Upload file</label>
+                     <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" aria-describedby="file_input_help" id="image" name="image" type="file">
+                     <p class="mt-1 text-sm text-gray-500" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
+                </div>
                 <!-- Submit Button -->
                 <div class="flex justify-end">
                     <button 

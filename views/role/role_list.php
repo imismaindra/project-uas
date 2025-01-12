@@ -37,11 +37,11 @@
 </head>
 <body class="bg-[#B5C2CA] font-poppins">
     <!-- Navbar -->
-    <?php include 'components/navbar-admin.php'; ?>
+    <?php include './views/components/navbar-admin.php'; ?>
 
     <div class="flex">
         <!-- Sidebar -->
-        <?php include 'components/sidebar-admin.php'; ?>
+        <?php include './views/components/sidebar-admin.php'; ?>
         <!-- Main Content -->
         <div class="flex-1 ml-72 mt-20 p-8">
             <h1 class="text-3xl font-bold mb-5">Roles</h1>
@@ -49,7 +49,7 @@
                 <svg class="w-[24px] h-[24px] text-gray-800 dark:text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                     <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z" clip-rule="evenodd"/>
                 </svg>
-                <a href="index.php?modul=role&fitur=insert">New Role</a>
+                <a href="/role/add">New Role</a>
                 
             </button>
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -91,11 +91,11 @@
                                 </span>
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <a href="../index.php?modul=role&fitur=edit&id=<?php echo htmlspecialchars($role['id']); ?>" class="text-gray-400 hover:text-gray-100 mx-2">
+                                <a href="/role/edit/<?php echo htmlspecialchars($role['id']); ?>" class="text-gray-400 hover:text-gray-100 mx-2">
                                     <i class="material-icons-outlined text-blue-600">edit</i>
                                 </a>
                                 
-                                <a href="../index.php?modul=role&fitur=delete&rid=<?php echo htmlspecialchars($role['id']); ?>" class="text-gray-400 hover:text-gray-100 ml-2">
+                                <a href="/role/delete/<?php echo htmlspecialchars($role['id']); ?>" class="text-gray-400 hover:text-gray-100 ml-2">
                                     <i class="material-icons-round text-red-600">delete_outline</i>
                                 </a>
                             </td>

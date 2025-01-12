@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TopUp Store - Insert Product</title>
+    <title>Update - TopUp Store</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,17 +36,19 @@
 </head>
 <body class="bg-[#B5C2CA] font-poppins">
     <!-- Navbar -->
-    <?php include 'components/navbar-admin.php'; ?>
+    <?php include './views/components/navbar-admin.php'; ?>
 
     <div class="flex">
         <!-- Sidebar -->
-        <?php include 'components/sidebar-admin.php'; ?>
+        <?php include './views/components/sidebar-admin.php'; ?>
 
         <!-- Main Content -->
         <div class="flex-1 ml-72 mt-20 p-8">
-            <h1 class="text-2xl font-bold mb-8">Insert Product</h1>
-            <form method="post" action="../index.php?modul=product&fitur=add" enctype="multipart/form-data" class="bg-white px-6 py-8 rounded-lg shadow-lg">
+            <h1 class="text-2xl font-bold mb-8">Edit Product</h1>
+            <form method="post" action="../index.php?modul=product&fitur=update" class="bg-white px-6 py-8 rounded-lg shadow-lg">
                 <div class="grid gap-6 mb-6">
+                <input type="hidden" name="id" value="<?php echo htmlspecialchars($product['id']); ?>">
+
                     <!-- Input for Product Name -->
                     <div>
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Product Name</label>
@@ -56,29 +58,19 @@
                             name="name" 
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
                             placeholder="Enter product name" 
+                            value="<?php echo $product['name']?>"
                             required 
                         />
                     </div>
-
-                    <!-- Input for Description -->
-                    <div>
-                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
-                        <textarea 
-                            id="description" 
-                            name="description" 
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-                            placeholder="Enter product description" 
-                            required>
-                        </textarea>
-                    </div>
-
                     <!-- Select for Category -->
                     <div>
-                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900">Category</label>
+                        <label for="category_id" class="block mb-2 text-sm font-medium text-gray-900">Category</label>
                         <select id="category_id" name="category_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                            <option selected>pilih Category</option>
-                            <?php  foreach ($categories as $category): ?>
-                            <option value="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></option>
+                            <option value="" disabled>Pilih Category</option>
+                            <?php foreach ($categories as $category): ?>
+                                <option value="<?php echo $category['id']; ?>" <?php echo $product['id'] == $category['id'] ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($category['name']); ?>
+                                </option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -87,6 +79,7 @@
                     <div>
                         <label for="stock" class="block mb-2 text-sm font-medium text-gray-900">Stock</label>
                         <input 
+                            value="<?php echo $product['stock']?>"
                             type="number" 
                             id="stock" 
                             name="stock" 
@@ -100,6 +93,7 @@
                     <div>
                         <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Price</label>
                         <input 
+                        value="<?php echo $product['price']?>"
                             type="number" 
                             id="price" 
                             name="price" 
@@ -109,17 +103,6 @@
                         />
                     </div>
 
-                    <!-- Image Upload
-                    <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900" for="image">Upload Product Image</label>
-                        <input 
-                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" 
-                            id="image" 
-                            name="image" 
-                            type="file" 
-                            required>
-                        <p class="mt-1 text-sm text-gray-500">Supported formats: SVG, PNG, JPG, GIF (Max size: 800x400px).</p>
-                    </div> -->
                 </div>
 
                 <!-- Submit Button -->

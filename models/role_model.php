@@ -23,4 +23,32 @@ class RoleModel {
         $stmt->execute();
         $stmt->close();
     }
+    public function deleteRole($id) {
+        global $conn;
+        $sql = "DELETE FROM roles WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    public function updateRole($id, $name, $description, $is_aktif) {
+        global $conn;
+        $sql = "UPDATE roles SET name = ?, description = ?, is_aktif = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssi", $name, $description, $is_aktif, $id);
+        $stmt->execute();
+        $stmt->close();
+    }
+    public function getRole($id) {
+        global $conn;
+        $sql = "SELECT * FROM roles WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $role = $result->fetch_assoc();
+        $stmt->close();
+        return $role;
+    }
 }
