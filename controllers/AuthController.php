@@ -37,19 +37,31 @@ class AuthController {
         $email = $_POST['email'] ?? null;
         $password = $_POST['password'] ?? null;
         $role_id = 2;
+
         $data = [
             'username' => $username,
             'email' => $email,
-            'password' => password_hash($password, PASSWORD_DEFAULT),
+            'password' => $password,
             'role_id' => $role_id,
         ];
+
         try {
             $userModel->checkRegister($data);
-            header('Location: /auth/login');
-            exit();
+            // echo "Registr";
+            // Kirim pesan sukses menggunakan session
+            $_SESSION['status'] = 'success';
+            // echo "Registrasi berhasil! Silakan login.";
+            $_SESSION['message'] = 'Registrasi berhasil! Silakan login.';
+            $_SESSION['redirect'] = '/auth/login';
         } catch (Exception $e) {
-            echo "Error: " . $e->getMessage();
+            // Kirim pesan error menggunakan session
+            $_SESSION['status'] = 'error';
+            $_SESSION['message'] = $e->getMessage();
+            $_SESSION['redirect'] = '';
         }
+
+        header('Location: /auth/register'); // Kembali ke halaman registrasi
+        exit();
     }
 
     public function logout() {

@@ -3,10 +3,19 @@
 require_once 'models/transaksi_model.php';
 require_once 'models/product_model.php';
 require_once 'services/ExportPDFService.php';
+require_once 'BaseController.php';
 
-class TransaksiController {
+class TransaksiController extends BaseController{
+    private $productModel;
+    private $categoryModel;
+
+    public function __construct() {
+        parent::__construct();
+        $this->productModel = new ProductModel($this->conn);
+        $this->categoryModel = new CategoryModel();
+    }
     public function list() {
-        $productModel = new ProductModel();
+    
         $transaksiModel = new TransaksiModel();
         $transaksis = $transaksiModel->getAllTransaksi();
         include './views/transaction/transaction_list.php';
@@ -54,11 +63,10 @@ class TransaksiController {
     }
 
     public function checkinvoice($invoiceId) {
-        $productModel = new ProductModel();
+        $productModel = $this->productModel;
         $userModel = new Users();
         $transaksiModel = new TransaksiModel();
-        $categoryModel = new CategoryModel();
-
+         $categoryModel = $this->categoryModel;
         $transaksibyInvoices = $transaksiModel->getTransaksiByInvoice($invoiceId);
         if ($transaksibyInvoices) {
             include 'views/store/transactions.php';
@@ -74,7 +82,7 @@ class TransaksiController {
         $status = (int) $status;
         $timeframe = $_GET['timeframe'] ?? '';
         $exportPDFService = new ExportPDFService();
-        $productModel =  new productModel();
+         $productModel =  $this->productModel;
         $transaksiModel = new TransaksiModel();
         $transaksis = $transaksiModel->getAllTransaksi();
         $filter = isset($timeframe) ? $timeframe : '';

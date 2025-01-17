@@ -91,7 +91,7 @@
     <?php include './views/components/navbar.php'; ?>
     <!-- content -->
     <?php if (isset($transaksibyInvoices) && !empty($transaksibyInvoices)): ?>
-<?php $products = $productModel->getProductById( $transaksibyInvoices[0]['product_id']); ?>
+    <?php $products = $productModel->getProductById( $transaksibyInvoices[0]['product_id']); ?>
         
       <?php $categories = $categoryModel->getCategoryById( $products['id_catagories']);?>
         <section id="main" class="flex flex-col  my-10">
