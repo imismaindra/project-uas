@@ -1,71 +1,133 @@
 <?php
 
 require_once 'models/product_model.php';
+require_once 'models/category_model.php';
+require_once 'BaseController.php';
 
-    class ProductController {
-        public function list() {
-            $productModel = new ProductModel();
-            $categoryModel = new CategoryModel();
-    
+class ProductController extends BaseController {
+    private $productModel;
+    private $categoryModel;
+
+
+    public function __construct() {
+        parent::__construct();
+        $this->productModel = new ProductModel($this->conn);
+        $this->categoryModel = new CategoryModel();
+    }
+
+    /**
+     * List all products with pagination and filtering.
+     */
+    public function list() {
+        try {
             // Ambil parameter dari URL
-            $search = isset($_GET['search']) ? $_GET['search'] : '';
-            $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : null;
-    
+            $search = isset($_GET['search']) ? trim($_GET['search']) : '';
+            $category_id = isset($_GET['category_id']) ? (int)$_GET['category_id'] : null;
+
             // Pagination
             $limit = 5;
-            $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-            $page = max($page, 1); // Pastikan halaman tidak negatif
+            $page = isset($_GET['page']) ? max((int)$_GET['page'], 1) : 1;
             $offset = ($page - 1) * $limit;
-    
+
             // Hitung total produk dan halaman
-            $totalProducts = $productModel->GetTotalProducts($search, $category_id);
+            $totalProducts = $this->productModel->getTotalProducts($search, $category_id);
             $totalPages = ceil($totalProducts / $limit);
-    
+
             // Ambil data produk dengan filter dan pencarian
-            $products = $productModel->getProducts($search, $category_id, $limit, $offset);
-    
+            $products = $this->productModel->getProducts($search, $category_id, $limit, $offset);
+
             // Ambil daftar kategori
-            $categories = $categoryModel->getCategories();
-    
+            $categories = $this->categoryModel->getCategories();
+
             // Tampilkan halaman
             include 'views/product/product_list.php';
+        } catch (Exception $e) {
+            error_log("Error in ProductController::list - " . $e->getMessage());
+            include 'views/error.php';
         }
+    }
 
+    /**
+     * Show the form to create a new product and handle form submission.
+     */
     public function create() {
-        require_once 'models/category_model.php';
-        $categoryModel = new CategoryModel();
-        $categories = $categoryModel->getCategories();
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        try {
+            $categories = $this->categoryModel->getCategories();
 
-            $productModel = new ProductModel();
-            
-            $productModel->insertProduct($_POST['name'],  $_POST['category_id'], $_POST['stock'], $_POST['price']);
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $name = trim($_POST['name']);
+                $category_id = (int)$_POST['category_id'];
+                $stock = (int)$_POST['stock'];
+                $price = (float)$_POST['price'];
 
-            header('Location: /product/list');
+                // Validasi input
+                if (empty($name) || $category_id <= 0 || $stock < 0 || $price < 0) {
+                    throw new Exception("Invalid input data.");
+                }
+
+                $this->productModel->insertProduct($name, $category_id, $stock, $price);
+                header('Location: /product/list');
+                exit;
+            }
+
+            include 'views/product/product_insert.php';
+        } catch (Exception $e) {
+            error_log("Error in ProductController::create - " . $e->getMessage());
+            include 'views/error.php';
         }
-
-        include 'views/product/product_insert.php';
     }
 
-    public function edit($id){
-        require_once 'models/category_model.php';
-        $categoryModel = new CategoryModel();
-        $categories = $categoryModel->getCategories();
-        $productModel = new ProductModel();
-        $product = $productModel->getProductById($id);
+    /**
+     * Show the form to edit a product and handle form submission.
+     */
+    public function edit($id) {
+        try {
+            $categories = $this->categoryModel->getCategories();
+            $product = $this->productModel->getProductById($id);
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $productModel->updateProduct($id, $_POST['name'], $_POST['category_id'], $_POST['stock'], $_POST['price']);
-            header('Location: /product/list');
+            if (!$product) {
+                throw new Exception("Product not found.");
+            }
+
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $name = trim($_POST['name']);
+                $category_id = (int)$_POST['category_id'];
+                $stock = (int)$_POST['stock'];
+                $price = (float)$_POST['price'];
+
+                // Validasi input
+                if (empty($name) || $category_id <= 0 || $stock < 0 || $price < 0) {
+                    throw new Exception("Invalid input data.");
+                }
+
+                $this->productModel->updateProduct($id, $name, $price, $stock, $category_id);
+                header('Location: /product/list');
+                exit;
+            }
+
+            include 'views/product/product_update.php';
+        } catch (Exception $e) {
+            error_log("Error in ProductController::edit - " . $e->getMessage());
+            include 'views/error.php';
         }
-
-        include 'views/product/product_update.php';
     }
 
+    /**
+     * Delete a product by ID.
+     */
     public function delete($id) {
-        $productModel = new ProductModel();
-        $productModel->deleteProductByid($id);
+        try {
+            $deletedRows = $this->productModel->deleteProductById($id);
 
-        header('Location: /product/list');
+            if ($deletedRows === 0) {
+                throw new Exception("Failed to delete product or product not found.");
+            }
+
+            header('Location: /product/list');
+            exit;
+        } catch (Exception $e) {
+            error_log("Error in ProductController::delete - " . $e->getMessage());
+            include 'views/error.php';
+        }
     }
 }

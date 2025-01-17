@@ -12,7 +12,7 @@ require_once 'controllers/RoleController.php';
 require_once 'controllers/MemberController.php';
 $router = new Router();
 
-// Tambahkan rute
+
 $router->add('auth/login', [AuthController::class, 'loginForm']);
 $router->add('auth/checklogin', [AuthController::class, 'login']);
 $router->add('auth/logout', [AuthController::class, 'logout']);
@@ -55,6 +55,8 @@ $router->add('topup/{slug}', [StoreController::class, 'productList']);
 $router->add('transaksi/invoice', [TransaksiController::class, 'forminvoice']);
 $router->add('transaksi/checkinvoice/{invoices}', [TransaksiController::class, 'checkinvoice']);
 $router->add('leaderboard', [StoreController::class, 'leaderboard']);
+$router->add('calculator/winrate', [StoreController::class, 'ClacWinRate']);
+
 
 
 // Ambil URI dari request

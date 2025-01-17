@@ -2,7 +2,7 @@
      x-on:scroll.window="scrolled = (window.pageYOffset > 0)" 
      :class="scrolled ? 'bg-opacity-70 backdrop-blur-md' : 'bg-opacity-100'" 
      class="sticky top-0 bg-[#1A1B41] z-50 transition-all duration-300 shadow shadow-xl">
-  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-end sm:justify-between mx-auto p-4">
     <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
       <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
       <span class="self-center text-2xl font-bold whitespace-nowrap text-[#3FC43B]">TOP-UP GAME</span>
@@ -50,7 +50,7 @@
           <a href="/leaderboard" class="block py-2 px-3 md:p-0 text-white rounded hover:bg-[#3FC43B] md:hover:bg-transparent md:hover:text-[#3FC43B]">Leaderboard</a>
         </li>
         <li>
-          <a href="/contact" class="block py-2 px-3 md:p-0 text-white rounded hover:bg-[#3FC43B] md:hover:bg-transparent md:hover:text-[#3FC43B]">Contact</a>
+          <a href="/calculator/winrate" class="block py-2 px-3 md:p-0 text-white rounded hover:bg-[#3FC43B] md:hover:bg-transparent md:hover:text-[#3FC43B]">Calculator</a>
         </li>
       </ul>
     </div>

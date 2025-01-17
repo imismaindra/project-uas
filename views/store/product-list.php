@@ -54,6 +54,31 @@
         }
 
     </style>
+    <script>
+      tailwind.config = {
+          theme: {
+          // screens: {
+          // 'tablet': '640px',
+          // 'laptop': '1024px',
+          
+          // 'desktop': '1280px',
+          // },
+          extend: {
+              colors: {
+                base: '#1A1B41',
+              secondary: '#3FC43B',
+              },
+              fontFamily: {
+                  poppins: ['Poppins', 'sans-serif'],
+              },
+              screens: {
+              'hp': '465px',
+          },
+              
+          }
+          }
+      }
+  </script>
 
 </head>
 <body class="bg-[#1A1B41] ">
@@ -64,7 +89,7 @@
     <div class="bg-title-product flex min-h-32 w-full items-center border-b bg-transparent lg:min-h-[160px] bg-order-header-background text-order-header-foreground">
         <div class="container flex items-center gap-2">
             <div>
-                <div class="flex items-start gap-4 ml-[7.5rem]">
+                <div class="flex items-start gap-4 md:ml-[7.5rem] sm:ml-[1rem]">
                     <div class="product-thumbnail-container relative -top-28 md:ml-[10%]">
                         <img alt="" loading="lazy" width="300" height="300" decoding="async" data-nimg="1" class="z-20 -mb-14 aspect-square w-32 rounded-2xl object-cover shadow-2xl md:-mb-20 md:w-60" sizes="100vw" 
                         src=/<?php echo $products[0]['category_image'];?>>
@@ -96,7 +121,7 @@
     <div class="min-h-screen flex items-center justify-center mt-10 mb-10">
         <!-- Form -->
         <form method="POST" action="/transaksi/add" class="col-auto col-start-1 flex flex-col gap-4 lg:col-auto lg:gap-8">
-            <section class="relative scroll-mt-20 rounded-xl bg-card/50 shadow-2xl md:scroll-mt-[5.75rem] w-[45rem]" id="1">
+            <section class="relative scroll-mt-20 rounded-xl bg-card/50 shadow-2xl md:scroll-mt-[5.75rem] md:w-[45rem] sm:w-[20rem]" id="1">
                 <div class="flex items-center overflow-hidden rounded-t-xl bg-[#53B950]">
                     <div class="flex h-10 w-10 items-center justify-center bg-primary font-semibold text-primary-foreground">1</div>
                     <h2 class="px-4 py-2 text-sm/6 font-semibold text-white">Masukkan Data Akun</h2>

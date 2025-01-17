@@ -2,8 +2,16 @@
 
 require_once 'models/product_model.php';
 require_once 'models/category_model.php';
+require_once 'BaseController.php';
 
-class StoreController {
+class StoreController extends BaseController {
+    private $productModel;
+    private $categoryModel;
+    public function __construct() {
+        parent::__construct();
+        $this->productModel = new ProductModel($this->conn);
+        $this->categoryModel = new CategoryModel();
+    }
     public function index() {
         $categoryModel = new CategoryModel();
         $limit = 6;
@@ -22,10 +30,12 @@ class StoreController {
 
         include 'views/store/store.php';
     }
+    public function list() {
+    }
 
     public function productList($slug) {
-        $productModel = new ProductModel();
-        $products = $productModel->getProductsByCategorySlug($slug);
+        // $productModel = new ProductModel();
+        $products = $this->productModel->getProductsByCategorySlug($slug);
 
         $category_images = [
             'Mobile Legends' => '/assets/include/dm.webp',
@@ -59,5 +69,9 @@ class StoreController {
       
         $top5order = $dashboard->getTop5Transaksi();
         include 'views/store/leaderboard.php';
+    }
+
+    public function ClacWinRate() {
+        include 'views/store/calculatorWr.php';
     }
 }

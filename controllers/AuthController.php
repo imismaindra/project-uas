@@ -15,12 +15,15 @@ class AuthController {
             $check = $userModel->checkLogin($email, $password);
             if ($check) {
                 $_SESSION['user'] = $check;
-                $redirect = $check['role_id'] == 1 ? '/dashboard' : '/store';
-                header("Location: $redirect");
-                exit();
+                $_SESSION['status'] = 'success';
+                $_SESSION['message'] = 'Login berhasil! Selamat datang.';
+                $_SESSION['redirect'] = $check['role_id'] == 1 ? '/dashboard' : '/store';
             } else {
-                echo "Login gagal.";
+                $_SESSION['status'] = 'error';
+                $_SESSION['message'] = 'Email atau password salah.';
             }
+            header('Location: /auth/login');
+            exit();
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }

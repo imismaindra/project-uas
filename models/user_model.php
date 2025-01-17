@@ -2,12 +2,12 @@
 include 'config/connection.php';
 
 class Users {
-    protected $conn;
+    protected $conn; 
 
-    public function __construct($conn) {
+    public function __construct() {
+        global $conn;
         $this->conn = $conn;
     }
-
     public function insertUser($username, $password, $email, $role) {
         $stmt = $this->conn->prepare("INSERT INTO users (username, password, email, role_id) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("ssss", $username, $password, $email, $role);
@@ -29,7 +29,6 @@ class Users {
             return "Error: " . $stmt->error;
         }
     }
-
     public function deleteUser($userId) {
         $stmt = $this->conn->prepare("DELETE FROM users WHERE id = ?");
         $stmt->bind_param("i", $userId);
@@ -49,12 +48,11 @@ class Users {
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            return $result->fetch_all(MYSQLI_ASSOC);
+            return $result->fetch_all(MYSQLI_ASSOC); // Kembalikan array asosiatif
         } else {
             return "No users found.";
         }
     }
-
     public function getUserById($userId) {
         $stmt = $this->conn->prepare("SELECT * FROM users WHERE id = ?");
         $stmt->bind_param("i", $userId);
@@ -62,35 +60,43 @@ class Users {
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            return $result->fetch_assoc();
+            $user = $result->fetch_assoc();
+            return $user['username'];
+        } else {
+            return false;
+        }
+    }
+    public function getUser($userId) {
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE id = ?");
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $user = $result->fetch_assoc();
+            return $user;
         } else {
             return false;
         }
     }
 
-    public function getAllUsers($search = '', $username = null, $limit = 5, $offset = 0) {
+    public function getAllUsers($search = '', $username = null, $limit = 5, $offsite = 0) {
         $sql = "SELECT users.*, roles.name AS role_name FROM users JOIN roles ON users.role_id = roles.id WHERE 1=1";
         $params = [];
-        $types = '';
-
         if (!empty($search)) {
             $sql .= " AND (users.username LIKE ? OR users.email LIKE ?)";
             $params[] = "%$search%";
             $params[] = "%$search%";
-            $types .= 'ss';
         }
         if (!empty($username)) {
             $sql .= " AND users.username = ?";
             $params[] = $username;
-            $types .= 's';
         }
         $sql .= " LIMIT ? OFFSET ?";
         $params[] = $limit;
-        $params[] = $offset;
-        $types .= 'ii';
-
+        $params[] = $offsite;
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param($types, ...$params);
+        $stmt->bind_param(str_repeat("s", count($params)), ...$params);
         $stmt->execute();
         $result = $stmt->get_result();
         $users = [];
@@ -107,13 +113,13 @@ class Users {
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            return $result->fetch_assoc();
+            $user = $result->fetch_assoc();
+            return $user;
         } else {
             return false;
         }
     }
-
-    public function checkRegister($data) {
+    public function checkRegister($data){
         $stmt = $this->conn->prepare("INSERT INTO users (username, email, password, role_id) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("sssi", $data['username'], $data['email'], $data['password'], $data['role_id']);
         if ($stmt->execute()) {
@@ -121,5 +127,6 @@ class Users {
         } else {
             return false;
         }
-    }
+    } 
 }
+?>
