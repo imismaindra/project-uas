@@ -81,7 +81,7 @@ class TransaksiController extends BaseController{
         $status = $_GET['status'] ?$_GET['status']: '';
         $status = (int) $status;
         $timeframe = $_GET['timeframe'] ?? '';
-        $exportPDFService = new ExportPDFService();
+        $exportPDFService = new ExportPDFService($this->conn);
          $productModel =  $this->productModel;
         $transaksiModel = new TransaksiModel();
         $transaksis = $transaksiModel->getAllTransaksi();

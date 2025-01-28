@@ -1,23 +1,21 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php'; // Jika menggunakan library seperti Dompdf
+require_once __DIR__ . '/../vendor/autoload.php'; 
 require_once 'models/product_model.php';
 
 use Dompdf\Dompdf;
 
 class ExportPDFService
 {
-    /**
-     * Mengekspor laporan transaksi ke PDF.
-     *
-     * @param array $transactions Daftar transaksi.
-     * @param string $filter Filter laporan.
-     * @return void
-     */
+    private $conn;
+    private $productModel;
+    public function __construct($connection) {
+        $this->conn = $connection;
+        $this->productModel = new ProductModel($connection);
+    }
     public function export(array $transactions, string $filter): void
     {
-        // Inisialisasi model produk dan Dompdf
-        $productModel = new ProductModel();
+        $productModel = $this->productModel;
         $dompdf = new Dompdf();
 
         // Buat konten HTML untuk PDF
@@ -32,17 +30,9 @@ class ExportPDFService
         $dompdf->stream('laporan_transaksi.pdf', ['Attachment' => true]);
     }
 
-    /**
-     * Membuat konten HTML untuk PDF.
-     *
-     * @param array $transactions Daftar transaksi.
-     * @param string $filter Filter laporan.
-     * @param ProductModel $productModel Model untuk mendapatkan data produk.
-     * @return string HTML yang telah di-generate.
-     */
-    private function generateHTMLContent(array $transactions, string $filter, ProductModel $productModel): string
+      private function generateHTMLContent(array $transactions, string $filter, ProductModel $productModel): string
     {
-        $totalHargaSemua = 0; // Variabel untuk menghitung total harga semua transaksi
+        $totalHargaSemua = 0; 
 
         $html = '
             <h1 style="text-align: center;">Laporan Transaksi</h1>
@@ -73,7 +63,6 @@ class ExportPDFService
                 </tr>';
         }
 
-        // Tambahkan baris untuk total harga semua transaksi
         $html .= '
                 <tr style="font-weight: bold;">
                     <td colspan="3" style="text-align: right;">Total Harga Semua Transaksi:</td>

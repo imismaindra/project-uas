@@ -7,49 +7,34 @@ require_once 'BaseController.php';
 class ProductController extends BaseController {
     private $productModel;
     private $categoryModel;
-
-
     public function __construct() {
         parent::__construct();
         $this->productModel = new ProductModel($this->conn);
         $this->categoryModel = new CategoryModel();
     }
 
-    /**
-     * List all products with pagination and filtering.
-     */
     public function list() {
         try {
-            // Ambil parameter dari URL
             $search = isset($_GET['search']) ? trim($_GET['search']) : '';
             $category_id = isset($_GET['category_id']) ? (int)$_GET['category_id'] : null;
 
-            // Pagination
             $limit = 5;
             $page = isset($_GET['page']) ? max((int)$_GET['page'], 1) : 1;
             $offset = ($page - 1) * $limit;
 
-            // Hitung total produk dan halaman
             $totalProducts = $this->productModel->getTotalProducts($search, $category_id);
             $totalPages = ceil($totalProducts / $limit);
 
-            // Ambil data produk dengan filter dan pencarian
             $products = $this->productModel->getProducts($search, $category_id, $limit, $offset);
 
-            // Ambil daftar kategori
             $categories = $this->categoryModel->getCategories();
 
-            // Tampilkan halaman
             include 'views/product/product_list.php';
         } catch (Exception $e) {
             error_log("Error in ProductController::list - " . $e->getMessage());
             include 'views/error.php';
         }
     }
-
-    /**
-     * Show the form to create a new product and handle form submission.
-     */
     public function create() {
         try {
             $categories = $this->categoryModel->getCategories();
@@ -77,9 +62,6 @@ class ProductController extends BaseController {
         }
     }
 
-    /**
-     * Show the form to edit a product and handle form submission.
-     */
     public function edit($id) {
         try {
             $categories = $this->categoryModel->getCategories();

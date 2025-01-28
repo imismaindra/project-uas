@@ -5,7 +5,8 @@
         $filter = isset($_GET['filter']) ? $_GET['filter'] : 'Semua';
         $transactions = $transactionModel->getFilteredTransactions($filter);
         var_dump($transactions);
-        $exportService = new ExportPDFService();
+        global $conn;  // If using a global connection variable
+        $exportService = new ExportPDFService($conn);
         $exportService->export($transactions, $filter);
         exit;
     }
@@ -134,7 +135,7 @@
                                 <?php if(!isset($_SESSION['user']['role_id'])||  $_SESSION['user']['role_id'] == 1):?>
                                     <?php foreach ($transaksis as $tsk): ?>
                                             <?php //echo $tsk['id'];?>
-                                        <?php $product= $productModel->getProductById($tsk['product_id']);?>
+                                            <?php $product= $this->productModel->getProductById($tsk['product_id']);?>
 
                                         <tr class="bg-white border-b hover:bg-gray-50">
                                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
